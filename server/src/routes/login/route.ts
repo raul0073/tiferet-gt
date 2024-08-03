@@ -7,20 +7,20 @@ export const loginRoute: FastifyPluginAsync = async (server: FastifyInstance): P
 
     server.post('/', async (request: FastifyRequest, reply: FastifyReply) => {
         try {
-            // Validate request body
+           
+            // validate body
             const userObj: ILogin = await loginSchema.parseAsync(request.body);
-            // Check if the user exists
+            // get usewr
             const user = await usersCollection?.findOne({ email: userObj.email });
             if (!user) {
                 return reply.status(401).send({msg: "משתמש עם כתובת המייל לא נמצא"});
             }
-            // Compare passwords
+            // check password
             const isPasswordMatch = (userObj.password === user.password);
             if (!isPasswordMatch) {
                 return reply.status(401).send({msg: "סיסמה לא תואמת"});
             }
 
-            // Successful login
             return reply.status(200).send({user});
 
         } catch (err) {

@@ -18,14 +18,16 @@ export type BtnsData = {
 
 
 export class HomeComponent implements OnInit {
+  // get user from store
   currentUser$: Observable<UserType | null> = this.store.select(selectCurrentUser);
+  // assign user variable
   user: UserType | null = null
+  // ui
   quickActions: BtnsData[]
   actions: BtnsData[]
   dateVal: Date = new Date()
   allActionsHeader = labels.allActions
   quickActionsHeader = labels.quickAction
-  // ht,ml labels
   header = labels.header;
   welcome = labels.welcome;
 
@@ -45,7 +47,7 @@ export class HomeComponent implements OnInit {
     ];
   }
 
-
+  // get user data
   ngOnInit(): void {
     this.currentUser$.subscribe(data => {
       this.user = data

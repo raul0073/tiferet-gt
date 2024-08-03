@@ -34,9 +34,8 @@ server.register(fastifyMongodb, {
     forceClose: true, 
 })
 
-// app routes
-// home route
-// Register routes in the 'onReady' lifecycle hook
+
+// routes
 server.register(mainRoute, {prefix: 'api/main'})
 server.register(usersRoute, {prefix: 'api/users'})
 server.register(loginRoute, {prefix: 'api/login'})
@@ -52,10 +51,10 @@ const start = async () => {
         });
         
     
-        // Log that the server is running
-        console.log(`Server is running on ${API_URL}:${PORT}`);
+        
+        console.info(`Server is running on ${API_URL}:${PORT}`);
 
-        // Log that the app is connected to MongoDB Atlas
+        // start mongo session
         if (server.mongo.client.startSession()) {
             console.log('Connected to Atlas MongoDB ');
         } else {

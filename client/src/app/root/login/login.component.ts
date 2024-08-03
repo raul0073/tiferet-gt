@@ -40,18 +40,18 @@ export class LoginComponent {
   ) {}
 
 
-  // Function to log in user by email and password
+  
   onSubmit() {
-    this.errorMessages = {}; // Clear previous error messages
+    this.errorMessages = {}; 
     this.loading = true;
 
     const userObj: ILogin = { email: this.userEmail, password: this.userPassword };
 
     try {
-        // Validate userObj with the schema
+        // userObj with the schema
         loginSchema.parse(userObj);
 
-        // Call the login service and handle the response
+       // login service
         this.loginService.loginUser(userObj).subscribe({
             next: (data: any) => {
                 this.store.dispatch(setCurrentUser({ user: data.user }))
@@ -82,7 +82,7 @@ export class LoginComponent {
     }
 }
 
-
+  // errors display
   private updateErrorMessages(errors: any[]) {
     errors.forEach(error => {
       const { path, message } = error;

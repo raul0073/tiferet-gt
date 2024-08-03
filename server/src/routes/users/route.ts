@@ -39,10 +39,12 @@ server.get('/', async (request: FastifyRequest, reply: FastifyReply) => {
 
   server.get('/:id', async (request: FastifyRequest, reply: FastifyReply) => {
     try {
+      // get id
       const { id } = request.params as { id: string };
       if(!id){
         return reply.status(404).send({ error: 'ERROR; no id was found' });
       }
+      //get user
       const user = await usersCollection?.findOne({_id: new ObjectId(id)})
       return reply.status(200).send(user);
     } catch (error) {
@@ -51,14 +53,15 @@ server.get('/', async (request: FastifyRequest, reply: FastifyReply) => {
     }
   });
 
-  // POST: Create a new user
 
-// POST: Create a new user
+
+// POST: new user
 server.post('/', async (request: FastifyRequest, reply: FastifyReply) => {
   try {
+    // get user
     const userObj: IUser = await userSchema.parseAsync(request.body); 
     if(!userObj){
-      return reply.status(401).send({msg: "bad good user obj"}); 
+      return reply.status(401).send({msg: "Cannot parse user obj"}); 
     }
     const newUser = await usersCollection?.insertOne(userObj) 
 
@@ -68,10 +71,12 @@ server.post('/', async (request: FastifyRequest, reply: FastifyReply) => {
   }
 });
 
-  // // DELETE: Delete a user by ID
+  // // DELETE:user by ID
   server.delete('/:id', async (request: FastifyRequest, reply: FastifyReply) => {
     try {
+      // get id
       const id = request.id as string;
+      
       const result = await usersCollection?.deleteOne({ _id: id.toString() });
 
       if (result?.deletedCount) {
@@ -85,7 +90,7 @@ server.post('/', async (request: FastifyRequest, reply: FastifyReply) => {
     }
   });
 
-  // // PUT: Update a user by ID
+  // // PUT: user by ID
   server.put('/:id', async (request: FastifyRequest, reply: FastifyReply) => {
     try {
       const id = request.id as string;

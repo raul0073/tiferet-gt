@@ -2,10 +2,10 @@ import mongoose, {Schema} from 'mongoose'
 
 const balanceSchema = new Schema({
     type: Number, // 1 income / 2 out
-    transactionId:String, // correspondes with transactions
+    transactionId:String,
     paidTo: String,
     transactionAmount: Number, 
-    balance: Number, // returns always latest balance
+    balance: Number,
 }, {
     timestamps: true
 },

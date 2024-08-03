@@ -4,7 +4,7 @@ const donersRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
     const db = server.mongo.db;
     const donersCollection = db?.collection('doners');
 
-    // GET: Fetch all users with their orders
+    // GET: get all doners
     server.get('/', async (request: FastifyRequest, reply: FastifyReply) => {
         try {
             const doners = await donersCollection?.find({}).toArray()
