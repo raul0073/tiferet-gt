@@ -1,0 +1,64 @@
+
+<section class="login w-full p-4 md:p-8">
+  <main class="w-full flex flex-col items-center">
+    <mat-card class="w-full border-0">
+   
+      <mat-card-header class="p-8 flex flex-col items-center">
+        <h2 class="text-appBlue text-center text-3xl font-semibold w-full p-8">{{headerText}}</h2>
+        
+      
+      </mat-card-header>
+      <mat-card-subtitle class="w-full text-center flex flex-col"> 
+        <i class="material-icons p-4 text-5xl text-appGold">verified_user</i>
+        <p class="text-appText text-center">{{subHeaderTxt}}</p>
+       </mat-card-subtitle>
+
+      <mat-card-content class="min-h-[40vh] my-4">
+        <form (ngSubmit)="onSubmit()">
+          <div class="p-4 md:p-8 flex flex-col space-y-8">
+            <div class="inputWrapper flex flex-col">
+              <label class="input input-bordered flex items-center bg-gray-200">
+                <input
+                  type="email"
+                  class="grow bg-transparent text-appText"
+                  placeholder="{{emailLabel}}"
+                  [(ngModel)]="userEmail"
+                  name="email"
+                />
+              
+              </label>
+              <small class="text-red-800 pt-0 mt-0" *ngIf="errorMessages['email']">
+                {{ errorMessages['email'] }}
+              </small>
+            </div>
+            <div class="inputWrapper flex flex-col">
+              <label class="input input-bordered flex items-center bg-gray-200">
+                <input
+                  type="password"
+                  class="grow bg-transparent text-appText"
+                  placeholder="{{passLabel}}"
+                  [(ngModel)]="userPassword"
+                  name="password"
+                />
+              </label>
+              <small class="text-red-800 pt-0 mt-0" *ngIf="errorMessages['password']">
+                {{ errorMessages['password'] }}
+              </small>
+            </div>
+            <mat-card-actions>
+              <div class="w-full flex flex-col items-center justify-center pt-12 space-y-4">
+                <a href="#">{{forgotTxt}}</a>
+                <app-loading-button [loading]="loading" (clickAction)="onSubmit()" class="w-full"></app-loading-button>
+               
+              </div>
+              
+            </mat-card-actions>
+            <mat-divider></mat-divider>
+          </div>
+        </form>       
+      </mat-card-content>
+      <mat-card-footer class="w-full p-2 text-center text-xs">
+        <p>בהתחברות את.ה מאשר.ת את תנאי השימוש<p>
+     </mat-card-footer>
+    </mat-card>
+  </main>

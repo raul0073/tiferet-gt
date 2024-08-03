@@ -1,0 +1,30 @@
+import { FastifyInstance, FastifyPluginAsync, FastifyReply, FastifyRequest } from 'fastify';
+import { loginSchema, ILogin } from './../../../../shared/schemas/loginSchema';
+
+export const loginRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise<void> => {
+    const db = server.mongo.db;
+    const usersCollection = db?.collection('users');
+
+    server.post('/', async (request: FastifyRequest, reply: FastifyReply) => {
+        try {
+            // Validate request body
+            const userObj: ILogin = await loginSchema.parseAsync(request.body);
+            // Check if the user exists
+            const user = await usersCollection?.findOne({ email: userObj.email });
+            if (!user) {
+                return reply.status(401).send({msg: "משתמש עם כתובת המייל לא נמצא"});
+            }
+            // Compare passwords
+            const isPasswordMatch = (userObj.password === user.password);
+            if (!isPasswordMatch) {
+                return reply.status(401).send({msg: "סיסמה לא תואמת"});
+            }
+
+            // Successful login
+            return reply.status(200).send({user});
+
+        } catch (err) {
+            return reply.status(500).send(`ERROR: ${err}`);
+        }
+    });
+};

@@ -1,0 +1,4 @@
+<button mat-raised-button color="primary" (click)="handleClick()" [disabled]="loading" class="w-full p-4 text-xl font-semibold">
+  <span *ngIf="!loading">{{ btnText }}</span>
+  <mat-spinner *ngIf="loading" diameter="24"></mat-spinner>
+</button>
