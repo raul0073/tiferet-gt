@@ -9,7 +9,7 @@ import labels from './../../../Data/Labels/doners.json'
 })
 export class DonersComponent {
   doners: IDoner[] = [];
-  displayedColumns: string[] = [];
+  displayedColumns: string[] = ["fullName", "amountDonated", "contact", "createdAt"];
   header: string = labels.header
   constructor(private donersService: DonersService) {
     this.loadDoners()
@@ -18,10 +18,6 @@ export class DonersComponent {
   async loadDoners() {
     try {
       this.doners = await this.donersService.getDoners();
-      if (this.doners.length > 0) {
-        this.displayedColumns = Object.keys(this.doners[0]); 
-      }
-      console.table(this.doners);
     } catch (error) {
       console.error('Error fetching doners:', error);
     }

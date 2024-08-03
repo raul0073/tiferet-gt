@@ -1,5 +1,5 @@
 import { HttpClientModule } from '@angular/common/http';
-import { NgModule } from '@angular/core';
+import { LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
@@ -21,7 +21,12 @@ import { SynagoguePanelComponent } from './pages/synagogue/synagogue-panel/synag
 import { DonersComponent } from './pages/doners/doners.component';
 import { TableComponent } from './components/table/table.component';
 import { CommonModule } from '@angular/common';
+import { registerLocaleData } from '@angular/common';
+import localeHe from '@angular/common/locales/he';
 
+
+
+registerLocaleData(localeHe);
 
 @NgModule({
   declarations: [
@@ -51,7 +56,8 @@ import { CommonModule } from '@angular/common';
     StoreModule.forRoot({ users: usersReducer }) 
   ],
   providers: [
-    provideAnimationsAsync()
+    provideAnimationsAsync(),
+    { provide: LOCALE_ID, useValue: 'he-IL' },
   ],
   bootstrap: [AppComponent]
 })
