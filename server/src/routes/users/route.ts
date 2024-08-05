@@ -23,13 +23,14 @@ server.get('/', async (request: FastifyRequest, reply: FastifyReply) => {
     if (!orders || orders.length === 0) {
       return reply.status(404).send({ error: 'Could not get orders collection' });
     }
-
+    users.sort((a, b) => a.lastName.localeCompare(b.lastName, 'he'));
     // combine users with orders
     const usersWithOrders = users.map(user => {
       const userOrders = orders.filter(order => order.userId === user._id.toString());
       return { ...user, orders: userOrders };
     });
 
+ 
     return reply.status(200).send(usersWithOrders);
   } catch (error) {
     server.log.error('Error querying MongoDB:', error);

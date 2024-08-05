@@ -1,0 +1,20 @@
+.mat-mdc-header-cell{
+    font-weight: 700;
+    &.lastCol{
+    text-align: left;
+}
+}
+
+
+.mat-mdc-cell{
+    &.negative{
+        color: red;
+
+    }
+    &.positive{
+        color: green;
+    }
+    &.lastCol{
+        text-align: left;
+    }
+}

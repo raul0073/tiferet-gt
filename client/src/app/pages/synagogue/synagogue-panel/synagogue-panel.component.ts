@@ -11,7 +11,7 @@ export class SynagoguePanelComponent {
   header: string = labels.header
   constructor(){
    this.actions = [
-     {txt: labels.balance, icon: 'balance', link: ''},
+     {txt: labels.balance, icon: 'balance', link: '/synagogue-balance'},
      {txt: labels.transaction, icon: 'payments', link: ''},
    ]
   }

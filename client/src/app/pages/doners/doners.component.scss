@@ -1,3 +1,15 @@
-.font-extrabold {
-    font-weight: 800; 
-}  
+.mat-mdc-header-cell{
+    font-weight: 700;
+    font-size: 1.1rem;
+    &.lastCol{
+    text-align: center;
+}
+}
+
+
+.mat-mdc-cell{
+
+    &.lastCol{
+        text-align: center;
+    }
+}

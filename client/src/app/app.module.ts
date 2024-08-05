@@ -23,6 +23,11 @@ import { TableComponent } from './components/table/table.component';
 import { CommonModule } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import localeHe from '@angular/common/locales/he';
+import { SubHeaderComponent } from './components/headers/sub-header/sub-header.component';
+import { AddDonerComponent } from './pages/doners/add-doner/add-doner.component';
+import { BalanceTableComponent } from './pages/prayers/balance-table/balance-table.component';
+import { SynagogueBalanceComponent } from './pages/synagogue/synagogue-balance/synagogue-balance.component';
+import { SynagogueTansactionComponent } from './pages/synagogue/synagogue-tansaction/synagogue-tansaction.component';
 
 
 
@@ -42,7 +47,11 @@ registerLocaleData(localeHe);
     SynagoguePanelComponent,
     DonersComponent,
     TableComponent,
-    
+    SubHeaderComponent,
+    AddDonerComponent,
+    BalanceTableComponent,
+    SynagogueBalanceComponent,
+    SynagogueTansactionComponent
   ],
   imports: [
     BrowserModule,

@@ -1,5 +1,5 @@
 import { createAction, props } from '@ngrx/store';
-import { UserType } from '../../../../../../server/src/models/users';
+import { UserType } from '../../../../../../shared/schemas/userSchema';
 
 export const addUserToStore = createAction(
   '[Users] Add User to Store',

@@ -11,3 +11,16 @@ export const userSchema = z.object({
 });
 
 export type IUser = z.infer<typeof userSchema>;
+
+
+export type UserType = {
+  _id: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  hasAccess: boolean;
+  hasDebt: boolean;
+  balance: number;
+  lastSeen: Date;
+}

@@ -1,0 +1,40 @@
+<section class="addDoner my-12 p-4 border rounded-md">
+  <app-sub-header [text]="addDoner"></app-sub-header>
+  <form novalidate [formGroup]="addDonerForm" (ngSubmit)="saveDoner()">
+    <div class="p-4 md:p-8 flex flex-col space-y-8">
+      <div class="inputWrapper flex flex-col">
+        <input
+          type="text"
+          placeholder="שם מלא"
+          class="grow bg-white text-appText rounded-md p-2"
+          formControlName="fullName"
+          name="fullName"
+        />
+      </div>
+      <div class="inputWrapper flex flex-col">
+        <input
+          type="number"
+          placeholder="סכום"
+          class="grow bg-white text-appText rounded-md p-2"
+          formControlName="amountDonated"
+          name="amountDonated"
+        />
+      </div>
+      <div class="inputWrapper flex flex-col">
+        <input
+          type="text"
+          placeholder="טלפון"
+          class="grow bg-white text-appText rounded-md p-2"
+          formControlName="contact"
+          name="contact"
+        />
+      </div>
+      <app-loading-button
+        *ngIf="addDonerForm.valid"
+        [loading]="loading"
+        [alternativeText]="add"
+        [disabled]="addDonerForm.invalid"
+      ></app-loading-button>
+    </div>
+  </form>
+</section>

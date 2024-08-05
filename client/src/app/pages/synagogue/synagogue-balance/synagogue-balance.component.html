@@ -1,0 +1,33 @@
+<section class="synagogueBalance">
+    <app-header [text]="header"></app-header>
+    <table mat-table [dataSource]="balance" class="mat-elevation-z8">
+
+      <!-- Full Name Column -->
+      <ng-container matColumnDef="createdAt" class="font-extrabold">
+        <th mat-header-cell *matHeaderCellDef> תאריך </th>
+        <td mat-cell *matCellDef="let balance"> {{ balance.createdAt | date:'shortDate' }} </td>
+      </ng-container>
+
+      <ng-container matColumnDef="type">
+        <th mat-header-cell *matHeaderCellDef> פעולה </th>
+        <td 
+        [ngClass]="{ 'in': balance.type === 1, 'out': balance.type === 2 }"
+        mat-cell *matCellDef="let balance"> {{ balance.type === 1 ? " הכנסה → "  : "הוצאה ← " }} </td>
+      </ng-container>
+      <ng-container matColumnDef="transactionAmount">
+        <th mat-header-cell *matHeaderCellDef> סכום </th>
+        <td mat-cell *matCellDef="let balance"> {{ balance.transactionAmount | currency:'ILS' }} </td>
+      </ng-container>
+
+      <!-- Phone Column -->
+      <ng-container matColumnDef="balance">
+        <th mat-header-cell *matHeaderCellDef> יתרה </th>
+        <td mat-cell *matCellDef="let balance"> {{ balance.balance | currency:'ILS' }}</td>
+      </ng-container>
+
+    
+      <!-- Header and Row Definitions -->
+      <tr  mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr  mat-row *matRowDef="let row; columns: displayedColumns;" routerLink="{{row.transactionId}}" ></tr>
+    </table>
+</section>

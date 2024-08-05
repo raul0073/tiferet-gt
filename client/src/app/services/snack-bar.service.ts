@@ -15,4 +15,12 @@ export class SnackBarService {
       panelClass: ['snackbar']
     });
   }
+  openSnackBarError(message: string, action: string) {
+    this._snackBar.open(message, action, {
+      duration: 2500,
+      horizontalPosition: 'right',
+      verticalPosition: 'bottom',
+      panelClass: ['errSnackbar']
+    });
+  }
 }

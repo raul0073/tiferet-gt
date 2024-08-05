@@ -6,6 +6,9 @@ import usersRoute from "./routes/users/route";
 import dotenv from 'dotenv'
 import { loginRoute } from "./routes/login/route";
 import donersRoute from "./routes/doners/route";
+import synagogueRoute from "./routes/transactions/route";
+import balanceRoute from "./routes/balance/route";
+import transactionRoute from "./routes/transactions/route";
 dotenv.config()
 
 const {MONGODB_URI, API_URL, PORT} = process.env
@@ -40,6 +43,8 @@ server.register(mainRoute, {prefix: 'api/main'})
 server.register(usersRoute, {prefix: 'api/users'})
 server.register(loginRoute, {prefix: 'api/login'})
 server.register(donersRoute, {prefix: 'api/doners'})
+server.register(transactionRoute, {prefix: 'api/synagogue/transactions'})
+server.register(balanceRoute, {prefix: 'api/synagogue/balance'})
 
 
 // start server

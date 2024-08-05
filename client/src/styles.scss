@@ -69,6 +69,16 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
     --mat-mdc-snack-bar-button-color: #0068bd;
     --mdc-snackbar-supporting-text-color: #131313;
   }
+  &.errSnackbar{
+    --mdc-snackbar-container-color: #ff5050;
+    --mat-mdc-snack-bar-button-color: #000000;
+    --mdc-snackbar-supporting-text-color: #ffffff;
+  }
 }
 
+// table
 
+
+.lastCol{
+  text-align: center;
+}

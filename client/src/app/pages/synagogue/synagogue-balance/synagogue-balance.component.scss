@@ -1,0 +1,9 @@
+.mat-mdc-cell {
+
+    &.out{
+        color: red;
+    }
+    &.in{
+        color: green;
+    }
+}

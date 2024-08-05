@@ -1,9 +1,9 @@
-import { UserType } from '../../../../../../server/src/models/users';
 import { createReducer, on } from '@ngrx/store';
 import { addUserToStore, setCurrentUser } from './usersSlice.actions';
+import { UserType } from '../../../../../../shared/schemas/userSchema';
 export interface UsersState {
-  allUsers: UserType[];    // Array to hold all users
-  currentUser: UserType | null; // Object to hold the current logged-in user
+  allUsers: UserType[];   
+  currentUser: UserType | null; 
 }
 
 export const initialUsersState: UsersState = {

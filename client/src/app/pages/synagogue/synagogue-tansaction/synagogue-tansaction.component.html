@@ -1,0 +1,37 @@
+<section class="transaction">
+    <app-header [text]="header"></app-header>
+   <div class="w-full p-4 flex flex-col space-y-4 bg-white rounded-lg">
+    <ng-container >
+        <div>
+            <label>מספר מזהה</label>
+            <p>{{ transaction._id }}</p>
+        </div>
+        <div>
+            <label>סוג פעולה </label>
+            <p>{{ transaction.actionType ===1 ? "הכנסה" : 'הוצאה'  }}</p>
+        </div>
+        <div>
+            <label>סכום </label>
+            <p>{{ transaction.amountPaid | currency:"ILS" }}</p>
+        </div>
+        <div>
+            <label>שולם ב </label>
+            <p>{{ transaction.paymentType }}</p>
+        </div>
+        <div>
+            <label>שולם ל </label>
+            <p>{{ transaction.paidTo }}</p>
+        </div>
+        <div *ngIf="transaction.checkNo">
+            <label>מס' צ'ק </label>
+            <p>{{ transaction.checkNo }}</p>
+        </div>
+
+       
+      
+       
+        
+       
+      </ng-container>
+   </div>
+</section>

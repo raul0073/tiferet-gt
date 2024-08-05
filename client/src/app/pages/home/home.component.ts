@@ -1,10 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { UserType } from '../../../../../server/src/models/users';
 import { selectCurrentUser } from '../../store/slices/usersSlice/usersSlice.selector';
 import { AppStore } from '../../store/store';
 import labels from './../../../Data/Labels/home.json';
+import { UsersService } from '../../services/users.service';
+import { addUserToStore } from '../../store/slices/usersSlice/usersSlice.actions';
+import { UserType } from '../../../../../shared/schemas/userSchema';
+
 export type BtnsData = {
   txt: string, icon: string, link: string
 }
@@ -32,7 +35,9 @@ export class HomeComponent implements OnInit {
   welcome = labels.welcome;
 
 
-  constructor(private store: Store<AppStore>) {
+  constructor(private store: Store<AppStore>,
+    private userService: UsersService
+  ) {
     this.quickActions = [
       {txt: labels.addOrder, icon: 'add_circle', link: ''},
       {txt: labels.bigTable, icon: 'table_view', link: ''},
@@ -47,10 +52,21 @@ export class HomeComponent implements OnInit {
     ];
   }
 
-  // get user data
+  getAllUsers(): void {
+    this.userService.getUsers().subscribe(users => {
+      users.forEach(user => {
+        this.store.dispatch(addUserToStore({ user }));
+      });
+    });
+  }
+
   ngOnInit(): void {
+    // Fetch all users when component initializes
+    this.getAllUsers();
     this.currentUser$.subscribe(data => {
       this.user = data
     });
+
+
   }
 }
