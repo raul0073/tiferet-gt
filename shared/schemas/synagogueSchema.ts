@@ -21,6 +21,6 @@ export type TransactionType = {
     checkNo: string,
     amountPaid: number,
     paidTo: string,
-  createdAt: Date
+    createdAt: Date
 }
 

@@ -7,5 +7,5 @@ import { Component, Input } from '@angular/core';
 })
 export class ButtonWithIconComponent {
   @Input() text: string = ''
-  // @Input() icon: 
+  @Input() icon: string = ''
 }

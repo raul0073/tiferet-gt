@@ -12,7 +12,7 @@ export class SynagoguePanelComponent {
   constructor(){
    this.actions = [
      {txt: labels.balance, icon: 'balance', link: '/synagogue-balance'},
-     {txt: labels.transaction, icon: 'payments', link: ''},
+     {txt: labels.transaction, icon: 'payments', link: '/synagogue/add'},
    ]
   }
 }

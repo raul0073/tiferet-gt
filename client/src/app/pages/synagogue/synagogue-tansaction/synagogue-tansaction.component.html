@@ -1,37 +1,35 @@
 <section class="transaction">
-    <app-header [text]="header"></app-header>
-   <div class="w-full p-4 flex flex-col space-y-4 bg-white rounded-lg">
-    <ng-container >
-        <div>
-            <label>מספר מזהה</label>
-            <p>{{ transaction._id }}</p>
-        </div>
-        <div>
-            <label>סוג פעולה </label>
-            <p>{{ transaction.actionType ===1 ? "הכנסה" : 'הוצאה'  }}</p>
-        </div>
-        <div>
-            <label>סכום </label>
-            <p>{{ transaction.amountPaid | currency:"ILS" }}</p>
-        </div>
-        <div>
-            <label>שולם ב </label>
-            <p>{{ transaction.paymentType }}</p>
-        </div>
-        <div>
-            <label>שולם ל </label>
-            <p>{{ transaction.paidTo }}</p>
-        </div>
-        <div *ngIf="transaction.checkNo">
-            <label>מס' צ'ק </label>
-            <p>{{ transaction.checkNo }}</p>
-        </div>
-
-       
-      
-       
-        
-       
-      </ng-container>
-   </div>
+  <app-header [text]="header"></app-header>
+  <div class="w-full p-4 flex flex-col space-y-4 bg-white rounded-lg">
+    <ng-container>
+      <div>
+        <label>תאריך </label>
+        <p>{{ transaction.createdAt | date : "shortDate" }}</p>
+      </div>
+      <div>
+        <label>סוג פעולה </label>
+        <p>{{ transaction.actionType === 1 ? "הכנסה" : "הוצאה" }}</p>
+      </div>
+      <div>
+        <label>סכום </label>
+        <p>{{ transaction.amountPaid | currency : "ILS" }}</p>
+      </div>
+      <div>
+        <label>שולם ב </label>
+        <p>{{ transaction.paymentType }}</p>
+      </div>
+      <div>
+        <label>שולם ל </label>
+        <p>{{ transaction.paidTo }}</p>
+      </div>
+      <div *ngIf="transaction.checkNo">
+        <label>מס' צ'ק </label>
+        <p>{{ transaction.checkNo }}</p>
+      </div>
+    </ng-container>
+    <div class="action w-full p-2 flex justify-end gap-4 items-center">
+      <app-button-with-icon [text]="'ערוך'" icon="edit"></app-button-with-icon>
+    <app-delete-button-with-icon></app-delete-button-with-icon>
+    </div>
+  </div>
 </section>

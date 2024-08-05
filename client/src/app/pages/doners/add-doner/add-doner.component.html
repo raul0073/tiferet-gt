@@ -29,12 +29,14 @@
           name="contact"
         />
       </div>
+     <div class="action my-8 w-full md:w-1/2">
       <app-loading-button
-        *ngIf="addDonerForm.valid"
-        [loading]="loading"
-        [alternativeText]="add"
-        [disabled]="addDonerForm.invalid"
-      ></app-loading-button>
+      *ngIf="addDonerForm.valid"
+      [loading]="loading"
+      [alternativeText]="add"
+      [disabled]="addDonerForm.invalid"
+    ></app-loading-button>
+     </div>
     </div>
   </form>
 </section>

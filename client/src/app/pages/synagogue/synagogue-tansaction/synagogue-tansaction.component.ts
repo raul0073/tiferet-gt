@@ -19,9 +19,8 @@ export class SynagogueTansactionComponent implements OnInit {
 
   async loadTransaction() {
     try {
-      if (this.transactionID) { // Check if transactionID is not empty
+      if (this.transactionID) { 
         this.transaction = await this.synService.getTransactionById(this.transactionID);
-        console.log(this.transaction);
       } else {
         console.warn('Transaction ID is not set.');
       }
@@ -33,7 +32,7 @@ export class SynagogueTansactionComponent implements OnInit {
   ngOnInit(): void {
     this.route.params.subscribe(params => {
       this.transactionID = params['id'];
-      this.loadTransaction(); // Call after transactionID is set
+      this.loadTransaction(); 
     });
   }
 }

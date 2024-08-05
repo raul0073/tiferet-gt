@@ -28,6 +28,8 @@ import { AddDonerComponent } from './pages/doners/add-doner/add-doner.component'
 import { BalanceTableComponent } from './pages/prayers/balance-table/balance-table.component';
 import { SynagogueBalanceComponent } from './pages/synagogue/synagogue-balance/synagogue-balance.component';
 import { SynagogueTansactionComponent } from './pages/synagogue/synagogue-tansaction/synagogue-tansaction.component';
+import { DeleteButtonWithIconComponent } from './components/buttons/delete-button-with-icon/delete-button-with-icon.component';
+import { SynagogueAddTransactionComponent } from './pages/synagogue/synagogue-add-transaction/synagogue-add-transaction.component';
 
 
 
@@ -51,7 +53,9 @@ registerLocaleData(localeHe);
     AddDonerComponent,
     BalanceTableComponent,
     SynagogueBalanceComponent,
-    SynagogueTansactionComponent
+    SynagogueTansactionComponent,
+    DeleteButtonWithIconComponent,
+    SynagogueAddTransactionComponent
   ],
   imports: [
     BrowserModule,

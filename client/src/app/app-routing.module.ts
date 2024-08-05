@@ -9,6 +9,7 @@ import { DonersComponent } from './pages/doners/doners.component';
 import { BalanceTableComponent } from './pages/prayers/balance-table/balance-table.component';
 import { SynagogueBalanceComponent } from './pages/synagogue/synagogue-balance/synagogue-balance.component';
 import { SynagogueTansactionComponent } from './pages/synagogue/synagogue-tansaction/synagogue-tansaction.component';
+import { SynagogueAddTransactionComponent } from './pages/synagogue/synagogue-add-transaction/synagogue-add-transaction.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -19,6 +20,7 @@ const routes: Routes = [
   { path: 'balance-table', component: BalanceTableComponent, canActivate: [authGuard] },
   { path: 'synagogue-balance', component: SynagogueBalanceComponent, canActivate: [authGuard] },
   { path: 'synagogue-balance/:id', component: SynagogueTansactionComponent, canActivate: [authGuard] },
+  { path: 'synagogue/add', component: SynagogueAddTransactionComponent, canActivate: [authGuard] },
 ];
 
 @NgModule({

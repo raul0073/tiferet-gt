@@ -2,8 +2,7 @@
   <app-header [text]="'ברוך הבא, ' + (user?.firstName || '')"></app-header>
 
   <div class="allActions space-y-4">
-    <div class="quick w-full">
-      <h2 class="text-appGrey pb-2">{{ quickActionsHeader }}</h2>
+    <app-sub-header [text]="quickActionsHeader"></app-sub-header>
       <div
         class="btns flex flex-col md:flex-row gap-4 justify-evenly items-center w-full p-4 border rounded-md"
       >
@@ -15,9 +14,8 @@
         {{ label.txt }}
         </button>
       </div>
-    </div>
-    <div class="actions w-full">
-        <h2 class="text-appGrey pb-2">{{ allActionsHeader }}</h2>
+
+      <app-sub-header [text]="allActionsHeader"></app-sub-header>
         <div
           class="btns flex flex-col md:flex-row gap-4 justify-evenly items-center w-full p-4 border rounded-md"
         >
@@ -30,7 +28,6 @@
           {{ label.txt }}
           </button>
         </div>
-      </div>
 
   </div>
   <div class="stats"></div>

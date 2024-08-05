@@ -1,0 +1,70 @@
+<section class="addTransaction">
+    <app-header [text]="header"></app-header>
+    <form novalidate [formGroup]="addTransactionForm" (ngSubmit)="addTransaction()">
+      <div class="p-4 md:p-8 flex flex-col space-y-8">
+        
+        <div class="inputWrapper flex flex-col">
+          <select
+            class="grow bg-white text-appText rounded-md p-2"
+            formControlName="actionType"
+            name="actionType"
+          >
+            <option value="" disabled selected>בחר סוג פעולה</option>
+            <option value="1">הכנסה</option>
+            <option value="2">הוצאה</option>
+          </select>
+        </div>
+    
+        <div class="inputWrapper flex flex-col">
+          <input
+            type="text"
+            placeholder="סוג תשלום"
+            class="grow bg-white text-appText rounded-md p-2"
+            formControlName="paymentType"
+            name="paymentType"
+          />
+        </div>
+    
+        <div class="inputWrapper flex flex-col">
+          <input
+            type="text"
+            placeholder="מספר צ'ק"
+            class="grow bg-white text-appText rounded-md p-2"
+            formControlName="checkNo"
+            name="checkNo"
+          />
+        </div>
+    
+        <div class="inputWrapper flex flex-col">
+          <input
+            type="number"
+            placeholder="סכום"
+            class="grow bg-white text-appText rounded-md p-2"
+            formControlName="amountPaid"
+            name="amountPaid"
+          />
+        </div>
+    
+        <div class="inputWrapper flex flex-col">
+          <input
+            type="text"
+            placeholder="שולם למי "
+            class="grow bg-white text-appText rounded-md p-2"
+            formControlName="paidTo"
+            name="paidTo"
+          />
+        </div>
+        
+      </div>
+      <div class="action my-8 w-full md:w-2/3 mx-auto">
+
+        <app-loading-button
+        *ngIf="addTransactionForm.valid"
+        [loading]="loading"
+        [alternativeText]="addText"
+        [disabled]="addTransactionForm.invalid"
+        ></app-loading-button>
+      </div>
+    </form>
+  </section>
+  
