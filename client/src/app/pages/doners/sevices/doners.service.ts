@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { IDoner } from './../../../../shared/schemas/donersSchema'
+import { IDoner } from '../../../../../../shared/schemas/donersSchema'
 import { firstValueFrom, lastValueFrom } from 'rxjs';
-import { httpOptions } from './login.service';
-import { environment } from './../../environments/environments'
+import { httpOptions } from '../../../services/login.service';
+import { environment } from '../../../../environments/environments'
 @Injectable({
   providedIn: 'root'
 })

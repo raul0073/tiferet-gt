@@ -1,12 +1,18 @@
 import { Component } from '@angular/core';
-import labels from './../../../../Data/Labels/transaction.json'
+import labels from './../data/transaction.json'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { SynagogueService } from '../services/synagogue.service';
+import { SnackBarService } from '../../../services/snack-bar.service';
 @Component({
   selector: 'app-synagogue-add-transaction',
   templateUrl: './synagogue-add-transaction.component.html',
   styleUrl: './synagogue-add-transaction.component.scss'
 })
 export class SynagogueAddTransactionComponent {
+
+  constructor(private synService: SynagogueService,
+              private snackBar: SnackBarService
+  ){}
   header: string = labels.addHeader
   loading: boolean = false
   addText: string = labels.add
@@ -21,6 +27,7 @@ export class SynagogueAddTransactionComponent {
       Validators.maxLength(10),
       Validators.minLength(1),
     ]),
+    expenseType: new FormControl('', []),
     checkNo: new FormControl('', []), 
     amountPaid: new FormControl('', [
       Validators.required,
@@ -31,11 +38,24 @@ export class SynagogueAddTransactionComponent {
       Validators.maxLength(30),
       Validators.minLength(1),
     ]),
-    createdAt: new FormControl(new Date(), []),
   })
 
 
-  async addTransaction() { 
-    console.log(this.addTransactionForm.valid)
+  async postTransaction() { 
+    this.loading = true
+    // cast to a number
+    let type = Number(this.addTransactionForm.get('actionType')?.value)
+    this.addTransactionForm.get('actionType')?.setValue(type);
+    // log
+    try {
+      const res = await this.synService.addTransaction(this.addTransactionForm.value)
+      this.snackBar.openSnackBar("הוזן בהצלחה", 'x')
+      this.addTransactionForm.reset()
+    } catch (error) {
+      console.log(error)
+      this.snackBar.openSnackBarError("תקלה. לא ניתן להוסיף", 'x')
+    }finally{
+      this.loading = false
+    }
   }
 }

@@ -12,11 +12,11 @@ export class PrayersPanelComponent {
   header: string = labels.header
  constructor(){
   this.actions = [
-    {txt: labels.addOrder, icon: 'add_circle', link: ''},
-    {txt: labels.bigTable, icon: 'table_view', link: ''},
-    {txt: labels.balaceTable, icon: 'account_balance', link: '/balance-table'},
-    {txt: labels.addUser, icon: 'person_add', link: ''},
-    {txt: labels.forms, icon: 'photo', link: ''},
+    {txt: labels.addOrder, icon: 'add_circle', link: '/prayers/order/add'},
+    {txt: labels.bigTable, icon: 'table_view', link: '/prayers/overall-table'},
+    {txt: labels.balaceTable, icon: 'account_balance', link: '/prayers/balance-table'},
+    {txt: labels.addUser, icon: 'person_add', link: '/prayers/add'},
+    {txt: labels.forms, icon: 'photo', link: '/prayers/custom-prints'},
   ]
  }
 }

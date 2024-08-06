@@ -1,8 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
-import {BalanceType} from './../../../../shared/schemas/balanceSchema'
-import { environment } from './../../environments/environments'
+import {BalanceType} from '../../../../../../shared/schemas/balanceSchema'
+import { environment } from '../../../../environments/environments'
 @Injectable({
   providedIn: 'root'
 })

@@ -1,6 +1,6 @@
-<nav>
+<nav class="w-full">
     <section class="nav w-full p-2 flex justify-between items-center">
-            <button *ngIf="!isHomePage" class="text-appBlue" (click)="goBack()">&#8594; חזרה</button>
+            <button *ngIf="isHomePage" class="text-appBlue text-xl" (click)="goBack()">&#8594; חזרה</button>
             <button class="text-appRed" (click)="onLogout()">התנתק</button>
     </section>
 </nav>

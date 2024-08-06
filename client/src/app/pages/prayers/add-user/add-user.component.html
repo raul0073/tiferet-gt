@@ -1,0 +1,69 @@
+<section class="addTransaction">
+  <app-header [text]="header"></app-header>
+  <div class="quick bg-white rounded-xl shadow-sm shadow-appGrey p-4">
+    <app-sub-header [text]="'יש למלא את כל השדות'"></app-sub-header>
+    <div class="formwrap pb-8">
+      <form
+        novalidate
+        [formGroup]="addUserForm"
+        (ngSubmit)="onSubmit()"
+        class="bg-gray-400 rounded-md"
+      >
+        <div class="p-4 md:p-8 flex flex-col space-y-8">
+          <div class="inputWrapper flex flex-col">
+            <input
+              type="text"
+              placeholder="אימייל"
+              class="grow bg-white text-appText rounded-md p-2"
+              formControlName="email"
+              name="email"
+            />
+          </div>
+          <div class="inputWrapper flex flex-col">
+            <input
+              type="text"
+              placeholder="סיסמה"
+              class="grow bg-white text-appText rounded-md p-2"
+              formControlName="password"
+              name="password"
+            />
+          </div>
+          <div class="inputWrapper flex flex-col">
+            <input
+              type="text"
+              placeholder="שם פרטי"
+              class="grow bg-white text-appText rounded-md p-2"
+              formControlName="firstName"
+              name="firstName"
+            />
+          </div>
+          <div class="inputWrapper flex flex-col">
+            <input
+              type="text"
+              placeholder="שם משפחה"
+              class="grow bg-white text-appText rounded-md p-2"
+              formControlName="lastName"
+              name="lastName"
+            />
+          </div>
+          <div class="inputWrapper flex w-full justify-start items-center p-2">
+            <input
+              type="checkbox"
+              formControlName="hasAccess"
+              name="hasAccess"
+            />
+            <label class="cursor-pointer text-white mx-2"> {{hasAceessLabel}} </label>
+          </div>
+        </div>
+        <div class="action my-8 w-full md:w-2/3 mx-auto">
+          <app-loading-button
+            *ngIf="addUserForm.valid"
+            [loading]="loading"
+            [alternativeText]="'הוסף משתמש'"
+            [disabled]="addUserForm.invalid"
+          ></app-loading-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>

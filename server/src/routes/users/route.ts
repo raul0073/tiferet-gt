@@ -65,7 +65,7 @@ server.post('/', async (request: FastifyRequest, reply: FastifyReply) => {
       return reply.status(401).send({msg: "Cannot parse user obj"}); 
     }
     const newUser = await usersCollection?.insertOne(userObj) 
-
+    
     return reply.status(201).send({msg: "user saved", user: newUser}); 
   } catch (err) {
     return reply.status(500).send({err}); 

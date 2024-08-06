@@ -12,7 +12,7 @@ module.exports = {
         "appBlue": "#003366",
         "appGold": "#FFD700",
         "appRed": "#F87474",
-        "appGrey": "#333333"
+        "appGrey": "#757575"
       },
     },
   },

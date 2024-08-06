@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
-import labels from './../../../../Data/Labels/doners.json'
+import labels from './../../data/doners.json'
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { DonersService } from '../../../services/doners.service';
-import { SnackBarService } from '../../../services/snack-bar.service';
+import { DonersService } from '../../sevices/doners.service';
+import { SnackBarService } from '../../../../services/snack-bar.service';
+
 @Component({
   selector: 'app-add-doner',
   templateUrl: './add-doner.component.html',

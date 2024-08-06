@@ -1,9 +1,22 @@
-.mat-mdc-cell {
 
+
+.mat-mdc-header-cell{
+    font-weight: 700;
+    font-size: 1.1rem;
+    &.lastCol{
+    text-align: center;
+}
+}
+
+
+.mat-mdc-cell{
     &.out{
         color: red;
     }
     &.in{
         color: green;
+    }
+    &.lastCol{
+        text-align: center;
     }
 }

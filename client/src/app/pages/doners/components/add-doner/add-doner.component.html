@@ -1,6 +1,6 @@
-<section class="addDoner my-12 p-4 border rounded-md">
+<section class="addDoner my-12 p-4 bg-white rounded-xl shadow-sm shadow-appGrey">
   <app-sub-header [text]="addDoner"></app-sub-header>
-  <form novalidate [formGroup]="addDonerForm" (ngSubmit)="saveDoner()">
+  <form novalidate [formGroup]="addDonerForm" (ngSubmit)="saveDoner()" class="bg-gray-400 rounded-md">
     <div class="p-4 md:p-8 flex flex-col space-y-8">
       <div class="inputWrapper flex flex-col">
         <input
@@ -29,7 +29,7 @@
           name="contact"
         />
       </div>
-     <div class="action my-8 w-full md:w-1/2">
+     <div class="action my-8 w-full md:w-1/2 mx-auto">
       <app-loading-button
       *ngIf="addDonerForm.valid"
       [loading]="loading"

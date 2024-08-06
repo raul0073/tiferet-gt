@@ -24,12 +24,17 @@ import { CommonModule } from '@angular/common';
 import { registerLocaleData } from '@angular/common';
 import localeHe from '@angular/common/locales/he';
 import { SubHeaderComponent } from './components/headers/sub-header/sub-header.component';
-import { AddDonerComponent } from './pages/doners/add-doner/add-doner.component';
 import { BalanceTableComponent } from './pages/prayers/balance-table/balance-table.component';
 import { SynagogueBalanceComponent } from './pages/synagogue/synagogue-balance/synagogue-balance.component';
-import { SynagogueTansactionComponent } from './pages/synagogue/synagogue-tansaction/synagogue-tansaction.component';
 import { DeleteButtonWithIconComponent } from './components/buttons/delete-button-with-icon/delete-button-with-icon.component';
 import { SynagogueAddTransactionComponent } from './pages/synagogue/synagogue-add-transaction/synagogue-add-transaction.component';
+import { SynagogueTansactionComponent } from './pages/synagogue/synagogue-tansaction/synagogue-tansaction.component';
+import { AddDonerComponent } from './pages/doners/components/add-doner/add-doner.component';
+import { AddOrderComponent } from './pages/prayers/add-order/add-order.component';
+import { OverallTableComponent } from './pages/prayers/overall-table/overall-table.component';
+import { AddUserComponent } from './pages/prayers/add-user/add-user.component';
+import { CustomPrintsComponent } from './pages/prayers/custom-prints/custom-prints.component';
+
 
 
 
@@ -50,12 +55,16 @@ registerLocaleData(localeHe);
     DonersComponent,
     TableComponent,
     SubHeaderComponent,
-    AddDonerComponent,
     BalanceTableComponent,
     SynagogueBalanceComponent,
     SynagogueTansactionComponent,
     DeleteButtonWithIconComponent,
-    SynagogueAddTransactionComponent
+    SynagogueAddTransactionComponent,
+    AddDonerComponent,
+    AddOrderComponent,
+    OverallTableComponent,
+    AddUserComponent,
+    CustomPrintsComponent,
   ],
   imports: [
     BrowserModule,

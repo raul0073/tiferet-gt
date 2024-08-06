@@ -3,10 +3,10 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { selectCurrentUser } from '../../store/slices/usersSlice/usersSlice.selector';
 import { AppStore } from '../../store/store';
-import labels from './../../../Data/Labels/home.json';
-import { UsersService } from '../../services/users.service';
+import labels from './data/home.json';
 import { addUserToStore } from '../../store/slices/usersSlice/usersSlice.actions';
 import { UserType } from '../../../../../shared/schemas/userSchema';
+import { UsersService } from '../prayers/services/users.service';
 
 export type BtnsData = {
   txt: string, icon: string, link: string

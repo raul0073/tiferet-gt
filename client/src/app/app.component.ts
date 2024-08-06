@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import labels from './../Data/Labels/home.json';
+import labels from './pages/home/data/home.json';
 import { AuthService } from './services/auth.service';
 import { Router } from '@angular/router';
 

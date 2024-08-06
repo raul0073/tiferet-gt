@@ -1,7 +1,7 @@
-import { Component } from '@angular/core';
-import { DonersService } from '../../services/doners.service';
+import { Component, HostBinding } from '@angular/core';
+import { DonersService } from './sevices/doners.service';
 import { IDoner } from '../../../../../shared/schemas/donersSchema';
-import labels from './../../../Data/Labels/doners.json'
+import labels from './../doners/data/doners.json'
 @Component({
   selector: 'app-doners',
   templateUrl: './doners.component.html',
@@ -10,9 +10,12 @@ import labels from './../../../Data/Labels/doners.json'
 export class DonersComponent {
   doners: IDoner[] = [];
   displayedColumns: string[] = ["fullName", "amountDonated", "contact", "createdAt"];
+  ser:any
+  @HostBinding() aaa: any
   header: string = labels.header
   constructor(private donersService: DonersService) {
     this.loadDoners()
+    this.ser = donersService as DonersService
   }
 
   async loadDoners() {
@@ -22,4 +25,6 @@ export class DonersComponent {
       console.error('Error fetching doners:', error);
     }
   }
+
+
 }

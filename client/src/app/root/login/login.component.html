@@ -1,5 +1,5 @@
 
-<section class="login w-full p-1 md:p-8">
+<section class="login w-full my-8 p-1 md:p-8 md:my-0">
   <main class="w-full flex flex-col items-center">
     <mat-card class="w-full border-0">
    
@@ -47,7 +47,7 @@
             </div>
             <mat-card-actions>
               <div class="w-full flex flex-col items-center justify-center pt-12 space-y-4">
-                <a href="#">{{forgotTxt}}</a>
+    
                 <app-loading-button [loading]="loading" (clickAction)="onSubmit()" class="w-full"></app-loading-button>
                
               </div>
@@ -57,8 +57,18 @@
           </div>
         </form>       
       </mat-card-content>
-      <mat-card-footer class="w-full p-2 text-center text-xs">
-        <p>בהתחברות את.ה מאשר.ת את תנאי השימוש<p>
+      <mat-card-footer class="w-full p-2 flex justify-between items-center md:w-2/3 md:mx-auto">
+        <button class="btn btn-link text-appGrey"> {{forgotTxt}}</button>
+        <button class="btn btn-link" onclick="my_modal_1.showModal()">תנאי שימוש</button>
+        <dialog id="my_modal_1" class="modal">
+          <div class="modal-box">
+            <form method="dialog">
+              <button class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2">✕</button>
+            </form>
+            <h3 class="text-lg font-bold">תנאי שימוש</h3>
+            <p class="py-4">  תנאי השימוש:</p>
+          </div>
+        </dialog>
      </mat-card-footer>
     </mat-card>
   </main>

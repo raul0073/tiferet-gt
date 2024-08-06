@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { TransactionType } from '../../../../../../shared/schemas/synagogueSchema';
-import { SynagogueService } from '../../../services/synagogue.service';
-import labels from './../../../../Data/Labels/synagogue.json'
-import { BalanceService } from '../../../services/balance.service';
+import labels from './../data/synagogue.json'
+import { BalanceService } from '../services/balance.service';
 import { BalanceType } from '../../../../../../shared/schemas/balanceSchema';
 @Component({
   selector: 'app-synagogue-balance',
