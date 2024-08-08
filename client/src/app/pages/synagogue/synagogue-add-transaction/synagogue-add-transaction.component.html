@@ -1,103 +1,103 @@
-<section class="addTransaction "> 
+<section class="addTransaction">
   <app-header [text]="header"></app-header>
-  <div class="quick bg-white rounded-xl shadow-sm shadow-appGrey p-4">
-    <app-sub-header [text]="'יש למלא את כל השדות'"></app-sub-header>
+  <div class="card  w-full rounded-sm">
+    <div class="card-body">
+      <app-form-header></app-form-header>
+      <form
+        novalidate
+        [formGroup]="addTransactionForm"
+        (ngSubmit)="postTransaction()"
+        class="rounded-md"
+      >
+        <div class="p-4 md:p-8 flex flex-col space-y-8">
+          <div class="inputWrapper flex flex-col">
+            <select
+              class="grow bg-white text-appText rounded-md p-2 border border-appGrey"
+              formControlName="actionType"
+              name="actionType"
+            >
+              <option value="" disabled selected>בחר סוג פעולה</option>
+              <option value="1">הכנסה</option>
+              <option value="2">הוצאה</option>
+            </select>
+          </div>
 
-   <div class="formwrap  ">
-    <form
-    novalidate
-    [formGroup]="addTransactionForm"
-    (ngSubmit)="postTransaction()"
-    class="bg-gray-400 rounded-md"
-    >
-    <div class="p-4 md:p-8 flex flex-col space-y-8 ">
-      <div class="inputWrapper flex flex-col">
-        <select
-        class="grow bg-white text-appText rounded-md p-2 "
-        formControlName="actionType"
-        name="actionType"
-        >
-        <option value="" disabled selected>בחר סוג פעולה</option>
-        <option value="1">הכנסה</option>
-        <option value="2">הוצאה</option>
-      </select>
-    </div>
-    
-    <div
-    class="inputWrapper flex flex-col"
-    *ngIf="addTransactionForm.get('actionType')?.value === '2'"
-    >
-    <select
-    class="grow bg-white text-appText rounded-md p-2 "
-    formControlName="expenseType"
-    name="expenseType"
-    >
-    <option value="" disabled selected>סוג ההוצאה</option>
-    <option value="תחזוקה">תחזוקה</option>
-    <option value="מלאי">מלאי</option>
-    <option value="בעל מקצוע">בעל מקצוע</option>
-    <option value="קייטרינג">קייטרינג</option>
-    <option value="אחר">אחר</option>
-  </select>
-</div>
+          <div
+            class="inputWrapper flex flex-col"
+            *ngIf="addTransactionForm.get('actionType')?.value === '2'"
+          >
+            <select
+              class="grow bg-white text-appText rounded-md p-2 border border-appGrey"
+              formControlName="expenseType"
+              name="expenseType"
+            >
+              <option value="" disabled selected>סוג ההוצאה</option>
+              <option value="תחזוקה">תחזוקה</option>
+              <option value="מלאי">מלאי</option>
+              <option value="בעל מקצוע">בעל מקצוע</option>
+              <option value="קייטרינג">קייטרינג</option>
+              <option value="אחר">אחר</option>
+            </select>
+          </div>
 
-<div class="inputWrapper flex flex-col">
-  <input
-  type="number"
-  placeholder="סכום"
-  class="grow bg-white text-appText rounded-md p-2 "
-  formControlName="amountPaid"
-  name="amountPaid"
-  />
-</div>
-<div class="inputWrapper flex flex-col">
-  <select
-  class="grow bg-white text-appText rounded-md p-2 "
-  formControlName="paymentType"
-  name="paymentType"
-  >
-  <option value="" disabled selected>בחר סוג תשלום</option>
-  <option value="אשראי">אשראי</option>
-  <option value="מזומן">מזומן</option>
-  <option value="העברה בנקאית">העברה בנקאית</option>
-  <option value="צק">צ'ק</option>
-</select>
-</div>
-<div
-*ngIf="addTransactionForm.get('paymentType')?.value === 'צק'"
-class="inputWrapper flex flex-col"
->
-<input
-type="text"
-placeholder="מספר צ'ק"
-class="grow bg-white text-appText rounded-md p-2 "
-formControlName="checkNo"
-name="checkNo"
-        />
-      </div>
-      
-      <div class="inputWrapper flex flex-col">
-        <input
-        type="text"
-        placeholder="{{
-            addTransactionForm.get('actionType')?.value === '1' ? 'מאת' : 'מוטב'
-          }}"
-          class="grow bg-white text-appText rounded-md p-2 "
-          formControlName="paidTo"
-          name="paidTo"
-          />
+          <div class="inputWrapper flex flex-col">
+            <input
+              type="number"
+              placeholder="סכום"
+              class="grow bg-white text-appText rounded-md p-2 border border-appGrey"
+              formControlName="amountPaid"
+              name="amountPaid"
+            />
+          </div>
+          <div class="inputWrapper flex flex-col">
+            <select
+              class="grow bg-white text-appText rounded-md p-2 border border-appGrey"
+              formControlName="paymentType"
+              name="paymentType"
+            >
+              <option value="" disabled selected>בחר סוג תשלום</option>
+              <option value="אשראי">אשראי</option>
+              <option value="מזומן">מזומן</option>
+              <option value="העברה בנקאית">העברה בנקאית</option>
+              <option value="צק">צ'ק</option>
+            </select>
+          </div>
+          <div
+            *ngIf="addTransactionForm.get('paymentType')?.value === 'צק'"
+            class="inputWrapper flex flex-col"
+          >
+            <input
+              type="text"
+              placeholder="מספר צ'ק"
+              class="grow bg-white text-appText rounded-md p-2 border border-appGrey"
+              formControlName="checkNo"
+              name="checkNo"
+            />
+          </div>
+
+          <div class="inputWrapper flex flex-col">
+            <input
+              type="text"
+              placeholder="{{
+                addTransactionForm.get('actionType')?.value === '1'
+                  ? 'מאת'
+                  : 'מוטב'
+              }}"
+              class="grow bg-white text-appText rounded-md p-2 border border-appGrey"
+              formControlName="paidTo"
+              name="paidTo"
+            />
+          </div>
         </div>
-      </div>
-      <div class="action my-8 w-full md:w-2/3 mx-auto">
-        <app-loading-button
-        *ngIf="addTransactionForm.valid"
-        [loading]="loading"
-        [alternativeText]="addText"
-        [disabled]="addTransactionForm.invalid"
-        ></app-loading-button>
-      </div>
-    </form>
-   </div>
+        <div class="action my-8 w-full md:w-2/3 mx-auto">
+          <app-loading-button
+            *ngIf="addTransactionForm.valid"
+            [loading]="loading"
+            [alternativeText]="addText"
+            [disabled]="addTransactionForm.invalid"
+          ></app-loading-button>
+        </div>
+      </form>
+    </div>
   </div>
-  </section>
-  
+</section>

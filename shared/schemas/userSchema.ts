@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { OrderType } from './orderSchema';
 
 export const userSchema = z.object({
   email: z.string().email({ message: "Invalid email address" }),
@@ -22,4 +23,20 @@ export type UserType = {
   hasDebt: boolean;
   balance: number;
   lastSeen: Date;
+  createdAt: Date
+}
+
+
+export type UserTypeWithOrders = {
+  _id: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+  hasAccess: boolean;
+  hasDebt: boolean;
+  balance: number;
+  lastSeen: Date;
+  createdAt: Date
+  orders: OrderType[]
 }

@@ -34,6 +34,12 @@ import { AddOrderComponent } from './pages/prayers/add-order/add-order.component
 import { OverallTableComponent } from './pages/prayers/overall-table/overall-table.component';
 import { AddUserComponent } from './pages/prayers/add-user/add-user.component';
 import { CustomPrintsComponent } from './pages/prayers/custom-prints/custom-prints.component';
+import { FooterComponent } from './components/footer/footer.component';
+import { LatestActionsComponent } from './pages/home/latest-actions/latest-actions.component';
+import { AllUsersComponent } from './pages/prayers/all-users/all-users.component';
+import { balanceReducer } from './store/slices/balanceSlice/balance.reducer';
+import { FormHeaderComponent } from './components/headers/form-header/form-header.component';
+import { UserDetailedComponent } from './pages/prayers/user-detailed/user-detailed.component';
 
 
 
@@ -65,6 +71,11 @@ registerLocaleData(localeHe);
     OverallTableComponent,
     AddUserComponent,
     CustomPrintsComponent,
+    FooterComponent,
+    LatestActionsComponent,
+    AllUsersComponent,
+    FormHeaderComponent,
+    UserDetailedComponent,
   ],
   imports: [
     BrowserModule,
@@ -75,7 +86,9 @@ registerLocaleData(localeHe);
     MaterialModule,
     RouterOutlet,
     CommonModule,
-    StoreModule.forRoot({ users: usersReducer }) 
+    StoreModule.forRoot({ users: usersReducer,
+                          balance: balanceReducer
+     }) 
   ],
   providers: [
     provideAnimationsAsync(),

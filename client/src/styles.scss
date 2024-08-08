@@ -81,3 +81,50 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 .lastCol{
   text-align: center;
 }
+
+
+.mat-mdc-form-field, .mat-mdc-form-field-type-mat-select, .mat-form-field-appearance-fill{
+  background: white;
+
+  .mat-mdc-form-field-focus-overlay, .mat-mdc-text-field-wrapper{
+    background: white !important;
+  }
+
+  .mat-mdc-form-field-flex{
+    background: white;
+
+  }
+}
+
+.inputWraper{
+  max-height: 300px !important;
+}
+
+
+.select{
+  max-height: 300px !important;
+}
+
+
+
+@media print{
+
+    
+  .nav, .header, .material-symbols-outlined{
+      display: none;
+  }
+  .logo{
+    max-height: 150px;
+    padding: 0;
+    margin: 0;
+  }
+
+  .mat-mdc-table {
+    line-height: .5rem;
+    font-size: .8rem;
+
+    tr{
+      padding: 0;
+    }
+  }
+}

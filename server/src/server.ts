@@ -9,9 +9,11 @@ import donersRoute from "./routes/doners/route";
 import synagogueRoute from "./routes/transactions/route";
 import balanceRoute from "./routes/balance/route";
 import transactionRoute from "./routes/transactions/route";
+import ordersRoute from "./routes/orders/route";
+import fastifyJwt from "@fastify/jwt";
 dotenv.config()
 
-const {MONGODB_URI, API_URL, PORT} = process.env
+const {MONGODB_URI, API_URL, PORT, SECRET} = process.env
 const shutdownKeys = ["SIGINIT", "SIGTERM"]
 
 
@@ -23,7 +25,11 @@ const server = fastify({
       }, 
     
 })
+const SECRET_KEY = SECRET || (() => {
+    throw new Error('JWT secret is not defined');
+})();
 
+server.register(fastifyJwt, { secret: SECRET });
 // fastify cors
 server.register(fastifyCors, {
     origin: "*", 
@@ -39,12 +45,18 @@ server.register(fastifyMongodb, {
 
 
 // routes
-server.register(mainRoute, {prefix: 'api/main'})
-server.register(usersRoute, {prefix: 'api/users'})
-server.register(loginRoute, {prefix: 'api/login'})
-server.register(donersRoute, {prefix: 'api/doners'})
-server.register(transactionRoute, {prefix: 'api/synagogue/transactions'})
-server.register(balanceRoute, {prefix: 'api/synagogue/balance'})
+const routes = [
+    { route: mainRoute, prefix: 'api/main' },
+    { route: usersRoute, prefix: 'api/users' },
+    { route: loginRoute, prefix: 'api/login' },
+    { route: donersRoute, prefix: 'api/doners' },
+    { route: transactionRoute, prefix: 'api/synagogue/transactions' },
+    { route: balanceRoute, prefix: 'api/synagogue/balance' },
+    { route: ordersRoute, prefix: 'api/orders' }
+];
+routes.forEach(({ route, prefix }) => {
+    server.register(route, { prefix });
+});
 
 
 // start server

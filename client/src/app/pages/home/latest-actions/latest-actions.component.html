@@ -1,0 +1,29 @@
+<section class="latestOrders p-1 rounded-md">
+  <app-sub-header [text]="' פעולות אחרונות   '"></app-sub-header>
+
+  <div class="overflow-x-hidden w-full p-2">
+    <table class="table ">
+      <thead class="bg-white text-appText">
+        <tr>
+          <td>תאריך</td>
+          <td>פרשה</td>
+          <td>פרטים</td>
+          <td>
+            בוצע על-ידי
+          </td>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let item of latestActions">
+          <td>{{item.createdAt | date:'shortDate'}}</td>
+          <td>{{item.parasha}}</td>
+          <td class="p-4">{{getNames(item.name)}}</td>
+          <td>{{item.doneBy}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+

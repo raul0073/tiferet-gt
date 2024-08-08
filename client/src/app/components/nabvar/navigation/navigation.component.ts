@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { AuthService } from '../../../services/auth.service';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
@@ -9,17 +9,30 @@ import { Location } from '@angular/common';
   styleUrl: './navigation.component.scss'
 })
 export class NavigationComponent {
-  constructor(private authService: AuthService,
+  screen: number = 0;
+  scrolled: boolean = false;
+  isHomePage: boolean = this.router.url.includes('home');
+
+  constructor(
+    private authService: AuthService,
     public router: Router,
     private location: Location
-  ) { }
-    isHomePage: boolean = this.router.url.includes('home')
-  
-  goBack(){
-    this.location.back()
+  ) {}
+
+  @HostListener('window:scroll', [])
+  onWindowScroll() {
+    this.screen = window.scrollY;
+    this.scrolled = this.screen > 140;
   }
+
+  goBack() {
+    this.location.back();
+  }
+
   onLogout() {
-    this.authService.logout()
-    return this.router.navigate(['/'])
+    this.authService.logout();
+    return this.router.navigate(['/']);
   }
+
+  
 }

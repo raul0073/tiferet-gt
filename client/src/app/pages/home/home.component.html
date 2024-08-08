@@ -1,7 +1,27 @@
 <section class="home w-full">
   <app-header [text]="'ברוך הבא, ' + (user?.firstName || '')"></app-header>
-
-  <section class="actions space-y-4">
+  
+  <div class="stats stats-vertical md:stats-horizontal shadow w-full bg-white text-appBlue p-2">
+    <div *ngIf="users$ | async as users">
+      <div class="stat">
+        <div class="stat-title text-appGold">סה"כ משתמשים</div>
+        <div class="stat-value">{{ users.length }}</div>
+      </div>
+    </div>
+  
+    <div class="stat">
+      <div class="stat-title text-appGold"> יתרת בית כנסת</div>
+      <div class="stat-value">{{balanceDisplay.toFixed(3)| currency:"ILS"}}</div>
+      <div class="stat-desc">↗︎ {{ balanceDiff | number:'1.2-2' }}%</div>
+    </div>
+  
+    <div class="stat">
+      <div class="stat-title text-appGold">סה"כ מתפללים בחובה </div>
+      <div class="stat-value">{{negativeBalanceCount}}</div>
+      <div class="stat-desc">{{totalDebt | currency:"ILS"}} טרם נגבה</div>
+    </div>
+  </div>
+  <section class="actions space-y-4 pt-4">
     <div class="quick ">
       <app-sub-header [text]="quickActionsHeader"></app-sub-header>
       <div

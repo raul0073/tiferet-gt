@@ -42,10 +42,9 @@ export class AddUserComponent {
 
   async onSubmit() {
     try {
-      console.log(this.addUserForm.valid)
-      console.log(this.addUserForm.value)
       await this.userService.addUser(this.addUserForm.value)
       this.snackBar.openSnackBar("משתמש נוסף בהצלחה", 'x')
+      this.addUserForm.reset()
     } catch (err) {
       console.log(err)
       this.snackBar.openSnackBarError("תקלה. לא ניתן להוסיף משתמש", 'x')

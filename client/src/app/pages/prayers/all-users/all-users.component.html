@@ -1,0 +1,27 @@
+<section class="latestOrders p-1 rounded-md">
+    <app-header [text]="' כל המשתמשים    '"></app-header>
+  
+    <div class="overflow-x-hidden w-full p-2 ">
+      <table class="table bg-appBG">
+        <thead class="bg-appBlue text-appGold">
+          <tr>
+            <th>שם מלא</th>
+            <th>יתרה</th>
+            <th>התחבר לאחרונה </th>
+            <th>תאריך הרשמה  </th>
+          </tr>
+        </thead>
+        <tbody class="text-appText">
+          <tr *ngFor="let user of users$ |async" class="cursor-pointer hover:bg-slate-200">
+              <td>{{user.firstName  }} {{ user.lastName }}</td>
+              <td>{{user.balance  | currency:'ILS' }} </td>
+              <td>{{ user.lastSeen | date: 'dd/MM/yyyy, HH:mm' }}</td>
+              <td>{{user.createdAt | date:'shortDate' }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+  
+  
+  

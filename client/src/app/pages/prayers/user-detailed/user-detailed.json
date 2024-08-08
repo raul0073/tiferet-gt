@@ -1,0 +1,10 @@
+{
+    "header": "פרטי משתמש",
+    "date": "תאריך",
+    "parasha": "פרשה",
+    "amount": "סכום",
+    "paid": "שולם", 
+    "left": "נותר",
+    "description": "תיאור",
+    "invoiceNo": "קבלה"
+}

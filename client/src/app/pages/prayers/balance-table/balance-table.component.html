@@ -1,5 +1,6 @@
 <section class="balaceTable">
-    <app-header [text]="header"></app-header>
+  <app-header [text]="header"></app-header> 
+
     <ng-container *ngIf="data | async as data; else loading">
       <table mat-table [dataSource]="data" class="mat-elevation-z8">
         <ng-container matColumnDef="firstName">

@@ -20,8 +20,8 @@ import { loginSchema } from './../../../../../shared/schemas/loginSchema';
 export class LoginComponent {
   users: IUser[] = [];
   loading: boolean = false;
-  userEmail: string =''
-  userPassword: string =''
+  userEmail: string = ''
+  userPassword: string = ''
   errorMessages: { [key: string]: string } = {};
   // HTML labels
   headerText = labels.header;
@@ -36,58 +36,61 @@ export class LoginComponent {
     private snackBarService: SnackBarService,
     private authService: AuthService,
     private router: Router,
-    private store: Store<AppStore> 
-  ) {}
+    private store: Store<AppStore>
+  ) { }
 
 
-  
   onSubmit() {
-    this.errorMessages = {}; 
+    this.errorMessages = {};
     this.loading = true;
 
     const userObj: ILogin = { email: this.userEmail, password: this.userPassword };
 
     try {
-        // userObj with the schema
-        loginSchema.parse(userObj);
+      // userObj with the schema
+      loginSchema.parse(userObj);
 
-       // login service
-        this.loginService.loginUser(userObj).subscribe({
-            next: (data: any) => {
-                this.store.dispatch(setCurrentUser({ user: data.user }))
-            },
-            error: (error) => {
-                if (error instanceof ZodError) {
-                    this.updateErrorMessages(error.errors);
-                } else {
-                    this.snackBarService.openSnackBar(error.error.msg, 'X');
-                }
-                
-            },
-            complete: () => {
-                this.loading = false;
-                this.authService.login();
-                this.router.navigate(['/home']);
-            }
-        });
-    } catch (error) {
-        if (error instanceof ZodError) {
+      // login service
+      this.loginService.loginUser(userObj).subscribe({
+        next: (data: any) => {
+          const { user, token } = data;
+          // add user to stre
+          this.store.dispatch(setCurrentUser({ user }));
+          // login user
+          this.authService.login(token);
+
+          this.router.navigate(['/home']);
+        },
+        error: (error) => {
+          if (error instanceof ZodError) {
             this.updateErrorMessages(error.errors);
-        } else {
-            this.snackBarService.openSnackBar('Login failed: ' + error, 'X');
-        }
+          } else {
+            this.snackBarService.openSnackBar(error.error.msg, 'X');
+          }
 
-    }finally{
+          this.loading = false;
+        },
+        complete: () => {
+          this.loading = false;
+        }
+      });
+    } catch (error) {
+      if (error instanceof ZodError) {
+        this.updateErrorMessages(error.errors);
+      } else {
+        this.snackBarService.openSnackBar('Login failed: ' + error, 'X');
+      }
+
       this.loading = false;
     }
-}
+  }
 
-  // errors display
+  // Update error messages for display
   private updateErrorMessages(errors: any[]) {
     errors.forEach(error => {
       const { path, message } = error;
       if (path.length > 0) {
-        const key = path[0]; 
+        const key = path[0];
         this.errorMessages[key] = message;
       }
     });

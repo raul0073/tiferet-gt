@@ -1,20 +1,20 @@
 <section class="addTransaction">
   <app-header [text]="header"></app-header>
-  <div class="quick bg-white rounded-xl shadow-sm shadow-appGrey p-4">
-    <app-sub-header [text]="'יש למלא את כל השדות'"></app-sub-header>
-    <div class="formwrap pb-8">
+  <div class="card w-full rounded-sm">
+    <div class="card-body">
+      <app-form-header></app-form-header>
       <form
         novalidate
         [formGroup]="addUserForm"
         (ngSubmit)="onSubmit()"
-        class="bg-gray-400 rounded-md"
+        class=" rounded-md"
       >
         <div class="p-4 md:p-8 flex flex-col space-y-8">
           <div class="inputWrapper flex flex-col">
             <input
               type="text"
               placeholder="אימייל"
-              class="grow bg-white text-appText rounded-md p-2"
+              class="grow bg-white text-appText rounded-md p-2 border border-appGrey"
               formControlName="email"
               name="email"
             />
@@ -23,7 +23,7 @@
             <input
               type="text"
               placeholder="סיסמה"
-              class="grow bg-white text-appText rounded-md p-2"
+              class="grow bg-white text-appText rounded-md p-2 border border-appGrey"
               formControlName="password"
               name="password"
             />
@@ -32,7 +32,7 @@
             <input
               type="text"
               placeholder="שם פרטי"
-              class="grow bg-white text-appText rounded-md p-2"
+              class="grow bg-white text-appText rounded-md p-2 border border-appGrey"
               formControlName="firstName"
               name="firstName"
             />
@@ -41,18 +41,23 @@
             <input
               type="text"
               placeholder="שם משפחה"
-              class="grow bg-white text-appText rounded-md p-2"
+              class="grow bg-white text-appText rounded-md p-2 border border-appGrey"
               formControlName="lastName"
               name="lastName"
             />
           </div>
-          <div class="inputWrapper flex w-full justify-start items-center p-2">
+          <div class="inputWrapper flex flex-col w-full justify-start  p-2">
+           <div class="w-full flex">
             <input
-              type="checkbox"
-              formControlName="hasAccess"
-              name="hasAccess"
-            />
-            <label class="cursor-pointer text-white mx-2"> {{hasAceessLabel}} </label>
+            type="checkbox"
+            formControlName="hasAccess"
+            name="hasAccess"
+          />
+          <label class="cursor-pointer text-black mx-2">
+            {{ hasAceessLabel }}
+          </label>
+           </div>
+            <p class="text-sm text-appGrey">סמן במידה ומשתמש הינו חבר ועד</p>
           </div>
         </div>
         <div class="action my-8 w-full md:w-2/3 mx-auto">

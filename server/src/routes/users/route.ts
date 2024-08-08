@@ -1,6 +1,7 @@
 import { ObjectId } from "@fastify/mongodb";
 import { FastifyInstance, FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify";
 import { IUser, userSchema } from './../../../../shared/schemas/userSchema';
+import { UserType } from "../../models/users";
 
 const usersRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise<void> => {
   const db = server.mongo.db;
@@ -64,7 +65,11 @@ server.post('/', async (request: FastifyRequest, reply: FastifyReply) => {
     if(!userObj){
       return reply.status(401).send({msg: "Cannot parse user obj"}); 
     }
-    const newUser = await usersCollection?.insertOne(userObj) 
+    const newUserObj = {
+      ...userObj,
+      createdAt: new Date()
+    }
+    const newUser = await usersCollection?.insertOne(newUserObj) 
     
     return reply.status(201).send({msg: "user saved", user: newUser}); 
   } catch (err) {
@@ -76,15 +81,18 @@ server.post('/', async (request: FastifyRequest, reply: FastifyReply) => {
   server.delete('/:id', async (request: FastifyRequest, reply: FastifyReply) => {
     try {
       // get id
-      const id = request.id as string;
+      const { id } = request.params as { id: string };
       
-      const result = await usersCollection?.deleteOne({ _id: id.toString() });
-
+      const result = await usersCollection?.deleteOne({ _id: new ObjectId(id) });
+      console.log(result)
+      // delete all orders with userId = id
+      await ordersCollection?.deleteMany({userId: id.toString()})
       if (result?.deletedCount) {
         return reply.status(200).send({ msg: 'User deleted' });
       } else {
         return reply.status(404).send({ error: 'User not found' });
       }
+
     } catch (error) {
       server.log.error('Error querying MongoDB:', error);
       return reply.status(500).send({ error: 'Internal Server Error', msg: error });

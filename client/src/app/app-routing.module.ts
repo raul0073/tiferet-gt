@@ -14,6 +14,8 @@ import { AddOrderComponent } from './pages/prayers/add-order/add-order.component
 import { OverallTableComponent } from './pages/prayers/overall-table/overall-table.component';
 import { AddUserComponent } from './pages/prayers/add-user/add-user.component';
 import { CustomPrintsComponent } from './pages/prayers/custom-prints/custom-prints.component';
+import { AllUsersComponent } from './pages/prayers/all-users/all-users.component';
+import { UserDetailedComponent } from './pages/prayers/user-detailed/user-detailed.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -26,9 +28,11 @@ const routes: Routes = [
   { path: 'synagogue-balance/:id', component: SynagogueTansactionComponent, canActivate: [authGuard] },
   { path: 'synagogue/add', component: SynagogueAddTransactionComponent, canActivate: [authGuard] },
   { path: 'prayers/order/add', component: AddOrderComponent, canActivate: [authGuard] },
-  { path: 'prayers/overall-table', component: OverallTableComponent, canActivate: [authGuard] },
+  { path: 'prayers/overall-table', component: OverallTableComponent},
+  { path: 'prayers/overall-table/:id', component: UserDetailedComponent},
   { path: 'prayers/add', component: AddUserComponent, canActivate: [authGuard] },
   { path: 'prayers/custom-prints', component: CustomPrintsComponent, canActivate: [authGuard] },
+  { path: 'prayers/all', component: AllUsersComponent, canActivate: [authGuard] },
 ];
 
 @NgModule({

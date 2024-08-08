@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import labels from './../../../../Data/Labels/prayers-panel.json';
+import labels from './../data/prayers-panel.json'
 import { BtnsData } from '../../home/home.component';
 
 @Component({
@@ -17,6 +17,7 @@ export class PrayersPanelComponent {
     {txt: labels.balaceTable, icon: 'account_balance', link: '/prayers/balance-table'},
     {txt: labels.addUser, icon: 'person_add', link: '/prayers/add'},
     {txt: labels.forms, icon: 'photo', link: '/prayers/custom-prints'},
+    {txt: labels.allUsers, icon: 'group', link: '/prayers/all'},
   ]
  }
 }

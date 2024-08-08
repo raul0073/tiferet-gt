@@ -1,5 +1,10 @@
 {
     "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+          "@shared/*": ["../shared/*"]
+        },
+      
       "target": "ES2018",
       "module": "commonjs",
       "strict": true,

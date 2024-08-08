@@ -1,1 +1,25 @@
-<p>overall-table works!</p>
+<section class="overallTable">
+    <app-header [text]="header"></app-header> 
+
+
+<div class="overflow-x-auto ">
+    <table class="table bg-appBG">
+      <!-- head -->
+      <thead class="bg-appBlue text-appGold text-xl font-extrabold">
+        <tr>
+          <th>{{fullName}}</th>
+          <th>{{nedarim}}</th>
+          <th> {{commits}}</th>
+          <th> {{total}}</th>
+        </tr>
+      </thead>
+      <tbody class="text-appText">
+        <tr *ngFor="let user of usersList$ | async" class="cursor-pointer hover:bg-gray-300" [routerLink]="user._id">
+            <td>{{user.firstName}} {{user.lastName}}</td>
+            <td>{{user.orders && user.orders[0] ? user.orders[0].parasha : 'לא קיים'}}</td>
+            <td>{{user.orders && user.orders[0] ? user.orders[0].price - user.orders[0].pricePaid : 'לא קיים'}}</td>
+            <td>{{user.balance}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

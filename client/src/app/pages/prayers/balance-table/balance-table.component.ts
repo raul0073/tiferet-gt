@@ -4,7 +4,9 @@ import { Observable } from 'rxjs';
 import { UserType } from '../../../../../../shared/schemas/userSchema';
 import { selectAllUsers } from '../../../store/slices/usersSlice/usersSlice.selector';
 import { AppStore } from '../../../store/store';
-import labels from './../../../../Data/Labels/balance-table.json'
+import labels from './../data/balance-table.json'
+import { UsersService } from '../services/users.service';
+import { addUserToStore } from '../../../store/slices/usersSlice/usersSlice.actions';
 @Component({
   selector: 'app-balance-table',
   templateUrl: './balance-table.component.html',
@@ -16,14 +18,24 @@ export class BalanceTableComponent implements OnInit {
   displayedColumns: string[] = ["firstName", "balance"];
   header: string = labels.header
   constructor(private store: Store<AppStore>,
-              
-  ) {}
+    private usersService: UsersService
+
+  ) { }
 
 
   ngOnInit(): void {
     this.data = this.store.select(selectAllUsers);
-    this.data.subscribe(data => {
-      this.tableData = data
-    });
+    this.usersService.getUsers().subscribe(users => {
+      if (users.length) {
+        users.forEach(user => {
+
+          this.store.dispatch(addUserToStore({ user }))
+        })
+      } else {
+        this.data.subscribe(data => {
+          this.tableData = data
+        });
+      }
+    })
   }
 }
