@@ -31,6 +31,7 @@
             <th>{{ left }}</th>
             <th>{{ desc }}</th>
             <th>{{ invoice }}</th>
+            <th>{{ actions }}</th>
           </tr>
         </thead>
         <tbody class="text-appText">
@@ -45,6 +46,12 @@
             <td>{{ order.price - order.pricePaid | currency : "ILS" }}</td>
             <td>{{ order.name || "N/A" }}</td>
             <td>{{ order.orderInvoice || "N/A" }}</td>
+            <td><button class="btn btn-outline btn-error  cursor-pointer "  (click)="onDelete(order._id)">
+              <span class="material-symbols-outlined ">
+                delete
+                </span>
+            </button>
+            </td>
           </tr>
         </tbody>
       </table>

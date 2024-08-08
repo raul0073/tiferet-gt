@@ -10,3 +10,7 @@ export const setCurrentUser = createAction(
   '[Users] Set Current User',
   props<{ user: UserType }>()
 );
+export const updateUserinStore = createAction(
+  '[Users] Update User',
+  props<{ user: UserTypeWithOrders }>()
+);

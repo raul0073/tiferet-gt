@@ -55,15 +55,52 @@ const ordersRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
                 createdAt: new Date(),
                 userName: `${user?.firstName} ${user?.lastName}`
             };
-            console.log(newOrderObj)
             const insertRes = await ordersCollection?.insertOne(newOrderObj);
-            return reply.status(200).send(insertRes);
+            return reply.status(200).send(user);
         } catch (error) {
             server.log.error('Error querying MongoDB:', error);
             return reply.status(500).send({ error: 'Internal Server Error', msg: error });
         }
     });
+    // DEL: Delete order
+    server.delete('/:id', async (request: FastifyRequest, reply: FastifyReply) => {
+        try {
+            const { id } = request.params as { id: string };
+            if (!id) {
+                return reply.status(404).send({ error: 'Invalid ID' });
+            }
 
+            const order = await ordersCollection?.findOne<OrderType>({ _id: new ObjectId(id) })
+            if (!order) {
+                return reply.status(404).send({ error: 'No order found' });
+            }
+
+            const user = await usersCollection?.findOne<UserType>({_id: new ObjectId(order.userId)})
+            if(!user){
+                return reply.status(404).send({ error: 'Could not find user' });
+            }
+
+            // update balance
+            let updatedBalance = user.balance;
+            if (order.pricePaid > order.price) {
+                updatedBalance -= (order.pricePaid - order.price);
+            } else if (order.price > order.pricePaid) {
+                updatedBalance += (order.price - order.pricePaid);
+            }
+            await usersCollection?.updateOne(
+                { _id: user._id },
+                { $set: { balance: updatedBalance } }
+            );
+            
+            // delete order
+            await ordersCollection?.deleteOne({_id: new ObjectId(id)})
+
+            return reply.status(200).send(user);
+        } catch (error) {
+            server.log.error('Error querying MongoDB:', error);
+            return reply.status(500).send({ error: 'Internal Server Error', msg: error });
+        }
+    });
 };
 
 export default ordersRoute;

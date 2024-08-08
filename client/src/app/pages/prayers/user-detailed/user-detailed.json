@@ -6,5 +6,6 @@
     "paid": "שולם", 
     "left": "נותר",
     "description": "תיאור",
-    "invoiceNo": "קבלה"
+    "invoiceNo": "קבלה",
+    "actions": "פעולות"
 }

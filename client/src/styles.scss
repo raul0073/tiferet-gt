@@ -96,13 +96,18 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   }
 }
 
-.inputWraper{
-  max-height: 300px !important;
-}
 
 
-.select{
-  max-height: 300px !important;
+
+form{
+  .inputWraper{
+    max-height: 100px !important;
+
+    .selectMax{
+      max-height: 100px !important;
+    }
+  }
+
 }
 
 

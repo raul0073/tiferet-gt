@@ -9,6 +9,7 @@ import { AppStore } from '../../../store/store';
 import { OrdersService } from '../services/orders.service';
 import labels from './../data/addOrder.json';
 import orderNames from './data/orderNames.json';
+import { updateUserinStore } from '../../../store/slices/usersSlice/usersSlice.actions';
 
 type OrderNamesType = {
   value: string,
@@ -75,9 +76,8 @@ export class AddOrderComponent {
         doneBy: adminName
       };
 
-      console.log(withAdminName);
-
-      await this.orderService.addOrder(withAdminName);
+      const orderRes = await this.orderService.addOrder(withAdminName);
+      this.store.dispatch(updateUserinStore(orderRes))
       this.addOrder.reset()
       this.snackBar.openSnackBar("הושלם בהצלחה", 'x');
     } catch (error) {

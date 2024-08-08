@@ -1,6 +1,7 @@
 import { ObjectId } from "@fastify/mongodb";
 import { FastifyInstance, FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify";
 import { IUser, userSchema } from './../../../../shared/schemas/userSchema';
+import { OrderType } from "@shared/schemas/orderSchema";
 
 const usersRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise<void> => {
   const db = server.mongo.db;
@@ -47,7 +48,14 @@ server.get('/', async (request: FastifyRequest, reply: FastifyReply) => {
       }
       //get user
       const user = await usersCollection?.findOne({_id: new ObjectId(id)})
-      return reply.status(200).send(user);
+      const userOrders = await ordersCollection?.find<OrderType>({ userId: id }).toArray()
+
+
+      const userWithOrders = {
+        ...user,
+        orders: userOrders
+      }
+      return reply.status(200).send(userWithOrders);
     } catch (error) {
       server.log.error('Error querying MongoDB:', error);
       return reply.status(500).send({ error: 'Internal Server Error', msg: error });

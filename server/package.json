@@ -5,6 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "tsc",
+    "prod_install": "npm i && cd.. && npm i",
     "start": "ts-node src/server.ts",
     "prod": "ts-node ./dist/server/src/server.js",
     "test": "echo \"Error: no test specified\" && exit 1"

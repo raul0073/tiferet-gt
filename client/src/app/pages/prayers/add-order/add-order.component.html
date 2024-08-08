@@ -2,6 +2,7 @@
     <app-header [text]="header"></app-header>
   
     <div class="card  w-full rounded-sm">
+      <app-latest-actions></app-latest-actions>
       <div class="card-body">
         <app-form-header></app-form-header>
         <form
@@ -11,14 +12,14 @@
           class=" rounded-md"
         >
           <div class="p-4 md:p-8 flex flex-col space-y-8">
-            <div class="inputWrapper flex flex-col max-h-[350px]">
+            <div class="inputWrapper flex flex-col">
             <label for="userId">
                 בחר מתפלל
             </label>
             <select
             formControlName="userId"
-            name="userId"
-            class="select bg-white border border-appGrey w-full text-sm font-semibold max-h-[300px]">
+            class="select selectMax bg-white border border-appGrey w-full text-sm font-semibold overflow-y-auto"
+            name="userId">
                 <option disabled selected>בחר מתפלל</option>
                 <option *ngFor="let user of users$ | async" [value]="user._id" >{{ user.firstName }} {{ user.lastName }}</option>
               </select>
