@@ -1,7 +1,7 @@
-import { FastifyInstance, FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify";
-import { IOrder, OrderType, addOrderSchema } from './../../../../shared/schemas/orderSchema'
 import { ObjectId } from "@fastify/mongodb";
-import { UserType } from "../../models/users";
+import { FastifyInstance, FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify";
+import { IOrder, OrderType, addOrderSchema } from './../../../../shared/schemas/orderSchema';
+import { UserType } from "@shared/schemas/userSchema";
 const ordersRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise<void> => {
     const db = server.mongo.db;
     const ordersCollection = db?.collection('orders');

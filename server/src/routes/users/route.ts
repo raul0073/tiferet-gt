@@ -1,7 +1,6 @@
 import { ObjectId } from "@fastify/mongodb";
 import { FastifyInstance, FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify";
 import { IUser, userSchema } from './../../../../shared/schemas/userSchema';
-import { UserType } from "../../models/users";
 
 const usersRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise<void> => {
   const db = server.mongo.db;
