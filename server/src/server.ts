@@ -46,7 +46,7 @@ server.register(fastifyMongodb, {
 
 // routes
 const routes = [
-    { route: mainRoute, prefix: 'api/main' },
+    { route: mainRoute, prefix: '/' },
     { route: usersRoute, prefix: 'api/users' },
     { route: loginRoute, prefix: 'api/login' },
     { route: donersRoute, prefix: 'api/doners' },
@@ -61,7 +61,7 @@ routes.forEach(({ route, prefix }) => {
 // start server
 const start = async () => {
     try {
-        const port = Number(process.env.PORT) || 5000;
+        const port = Number(process.env.PORT);
         const host = '0.0.0.0';
 
         await server.listen({port, host});
