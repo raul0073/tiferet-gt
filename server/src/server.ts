@@ -58,22 +58,24 @@ routes.forEach(({ route, prefix }) => {
     server.register(route, { prefix });
 });
 
-
 // start server
 const start = async () => {
     try {
-        
-        await server.listen({
-            port: 5000 || PORT,
-        });
-        
-    
-        
-        console.info(`Server is running on ${API_URL}:${PORT}`);
+        const port = Number(process.env.PORT) || 5000;
+        const host = '0.0.0.0';
 
-        // start mongo session
-        if (server.mongo.client.startSession()) {
-            console.log('Connected to Atlas MongoDB ');
+        await server.listen({port, host});
+
+        if (process.env.NODE_ENV !== 'production') {
+            console.info(`Server is running on http://localhost:${port}`);
+        } else {
+            console.info(`Server is running on ${host}:${port}`);
+        }
+
+        // MongoDB connection status
+        const session = server.mongo.client.startSession();
+        if (session) {
+            console.log('Connected to Atlas MongoDB');
         } else {
             console.error('Failed to connect to MongoDB Atlas');
         }
@@ -84,14 +86,12 @@ const start = async () => {
 };
 
 
-// restart sserver
+// restart server
 shutdownKeys.forEach((signal: string) => {
     process.on(signal, async () => {
-        await server.close()
-
+        await server.close();
         process.exit(0);
-    })
-})
-
+    });
+});
 
 start();
