@@ -4,12 +4,12 @@ import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { UserType } from '../../../../../../shared/schemas/userSchema';
 import { SnackBarService } from '../../../services/snack-bar.service';
+import { updateUserinStore } from '../../../store/slices/usersSlice/usersSlice.actions';
 import { selectAllUsers, selectCurrentUserName } from '../../../store/slices/usersSlice/usersSlice.selector';
 import { AppStore } from '../../../store/store';
 import { OrdersService } from '../services/orders.service';
 import labels from './../data/addOrder.json';
 import orderNames from './data/orderNames.json';
-import { updateUserinStore } from '../../../store/slices/usersSlice/usersSlice.actions';
 
 type OrderNamesType = {
   value: string,

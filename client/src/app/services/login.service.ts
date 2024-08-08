@@ -1,9 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import {ILogin, loginSchema} from './../../../../shared/schemas/loginSchema';
 import { Observable } from 'rxjs';
-import { HttpHeaders } from '@angular/common/http';
-import { environment } from './../../environments/environments'
+import { ILogin } from './../../../../shared/schemas/loginSchema';
+import { environment } from './../../environments/environments';
 
 export const httpOptions = {
   headers: new HttpHeaders({

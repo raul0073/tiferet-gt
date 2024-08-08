@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import labels from './../data/prayers-panel.json'
 import { BtnsData } from '../../home/home.component';
+import labels from './../data/prayers-panel.json';
 
 @Component({
   selector: 'app-prayers-panel',

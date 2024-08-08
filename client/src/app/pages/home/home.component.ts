@@ -1,18 +1,17 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { selectAllUsers, selectCurrentUser } from '../../store/slices/usersSlice/usersSlice.selector';
-import { AppStore } from '../../store/store';
-import labels from './data/home.json';
-import { addUserToStore } from '../../store/slices/usersSlice/usersSlice.actions';
-import { UserType } from '../../../../../shared/schemas/userSchema';
-import { UsersService } from '../prayers/services/users.service';
-import { OrdersService } from '../prayers/services/orders.service';
 import { OrderType } from '../../../../../shared/schemas/orderSchema';
-import { BalanceService } from '../synagogue/services/balance.service';
-import { BalanceType } from '../../../../../shared/schemas/balanceSchema';
+import { UserType } from '../../../../../shared/schemas/userSchema';
 import { updateBalance } from '../../store/slices/balanceSlice/balance.actions';
 import { selectBalance } from '../../store/slices/balanceSlice/balance.selector';
+import { addUserToStore } from '../../store/slices/usersSlice/usersSlice.actions';
+import { selectAllUsers, selectCurrentUser } from '../../store/slices/usersSlice/usersSlice.selector';
+import { AppStore } from '../../store/store';
+import { OrdersService } from '../prayers/services/orders.service';
+import { UsersService } from '../prayers/services/users.service';
+import { BalanceService } from '../synagogue/services/balance.service';
+import labels from './data/home.json';
 
 export type BtnsData = {
   txt: string, icon: string, link: string

@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import labels from './../../../../Data/Labels/login.json';
 
 @Component({

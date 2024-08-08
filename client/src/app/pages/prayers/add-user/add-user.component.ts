@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import labels from './../data/add-user.json'
-import { UsersService } from '../services/users.service';
 import { SnackBarService } from '../../../services/snack-bar.service';
+import { UsersService } from '../services/users.service';
+import labels from './../data/add-user.json';
 @Component({
   selector: 'app-add-user',
   templateUrl: './add-user.component.html',

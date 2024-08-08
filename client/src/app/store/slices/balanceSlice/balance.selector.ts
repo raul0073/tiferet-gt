@@ -1,7 +1,7 @@
-import { createFeatureSelector, createSelector } from '@ngrx/store';
+import { createSelector } from '@ngrx/store';
+import { BalanceType } from '../../../../../../shared/schemas/balanceSchema';
 import { AppStore } from '../../store';
 import { BalanceState } from './balance.reducer';
-import { BalanceType } from '../../../../../../shared/schemas/balanceSchema';
 
 
 export const selectBalanceState = (state: AppStore) => state.balance;

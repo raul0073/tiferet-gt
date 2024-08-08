@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { UserType } from '../../../../../../shared/schemas/userSchema';
+import { addUserToStore } from '../../../store/slices/usersSlice/usersSlice.actions';
 import { selectAllUsers } from '../../../store/slices/usersSlice/usersSlice.selector';
 import { AppStore } from '../../../store/store';
-import labels from './../data/balance-table.json'
 import { UsersService } from '../services/users.service';
-import { addUserToStore } from '../../../store/slices/usersSlice/usersSlice.actions';
+import labels from './../data/balance-table.json';
 @Component({
   selector: 'app-balance-table',
   templateUrl: './balance-table.component.html',

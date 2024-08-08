@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { UsersService } from '../services/users.service';
 import { select, Store } from '@ngrx/store';
-import { AppStore } from '../../../store/store';
-import { selectAllUsers } from '../../../store/slices/usersSlice/usersSlice.selector';
-import { UserType, UserTypeWithOrders } from '../../../../../../shared/schemas/userSchema';
-import { addUserToStore } from '../../../store/slices/usersSlice/usersSlice.actions';
 import { Observable } from 'rxjs';
-import labels from './data/overall-table.json'
+import { UserTypeWithOrders } from '../../../../../../shared/schemas/userSchema';
+import { addUserToStore } from '../../../store/slices/usersSlice/usersSlice.actions';
+import { selectAllUsers } from '../../../store/slices/usersSlice/usersSlice.selector';
+import { AppStore } from '../../../store/store';
+import { UsersService } from '../services/users.service';
+import labels from './data/overall-table.json';
 @Component({
   selector: 'app-overall-table',
   templateUrl: './overall-table.component.html',

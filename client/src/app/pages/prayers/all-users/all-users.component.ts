@@ -1,9 +1,9 @@
 import { Component } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { AppStore } from './../../../store/store';
 import { Observable } from 'rxjs';
 import { UserType } from '../../../../../../shared/schemas/userSchema';
 import { selectAllUsers } from '../../../store/slices/usersSlice/usersSlice.selector';
+import { AppStore } from './../../../store/store';
 
 @Component({
   selector: 'app-all-users',

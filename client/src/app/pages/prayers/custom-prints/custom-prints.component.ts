@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BtnsData } from '../../home/home.component';
-import labels from './../data/custom.json'
+import labels from './../data/custom.json';
 @Component({
   selector: 'app-custom-prints',
   templateUrl: './custom-prints.component.html',
