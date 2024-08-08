@@ -61,7 +61,7 @@ routes.forEach(({ route, prefix }) => {
 // start server
 const start = async () => {
     try {
-        const port = Number(process.env.PORT);
+        const port = Number(PORT);
         const host = '0.0.0.0';
 
         await server.listen({port, host});
