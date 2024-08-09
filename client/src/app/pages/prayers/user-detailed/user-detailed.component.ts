@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { UserTypeWithOrders } from '../../../../../../shared/schemas/userSchema';
+import { UserType, UserTypeWithOrders } from '../../../../../../shared/schemas/userSchema';
 import { selectUserById } from '../../../store/slices/usersSlice/usersSlice.selector';
 import { AppStore } from '../../../store/store';
 import labels from './user-detailed.json'
@@ -10,6 +10,7 @@ import { UsersService } from '../services/users.service';
 import { OrdersService } from '../services/orders.service';
 import { SnackBarService } from './../../../services/snack-bar.service';
 import { updateUserinStore } from '../../../store/slices/usersSlice/usersSlice.actions';
+import { selectCurrentUser } from './../../../store/slices/usersSlice/usersSlice.selector';
 @Component({
   selector: 'app-user-detailed',
   templateUrl: './user-detailed.component.html',
@@ -21,7 +22,12 @@ export class UserDetailedComponent implements OnInit {
     private userService: UsersService,
     private ordersService: OrdersService,
     private snackBar: SnackBarService
-  ) { }
+  ) {
+    
+   }
+   currentUser$: Observable<UserType | null> = this.store.select(selectCurrentUser)
+  userHasAccess: boolean  = false;
+   
   userId: string = ''
   dateLabel: string = labels.date
   parahsa: string = labels.parasha
@@ -34,10 +40,13 @@ export class UserDetailedComponent implements OnInit {
   header: string = labels.header
   actions: string = labels.actions
 
-
+  
 
   ngOnInit(): void {
     this.getParams()
+    this.currentUser$.subscribe(user => {
+    this.userHasAccess =  user?.hasAccess ?? false;
+    });
   }
 
   async onDelete(id: string){

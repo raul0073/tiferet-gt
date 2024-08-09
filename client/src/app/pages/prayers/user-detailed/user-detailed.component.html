@@ -1,14 +1,11 @@
 <section class="overallTable">
-  <app-header [text]="header"></app-header>
+  <app-header  *ngIf="userDetailes$ | async as user" text="{{user.firstName}} {{ user.lastName}}"></app-header>
 
   <div
     *ngIf="userDetailes$ | async as user"
     class="w-full p-2 bg-gray-400 rounded-sm text-white"
   >
-    <app-sub-header
-      text="{{ user.firstName }} {{ user.lastName }}"
-    ></app-sub-header>
-    
+
     <div class="w-full flex justify-between items-center p-2 rounded-sm ">
       <div>
         <div class="stat-title text-appGold">סה"כ רכישות</div>
@@ -32,7 +29,7 @@
             <th>{{ left }}</th>
             <th>{{ desc }}</th>
             <th>{{ invoice }}</th>
-            <th>{{ actions }}</th>
+            <th *ngIf="userHasAccess">{{ actions }}</th>
           </tr>
         </thead>
         <tbody class="text-appText">
@@ -47,11 +44,17 @@
             <td>{{ order.price - order.pricePaid | currency : "ILS" }}</td>
             <td>{{ order.name || "N/A" }}</td>
             <td>{{ order.orderInvoice || "N/A" }}</td>
-            <td><button class="btn btn-outline btn-error  cursor-pointer "  (click)="onDelete(order._id)">
-              <span class="material-symbols-outlined ">
-                delete
-                </span>
-            </button>
+            <td *ngIf="userHasAccess" class="flex gap-2 w-fit">
+              <button class="btn btn-outline btn-error  cursor-pointer "  (click)="onDelete(order._id)">
+                <span class="material-symbols-outlined ">
+                  delete
+                  </span>
+              </button>
+              <button class="btn btn-outline  cursor-pointer " >
+                <span class="material-symbols-outlined ">
+                  edit
+                  </span>
+              </button>
             </td>
           </tr>
         </tbody>

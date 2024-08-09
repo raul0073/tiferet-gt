@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, OnInit, Renderer2, RendererFactory2 } from '@angular/core';
 
 @Component({
   selector: 'app-header',
