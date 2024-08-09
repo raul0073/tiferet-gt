@@ -39,7 +39,11 @@ $client-theme: mat.define-light-theme((
 @tailwind components;
 @tailwind utilities;
 
-
+@font-face {
+  font-family: 'StamSefaradCLM';
+  src: local('StamSefaradCLM'),
+       url('./assets/StamSefaradCLM.ttf') format('truetype');
+}
 
 *,*::after,*::before{
     box-sizing: border-box;
@@ -57,11 +61,14 @@ html{
 
 html, body { 
   min-height: 100dvh;
-  background: #f5f4f4; 
+  background: #f5f4f4;
 }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
+.stamFont{
+  font-family: 'StamSefaradCLM' !important;
 
+}
 .mat-mdc-snack-bar-container {
   &.snackbar {
     --mdc-snackbar-container-color: #fff;

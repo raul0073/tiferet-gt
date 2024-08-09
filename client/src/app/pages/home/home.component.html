@@ -1,24 +1,24 @@
 <section class="home w-full">
   <app-header [text]="'ברוך הבא, ' + (user?.firstName || '')"></app-header>
   
-  <div class="stats stats-vertical md:stats-horizontal shadow w-full bg-appDarkGrey text-appBlue p-4">
+  <div class="stats stats-vertical md:stats-horizontal shadow w-full bg-white text-appDarkGrey p-4">
     <div *ngIf="users$ | async as users">
       <div class="stat">
-        <div class="stat-title text-appBG">סה"כ משתמשים</div>
+        <div class="stat-title text-appGrey">סה"כ משתמשים</div>
         <div class="stat-value">{{ users.length }}</div>
       </div>
     </div>
   
     <div class="stat">
-      <div class="stat-title text-appBG"> יתרת בית כנסת</div>
+      <div class="stat-title text-appGrey"> יתרת בית כנסת</div>
       <div class="stat-value">{{balanceDisplay.toFixed(3)| currency:"ILS"}}</div>
-      <div class="stat-desc">↗︎ {{ balanceDiff | number:'1.2-2' }}%</div>
+      <div class="stat-desc text-appGold">↗︎ {{ balanceDiff | number:'1.2-2' }}%</div>
     </div>
   
     <div class="stat">
-      <div class="stat-title text-appBG">סה"כ מתפללים בחובה </div>
+      <div class="stat-title text-appGrey">סה"כ מתפללים בחובה </div>
       <div class="stat-value">{{negativeBalanceCount}}</div>
-      <div class="stat-desc">{{totalDebt | currency:"ILS"}} טרם נגבה</div>
+      <div class="stat-desc text-appGold">{{totalDebt | currency:"ILS"}} טרם נגבה</div>
     </div>
   </div>
   <section class="actions space-y-4 pt-4">
