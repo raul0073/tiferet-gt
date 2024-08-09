@@ -1,101 +1,104 @@
 <section class="addOrder">
-    <app-header [text]="header"></app-header>
-  
-    <div class="card  w-full rounded-sm">
-      <app-latest-actions></app-latest-actions>
-      <div class="card-body">
-        <app-form-header></app-form-header>
-        <form
-          novalidate
-          [formGroup]="addOrder"
-          (ngSubmit)="onSubmit()"
-          class=" rounded-md"
-        >
-          <div class="p-4 md:p-8 flex flex-col space-y-8">
-            <div class="inputWrapper flex flex-col">
-            <label for="userId">
-                בחר מתפלל
-            </label>
+  <app-header [text]="header"></app-header>
+
+  <div class="card w-full rounded-sm">
+    <app-latest-actions></app-latest-actions>
+    <div class="card-body">
+      <app-form-header></app-form-header>
+      <form
+        novalidate
+        [formGroup]="addOrder"
+        (ngSubmit)="onSubmit()"
+        class="rounded-md"
+      >
+        <div class="p-4 md:p-8 flex flex-col space-y-8">
+          <div class="inputWrapper flex flex-col">
+            <label for="userId"> בחר מתפלל </label>
             <select
-            formControlName="userId"
-            class="select selectMax bg-white border border-appGrey w-full text-sm font-semibold overflow-y-auto"
-            name="userId">
-                <option disabled selected>בחר מתפלל</option>
-                <option *ngFor="let user of users$ | async" [value]="user._id" >{{ user.firstName }} {{ user.lastName }}</option>
-              </select>
-         </div> 
-         <div class="inputWrapper flex flex-col">
-            <label for="name">
-                בחר מה נרכש
-            </label>
-             <mat-form-field class="border border-lg border-appGrey rounded-lg p-1">
-                 <mat-label >פרטי הזמנה</mat-label>
-                 <mat-select formControlName="name" multiple>
-                     @for (item of names; track names) {
-                        <mat-option [value]="item.value">{{item.label}}</mat-option>
-                    }
-                </mat-select>
+              formControlName="userId"
+              class="select selectMax bg-white border border-appGrey w-full text-sm font-semibold overflow-y-auto"
+              name="userId"
+            >
+              <option disabled selected>בחר מתפלל</option>
+              <option *ngFor="let user of users$ | async" [value]="user._id" class="w-full flex gap-4 justify-between">
+                <div class="w-full flex justify-between">
+                  {{ user.firstName }} {{ user.lastName }}
+                </div>
+              </option>
+            </select>
+            <!-- iwant here to present the selected user.balance -->
+          </div>
+          <div class="inputWrapper flex flex-col">
+            <label for="name"> בחר מה נרכש </label>
+            <mat-form-field
+              class="border border-lg border-appGrey rounded-lg p-1"
+            >
+              <mat-label>פרטי הזמנה</mat-label>
+              <mat-select formControlName="name" multiple>
+                @for (item of names; track names) {
+                <mat-option [value]="item.value">{{ item.label }}</mat-option>
+                }
+              </mat-select>
             </mat-form-field>
+          </div>
+
+          <div class="inputWrapper flex flex-col">
+            <label for="parasha"> פרשה </label>
+            <input
+              type="text"
+              placeholder="פרשה"
+              class="grow bg-white text-appText rounded-md p-2 border border-appGrey"
+              formControlName="parasha"
+              name="parasha"
+            />
+          </div>
+          <div
+            class="inputWrapper flex flex-col"
+            *ngIf="this.addOrder.get('name')?.value != 'זיכוי'"
+          >
+            <label for="price"> עלות </label>
+            <input
+              type="number"
+              placeholder="עלות"
+              class="grow bg-white text-appText rounded-md p-2 border border-appGrey"
+              formControlName="price"
+              name="price"
+            />
+          </div>
+          <div class="inputWrapper flex flex-col">
+            <label for="pricePaid">
+              {{
+                this.addOrder.get("name")?.value === "זיכוי" ? "סכום" : "שולם"
+              }}
+            </label>
+            <input
+              type="number"
+              placeholder="שולם"
+              class="grow bg-white text-appText rounded-md p-2 border border-appGrey"
+              formControlName="pricePaid"
+              name="pricePaid"
+            />
+          </div>
+          <div class="inputWrapper flex flex-col">
+            <label for="orderInvoice"> מס' קבלה </label>
+            <input
+              type="text"
+              placeholder="ABC-1001"
+              class="grow bg-white text-appText rounded-md p-2 border border-appGrey"
+              formControlName="orderInvoice"
+              name="orderInvoice"
+            />
+          </div>
         </div>
-            
-              <div class="inputWrapper flex flex-col">
-                <label for="parasha">
-                    פרשה
-                </label>
-                <input
-                  type="text"
-                  placeholder="פרשה"
-                  class="grow bg-white text-appText rounded-md p-2 border border-appGrey"
-                  formControlName="parasha"
-                  name="parasha"
-                />
-              </div>
-              <div class="inputWrapper flex flex-col" *ngIf="this.addOrder.get('name')?.value != 'זיכוי'">
-                <label for="price">
-                    עלות
-                </label>
-                <input
-                  type="number"
-                  placeholder="עלות"
-                  class="grow bg-white text-appText rounded-md p-2 border border-appGrey"
-                  formControlName="price"
-                  name="price"
-                />
-              </div>
-              <div class="inputWrapper flex flex-col">
-                <label for="pricePaid">
-                    שולם
-                </label>
-                <input
-                  type="number"
-                  placeholder="שולם"
-                  class="grow bg-white text-appText rounded-md p-2 border border-appGrey"
-                  formControlName="pricePaid"
-                  name="pricePaid"
-                />
-              </div>
-              <div class="inputWrapper flex flex-col">
-                <label for="orderInvoice">
-                    מס' קבלה
-                </label>
-                <input
-                  type="text"
-                  placeholder="ABC-1001"
-                  class="grow bg-white text-appText rounded-md p-2 border border-appGrey"
-                  formControlName="orderInvoice"
-                  name="orderInvoice"
-                />
-              </div>
-          </div>
-          <div class="action my-8 w-full md:w-2/3 mx-auto">
-            <app-loading-button
-              *ngIf="addOrder.valid"
-              [loading]="loading"
-              [alternativeText]="'הזן פעולה'"
-              [disabled]="addOrder.invalid"
-            ></app-loading-button>
-          </div>
-        </form>
-      </div>
+        <div class="action my-8 w-full md:w-2/3 mx-auto">
+          <app-loading-button
+            *ngIf="addOrder.valid"
+            [loading]="loading"
+            [alternativeText]="'הזן פעולה'"
+            [disabled]="addOrder.invalid"
+          ></app-loading-button>
+        </div>
+      </form>
     </div>
-  </section>
+  </div>
+</section>

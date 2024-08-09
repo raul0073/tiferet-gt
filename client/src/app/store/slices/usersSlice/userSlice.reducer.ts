@@ -32,6 +32,7 @@ export const usersReducer = createReducer(
   })),
 
   on(updateUserinStore, (state: UsersState, { user }) => {
+    console.log('Updating user in store:', user);
     const updatedUsers = state.allUsers.map(existingUser =>
       existingUser._id === user._id ? user : existingUser
     );

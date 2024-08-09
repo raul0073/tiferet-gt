@@ -45,7 +45,7 @@ export class UserDetailedComponent implements OnInit {
       const res = await this.ordersService.deleteOrder(id)
       this.snackBar.openSnackBar(`נמחק בהצלחה`, "x")
       // update store
-      this.store.dispatch(updateUserinStore(res))
+      this.store.dispatch(updateUserinStore({user: res}))
       console.log(res)
     } catch (error) {
       console.error(error)

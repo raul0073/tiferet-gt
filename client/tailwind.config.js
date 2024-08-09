@@ -7,12 +7,13 @@ module.exports = {
    
     extend: {
       colors: {
-        "appBG": "#F9F2ED",
+        "appBG": "#f5f4f4",
         "appText": "#021526",
-        "appBlue": "#003366",
+        "appBlue": "#005fbe",
         "appGold": "#FFD700",
         "appRed": "#F87474",
-        "appGrey": "#757575"
+        "appGrey": "#888888",
+        "appDarkGrey": "#464646"
       },
     },
   },

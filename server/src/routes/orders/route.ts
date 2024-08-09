@@ -56,7 +56,15 @@ const ordersRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
                 userName: `${user?.firstName} ${user?.lastName}`
             };
             const insertRes = await ordersCollection?.insertOne(newOrderObj);
-            return reply.status(200).send(user);
+
+
+            const UserOrders = await ordersCollection?.find({userId: orderObj.userId.toString()}).toArray()
+
+            const userWithOrders = {
+                ...user,
+                orders: UserOrders
+            }
+            return reply.status(200).send(userWithOrders);
         } catch (error) {
             server.log.error('Error querying MongoDB:', error);
             return reply.status(500).send({ error: 'Internal Server Error', msg: error });
@@ -93,9 +101,15 @@ const ordersRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
             );
             
             // delete order
-            await ordersCollection?.deleteOne({_id: new ObjectId(id)})
+            await ordersCollection?.deleteOne({ _id: new ObjectId(id) })
+            const UserOrders = await ordersCollection?.find({userId: user._id.toString() }).toArray()
 
-            return reply.status(200).send(user);
+            const userWithOrders = {
+                ...user,
+                orders: UserOrders
+            }
+
+            return reply.status(200).send(userWithOrders);
         } catch (error) {
             server.log.error('Error querying MongoDB:', error);
             return reply.status(500).send({ error: 'Internal Server Error', msg: error });

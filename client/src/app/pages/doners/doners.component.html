@@ -1,5 +1,9 @@
 <section class="prayers-panel w-full">
     <app-header [text]="header"></app-header>
+    
+ 
+
+
     <table mat-table [dataSource]="doners" class="mat-elevation-z8">
 
       <!-- Full Name Column -->
@@ -30,10 +34,9 @@
       <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
       <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
     </table>
-
-
     <div class="addDoner">
-     <app-add-doner></app-add-doner>
-    </div>
+      <app-add-doner></app-add-doner>
+     </div>
+
   </section>
   

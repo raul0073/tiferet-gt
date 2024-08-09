@@ -3,12 +3,12 @@
 
   <div
     *ngIf="userDetailes$ | async as user"
-    class="w-full p-2 bg-appBG rounded-sm"
+    class="w-full p-2 bg-gray-400 rounded-sm text-white"
   >
     <app-sub-header
       text="{{ user.firstName }} {{ user.lastName }}"
     ></app-sub-header>
-    <div class="w-full flex justify-between items-center p-2">
+    <div class="w-full flex justify-between items-center p-2 rounded-sm ">
       <div>
         <div class="stat-title text-appGold">סה"כ רכישות</div>
         <div class="stat-value">{{ user.orders.length }}</div>

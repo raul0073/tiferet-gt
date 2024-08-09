@@ -57,7 +57,7 @@ html{
 
 html, body { 
   min-height: 100dvh;
-  background: linear-gradient(180deg, rgb(224, 224, 224) 0%,rgb(249,242,237) 100%);
+  background: #f5f4f4; 
 }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
@@ -97,21 +97,22 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 }
 
 
+.addOrder{
 
+  .card{
+    .card-body{
+      
+      form{
+        .inputWrapper{
+          select.selectMax{
+              max-height: 100px !important;
 
-form{
-  .inputWraper{
-    max-height: 100px !important;
-
-    .selectMax{
-      max-height: 100px !important;
+          }
+        }
+      }
     }
   }
-
 }
-
-
-
 @media print{
 
     

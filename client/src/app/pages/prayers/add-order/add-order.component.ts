@@ -30,7 +30,6 @@ export class AddOrderComponent {
   adminName: string = ''
   names: OrderNamesType[] = orderNames;
   header: string = labels.header;
-
   addOrder: FormGroup = new FormGroup({
     name: new FormControl([], [
       Validators.required,
@@ -61,7 +60,9 @@ export class AddOrderComponent {
     private store: Store<AppStore>,
     private orderService: OrdersService,
     private snackBar: SnackBarService
-  ) {}
+  ) {
+    
+  }
 
   async onSubmit() {
     this.loading = true;
@@ -77,7 +78,7 @@ export class AddOrderComponent {
       };
 
       const orderRes = await this.orderService.addOrder(withAdminName);
-      this.store.dispatch(updateUserinStore(orderRes))
+      this.store.dispatch(updateUserinStore({user: orderRes}))
       this.addOrder.reset()
       this.snackBar.openSnackBar("הושלם בהצלחה", 'x');
     } catch (error) {
@@ -87,6 +88,7 @@ export class AddOrderComponent {
       this.loading = false;
     }
   }
+
 
   // Helper method to get the current user's name
   private getCurrentUserName(): Promise<string> {

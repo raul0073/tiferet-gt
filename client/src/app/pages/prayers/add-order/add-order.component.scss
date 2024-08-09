@@ -1,3 +1,16 @@
-.selectMax{
-    max-height: 100px !important;
+.addOrder{
+
+  .card{
+    .card-body{
+      
+      form{
+        .inputWrapper{
+          select.selectMax{
+              max-height: 100px !important;
+
+          }
+        }
+      }
+    }
   }
+}
