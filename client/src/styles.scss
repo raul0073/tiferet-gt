@@ -102,7 +102,14 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
   }
 }
-
+thead{
+  .mat-mdc-header-row{
+      background-color: #1b548d;
+      th{
+        color: white;
+      }
+  }
+}
 
 .addOrder{
 
