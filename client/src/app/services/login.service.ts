@@ -6,7 +6,8 @@ import { environment } from './../../environments/environments';
 
 export const httpOptions = {
   headers: new HttpHeaders({
-    'Content-Type':  'application/json'
+    'Content-Type':  'application/json',
+    "Access-Control-Allow-Origin": environment.API_URL
   })
 };
 

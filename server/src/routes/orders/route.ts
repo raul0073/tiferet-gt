@@ -1,7 +1,7 @@
 import { ObjectId } from "@fastify/mongodb";
+import { UserType } from "@shared/schemas/userSchema";
 import { FastifyInstance, FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify";
 import { IOrder, OrderType, addOrderSchema } from './../../../../shared/schemas/orderSchema';
-import { UserType } from "@shared/schemas/userSchema";
 const ordersRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise<void> => {
     const db = server.mongo.db;
     const ordersCollection = db?.collection('orders');
@@ -29,7 +29,7 @@ const ordersRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
                 return reply.status(404).send({ error: 'Could not parse order obj' });
             }
 
-            const user = await usersCollection?.findOne<UserType>({ _id: new ObjectId(orderObj.userId) })
+            const user = await usersCollection?.findOne<UserType>({ _id: new ObjectId(orderObj.userId as string) })
 
             // Adjust user balance
             if (orderObj && user) {
@@ -70,6 +70,7 @@ const ordersRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
             return reply.status(500).send({ error: 'Internal Server Error', msg: error });
         }
     });
+
     // DEL: Delete order
     server.delete('/:id', async (request: FastifyRequest, reply: FastifyReply) => {
         try {
@@ -83,7 +84,7 @@ const ordersRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
                 return reply.status(404).send({ error: 'No order found' });
             }
 
-            const user = await usersCollection?.findOne<UserType>({_id: new ObjectId(order.userId)})
+            const user = await usersCollection?.findOne<UserType>({_id: new ObjectId(order.userId as string)})
             if(!user){
                 return reply.status(404).send({ error: 'Could not find user' });
             }
@@ -118,3 +119,61 @@ const ordersRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
 };
 
 export default ordersRoute;
+
+
+
+
+
+
+
+
+
+
+// TODO
+// add order to all users once a month
+// server.post('/all', async (request: FastifyRequest, reply: FastifyReply) => {
+//     try {
+//         const month = new Date().getUTCMonth()
+//         const orderObj: CollectiveOrderType = {
+//             name: ['דמי-עמותה'],
+//             userId: [], 
+//             parasha: 'חיוב חודשי',
+//             price: 15,
+//             pricePaid: 0,
+//             beenPaid: false,
+//             orderInvoice: `INV123 ${month}`,
+//             doneBy: 'מערכת',
+//             notes: 'חיוב חודשי דמי עמותה'
+//         };
+//         if (!orderObj) {
+//             return reply.status(404).send({ error: 'Could not parse order obj' });
+//         }
+
+//         const users = await usersCollection?.find<UserType>({}).toArray();
+//         if (!users || users.length === 0) {
+//             return reply.status(404).send({ error: 'Could not get users' });
+//         }
+
+//         const userIds = users?.map((user: UserType) => user._id);
+        
+//         const order = {
+//             ...orderObj,
+//             userId: userIds,
+//             createdAt: new Date(),
+//         };
+
+//         userIds.forEach(async (Id: string) => {
+//             await usersCollection?.updateOne(
+//                 { _id: new ObjectId(Id) },
+//                 { $set: { balance: -orderObj.price } }
+//             );
+//         })
+
+
+//         await ordersCollection?.insertOne(order)
+//         return reply.status(200).send(order);
+//     } catch (error) {
+//         server.log.error('Error querying MongoDB:', error);
+//         return reply.status(500).send({ error: 'Internal Server Error', msg: error });
+//     }
+// });

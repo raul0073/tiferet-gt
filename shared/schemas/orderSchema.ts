@@ -8,7 +8,8 @@ export const addOrderSchema = z.object({
   pricePaid: z.number().default(0),
   beenPaid: z.boolean().default(false),
   orderInvoice: z.string().optional(),
-  doneBy: z.string().optional()
+  doneBy: z.string().optional(),
+  notes: z.string().optional()
 });
 
 export type IOrder = z.infer<typeof addOrderSchema>;
@@ -27,7 +28,23 @@ export type OrderType = {
     orderInvoice?: string,
     doneBy: string,
     createdAt: Date;
+    notes?: string;
 }
+
+// export type CollectiveOrderType = {
+//   _id: string,
+//   userId: [],
+//   userName: string,
+//   name: [],
+//   parasha: string,
+//   price: number,
+//   pricePaid: number,
+//   beenPaid: boolean,
+//   orderInvoice?: string,
+//   doneBy: string,
+//   createdAt: Date;
+//   notes?: string;
+// }
 
 
 
