@@ -42,7 +42,7 @@ export class OverallTableComponent implements OnInit {
         }
       });
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 }

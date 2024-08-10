@@ -48,15 +48,16 @@ export class UserDetailedComponent implements OnInit {
     this.userHasAccess =  user?.hasAccess ?? false;
     });
   }
-
-  async onDelete(id: string){
+  getDeleteAction(orderId: string): () => Promise<void> {
+    return () => this.onDelete(orderId);
+  }
+  async onDelete(id: string): Promise<void>{
     this.loading = true
     try {
       const res = await this.ordersService.deleteOrder(id)
       this.snackBar.openSnackBar(`נמחק בהצלחה`, "x")
       // update store
       this.store.dispatch(updateUserinStore({user: res}))
-      console.log(res)
     } catch (error) {
       console.error(error)
       this.snackBar.openSnackBarError(`לא ניתן למחוק`, "x")

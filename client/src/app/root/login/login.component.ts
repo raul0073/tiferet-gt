@@ -67,7 +67,7 @@ export class LoginComponent {
         this.updateErrorMessages(error.errors);
       } else {
         this.snackBarService.openSnackBar('התחברות נכשלה', 'X');
-        console.log(error)
+        console.error(error)
       }
   
       this.loading = false;

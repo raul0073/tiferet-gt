@@ -17,7 +17,7 @@ export class LatestActionsComponent implements OnInit{
 
       this.latestActions = res.slice(0,2)
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
   // join order names

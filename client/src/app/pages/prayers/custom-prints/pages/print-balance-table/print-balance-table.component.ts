@@ -46,7 +46,7 @@ export class PrintBalanceTableComponent implements OnInit{
         this.usersPart2 = users.slice(mid)
       })
     } catch (error) {
-      console.log(error)
+      console.error(error)
     }
   }
 }

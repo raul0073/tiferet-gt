@@ -46,7 +46,7 @@ export class AddUserComponent {
       this.snackBar.openSnackBar("משתמש נוסף בהצלחה", 'x')
       this.addUserForm.reset()
     } catch (err) {
-      console.log(err)
+      console.error(err)
       this.snackBar.openSnackBarError("תקלה. לא ניתן להוסיף משתמש", 'x')
     } finally {
       this.loading = false;

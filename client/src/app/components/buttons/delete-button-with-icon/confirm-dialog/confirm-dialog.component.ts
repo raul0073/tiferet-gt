@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 
 @Component({
   selector: 'app-confirm-dialog',
@@ -6,24 +6,18 @@ import { Component, EventEmitter, Output } from '@angular/core';
   styleUrls: ['./confirm-dialog.component.scss']
 })
 export class ConfirmDialogComponent {
-  isOpen = false;
+  @Input() action?: () => Promise<void> | void;
 
-  @Output() confirmed = new EventEmitter<void>();
+  @ViewChild('confirmModal') confirmModal!: ElementRef<HTMLDialogElement>;
 
-  open() {
-    this.isOpen = true;
-  }
-
-  close() {
-    this.isOpen = false;
-  }
-
-  onConfirm() {
-    this.confirmed.emit();
-    this.close();
-  }
-
-  onCancel() {
-    this.close();
+  async onClick() {
+    if (this.action) {
+      try {
+        await this.action(); // Await if it's a Promise
+        this.confirmModal.nativeElement.close(); // Close the modal after action
+      } catch (error) {
+        console.error(error);
+      }
+    }
   }
 }

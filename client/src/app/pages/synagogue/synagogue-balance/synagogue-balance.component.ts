@@ -15,7 +15,7 @@ export class SynagogueBalanceComponent implements OnInit{
   constructor(private balanceService: BalanceService){}
 
   onRowClick(id: string){
-    console.log(id)
+    console.log("CLICKED")
   }
   async loadBalance() {
     try {

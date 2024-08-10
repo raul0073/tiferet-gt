@@ -88,7 +88,6 @@ const transactionRoute: FastifyPluginAsync = async (server: FastifyInstance): Pr
     server.delete('/:id', async (request: FastifyRequest, reply: FastifyReply) => {
         try {
             const { id } = request.params as { id: string };
-            console.log("SERVER:", id)
             // Validate the transaction ID
             if (!id) {
                 return reply.status(400).send({ error: 'Transaction ID is required' });
@@ -96,7 +95,6 @@ const transactionRoute: FastifyPluginAsync = async (server: FastifyInstance): Pr
 
             // Find the transaction to be deleted
             const transactionToDelete = await transactionsCollection?.findOne<TransactionType>({ _id: new ObjectId(id) });
-            console.log("SERVER", transactionToDelete)
             if (!transactionToDelete) {
                 return reply.status(404).send({ error: 'Transaction not found' });
             }
@@ -123,9 +121,6 @@ const transactionRoute: FastifyPluginAsync = async (server: FastifyInstance): Pr
 
 
             const deletedBalance = await balanceCollection?.deleteOne({transactionId: id})
-            console.log(deletedBalance)
-
-
 
 
             const latestBalaceUpdate = await balanceCollection?.updateOne(

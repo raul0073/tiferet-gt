@@ -91,7 +91,6 @@ server.post('/', async (request: FastifyRequest, reply: FastifyReply) => {
       const { id } = request.params as { id: string };
       
       const result = await usersCollection?.deleteOne({ _id: new ObjectId(id) });
-      console.log(result)
       // delete all orders with userId = id
       await ordersCollection?.deleteMany({userId: id.toString()})
       if (result?.deletedCount) {

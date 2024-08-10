@@ -53,12 +53,7 @@
           <td>{{ order.name || "N/A" }}</td>
           <td>{{ order.orderInvoice || "N/A" }}</td>
           <td *ngIf="userHasAccess" class="flex gap-2 w-fit">
-            <button
-              class="btn btn-outline btn-error cursor-pointer"
-              (click)="onDelete(order._id)"
-            >
-              <span class="material-symbols-outlined"> delete </span>
-            </button>
+            <app-confirm-dialog  [action]="getDeleteAction(order._id)" ></app-confirm-dialog>
             <button class="btn btn-outline cursor-pointer">
               <span class="material-symbols-outlined"> edit </span>
             </button>

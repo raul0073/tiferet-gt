@@ -52,7 +52,7 @@ export class SynagogueAddTransactionComponent {
       this.snackBar.openSnackBar("הוזן בהצלחה", 'x')
       this.addTransactionForm.reset()
     } catch (error) {
-      console.log(error)
+      console.error(error)
       this.snackBar.openSnackBarError("תקלה. לא ניתן להוסיף", 'x')
     }finally{
       this.loading = false
