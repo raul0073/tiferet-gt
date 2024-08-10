@@ -54,6 +54,7 @@ export class LoginComponent {
       const data = await this.loginService.loginUser(userObj);
   
       const { user, token } = data;
+      localStorage.setItem('UID', user._id);
       // Dispatch the user to the store
       this.store.dispatch(setCurrentUser({ user }));
       // Login user

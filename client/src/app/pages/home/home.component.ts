@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { select, Store } from '@ngrx/store';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { OrderType } from '../../../../../shared/schemas/orderSchema';
 import { UserType } from '../../../../../shared/schemas/userSchema';
 import { updateBalance } from '../../store/slices/balanceSlice/balance.actions';
@@ -46,6 +46,7 @@ export class HomeComponent implements OnInit {
   header = labels.header;
   welcome = labels.welcome;
 
+  private subscriptions: Subscription = new Subscription();
 
   constructor(private store: Store<AppStore>,
     private userService: UsersService,
@@ -117,7 +118,9 @@ export class HomeComponent implements OnInit {
     }
   }
 
-
+  ngOnDestroy(): void {
+    this.subscriptions.unsubscribe();
+  }
 
   ngOnInit(): void {
     // get all data on init
