@@ -130,21 +130,8 @@ thead{
 @media print{
 
     
-  .nav, .header, .material-symbols-outlined{
+  .nav, .header, .material-symbols-outlined, .footer, .logo{
       display: none;
   }
-  .logo{
-    max-height: 150px;
-    padding: 0;
-    margin: 0;
-  }
 
-  .mat-mdc-table {
-    line-height: .5rem;
-    font-size: .8rem;
-
-    tr{
-      padding: 0;
-    }
-  }
 }

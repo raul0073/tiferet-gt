@@ -27,7 +27,7 @@ export class UserDetailedComponent implements OnInit {
    }
    currentUser$: Observable<UserType | null> = this.store.select(selectCurrentUser)
   userHasAccess: boolean  = false;
-   
+   loading: boolean = false;
   userId: string = ''
   dateLabel: string = labels.date
   parahsa: string = labels.parasha
@@ -50,6 +50,7 @@ export class UserDetailedComponent implements OnInit {
   }
 
   async onDelete(id: string){
+    this.loading = true
     try {
       const res = await this.ordersService.deleteOrder(id)
       this.snackBar.openSnackBar(`נמחק בהצלחה`, "x")
@@ -59,6 +60,8 @@ export class UserDetailedComponent implements OnInit {
     } catch (error) {
       console.error(error)
       this.snackBar.openSnackBarError(`לא ניתן למחוק`, "x")
+    } finally{
+      this.loading = false;
     }
   }
   getParams() {

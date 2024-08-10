@@ -40,6 +40,9 @@ import { AllUsersComponent } from './pages/prayers/all-users/all-users.component
 import { balanceReducer } from './store/slices/balanceSlice/balance.reducer';
 import { FormHeaderComponent } from './components/headers/form-header/form-header.component';
 import { UserDetailedComponent } from './pages/prayers/user-detailed/user-detailed.component';
+import { ConfirmDialogComponent } from './components/buttons/delete-button-with-icon/confirm-dialog/confirm-dialog.component';
+import { PrintBalanceTableComponent } from './pages/prayers/custom-prints/pages/print-balance-table/print-balance-table.component';
+import { PrintAliyotComponent } from './pages/prayers/custom-prints/pages/print-aliyot/print-aliyot.component';
 
 
 
@@ -76,6 +79,9 @@ registerLocaleData(localeHe);
     AllUsersComponent,
     FormHeaderComponent,
     UserDetailedComponent,
+    ConfirmDialogComponent,
+    PrintBalanceTableComponent,
+    PrintAliyotComponent,
   ],
   imports: [
     BrowserModule,

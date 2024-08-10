@@ -11,8 +11,8 @@ export class CustomPrintsComponent {
   header: string = labels.header
   constructor(  ){
     this.actions = [
-      { txt: labels.smallTable, icon: 'table', link: '' },
-      { txt: labels.alyot, icon: 'toc', link: '' },
+      { txt: labels.smallTable, icon: 'table', link: 'print-balance' },
+      { txt: labels.alyot, icon: 'toc', link: 'print-balance' },
     ]
   }
 }

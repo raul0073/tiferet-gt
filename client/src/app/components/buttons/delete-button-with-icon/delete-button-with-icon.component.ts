@@ -7,7 +7,7 @@ import { Component, Input } from '@angular/core';
 })
 export class DeleteButtonWithIconComponent {
   @Input() text: string = 'מחק'
-  @Input() action?: any
+  @Input() action?: ()=> Promise<void>
   onClick(){
     if(this.action){
       this.action()

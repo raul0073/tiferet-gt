@@ -19,7 +19,6 @@ export class BalanceTableComponent implements OnInit {
   header: string = labels.header
   constructor(private store: Store<AppStore>,
     private usersService: UsersService
-
   ) { }
 
 

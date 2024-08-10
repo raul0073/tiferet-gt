@@ -19,11 +19,11 @@ export class OverallTableComponent implements OnInit {
   nedarim: string = labels.nedarim
   commits: string = labels.commit
   total: string = labels.total
-  
+
   constructor(
     private userService: UsersService,
     private store: Store<AppStore>
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.getAllUsers();

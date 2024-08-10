@@ -16,6 +16,7 @@ import { AddUserComponent } from './pages/prayers/add-user/add-user.component';
 import { CustomPrintsComponent } from './pages/prayers/custom-prints/custom-prints.component';
 import { AllUsersComponent } from './pages/prayers/all-users/all-users.component';
 import { UserDetailedComponent } from './pages/prayers/user-detailed/user-detailed.component';
+import { PrintBalanceTableComponent } from './pages/prayers/custom-prints/pages/print-balance-table/print-balance-table.component';
 
 const routes: Routes = [
   { path: '', component: LoginComponent },
@@ -33,6 +34,7 @@ const routes: Routes = [
   { path: 'prayers/add', component: AddUserComponent, canActivate: [authGuard] },
   { path: 'prayers/custom-prints', component: CustomPrintsComponent, canActivate: [authGuard] },
   { path: 'prayers/all', component: AllUsersComponent, canActivate: [authGuard] },
+  { path: 'prayers/custom-prints/print-balance', component: PrintBalanceTableComponent },
 ];
 
 @NgModule({

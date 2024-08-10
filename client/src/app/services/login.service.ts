@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
-import { ILogin } from './../../../../shared/schemas/loginSchema';
+import { lastValueFrom } from 'rxjs';
+import { ILogin, LoginDTO } from './../../../../shared/schemas/loginSchema';
 import { environment } from './../../environments/environments';
 
 export const httpOptions = {
@@ -20,8 +20,8 @@ export class LoginService {
   constructor(private http: HttpClient) { }
 
 
-  loginUser(loginObj: ILogin): Observable<ILogin>{
-    return this.http.post<ILogin>(`${this.API_URL}/login`, loginObj, httpOptions)
-  }
 
+  loginUser(loginObj: ILogin): Promise<LoginDTO> {
+    return lastValueFrom(this.http.post<LoginDTO>(`${this.API_URL}/login`, loginObj, httpOptions))
+  }
 }

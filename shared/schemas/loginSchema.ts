@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { UserType } from './userSchema';
 
 export const loginSchema = z.object({
   email: z.string().email({ message: "כתובת מייל אינה חוקית" }),
@@ -6,3 +7,9 @@ export const loginSchema = z.object({
 });
 
 export type ILogin = z.infer<typeof loginSchema>;
+
+
+export type LoginDTO = {
+  user: UserType,
+  token: string
+}

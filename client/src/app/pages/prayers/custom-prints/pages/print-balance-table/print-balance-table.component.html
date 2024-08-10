@@ -1,0 +1,63 @@
+<div class="noPrint w-full p-5 flex justify-center items-center">
+  <button (click)="onPrint()">
+    <span class="material-symbols-outlined text-7xl text-appBlue"> print </span>
+  </button>
+</div>
+<div class="tableWrap w-full grid grid-cols-3">
+  <ng-container *ngIf="usersList$ | async as users">
+    <div class="overflow-x-auto">
+      <table class="table table-sm border-l-2">
+        <!-- head -->
+        <thead>
+          <tr>
+            <th>שם</th>
+            <th class="lastCol">יתרה</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of usersPart1">
+            <td>{{ user.firstName }} {{ user.lastName }}</td>
+            <td class="lastCol">{{ user.balance | currency : "ILS" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="p-8 flex flex-col items-center justify-between space-y-24">
+      <div>
+        <div>
+          <app-logo [print]="true"></app-logo>
+        </div>
+        <h2
+          class="stamFont text-appGold text-3xl font-extrabold text-center pt-12"
+        >
+          כִּי תִדֹּר נֶדֶר לַיהוָה אֱלֹהֶיךָ לֹא תְאַחֵר לְשַׁלְּמוֹ
+        </h2>
+      </div>
+      <div class="text-center">
+        <p>בנק דיסקונט חשבון 9494, סניף 187</p>
+        <p>בית כנסת תפארת ישראל</p>
+      </div>
+      <div class="space-y-0 text-center text-green-700">
+        <h3>בברכת שבת שלום</h3>
+        <h4>ועד בית הכנסת</h4>
+      </div>
+    </div>
+    <div class="overflow-x-auto">
+      <table class="table table-sm border-r-2">
+        <!-- head -->
+        <thead>
+          <tr>
+            <th>שם</th>
+            <th class="lastCol">יתרה</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of usersPart2">
+            <td>{{ user.firstName }} {{ user.lastName }}</td>
+            <td class="lastCol">{{ user.balance | currency : "ILS" }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </ng-container>
+</div>

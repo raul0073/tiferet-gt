@@ -40,51 +40,41 @@ export class LoginComponent {
   ) { }
 
 
-  onSubmit() {
+  async onSubmit() {
     this.errorMessages = {};
     this.loading = true;
-
+  
     const userObj: ILogin = { email: this.userEmail, password: this.userPassword };
-
+  
     try {
-      // userObj with the schema
+      // Validate userObj with the schema
       loginSchema.parse(userObj);
-
-      // login service
-      this.loginService.loginUser(userObj).subscribe({
-        next: (data: any) => {
-          const { user, token } = data;
-          // add user to stre
-          this.store.dispatch(setCurrentUser({ user }));
-          // login user
-          this.authService.login(token);
-
-          this.router.navigate(['/home']);
-        },
-        error: (error) => {
-          if (error instanceof ZodError) {
-            this.updateErrorMessages(error.errors);
-          } else {
-            this.snackBarService.openSnackBar(error.error.msg, 'X');
-          }
-
-          this.loading = false;
-        },
-        complete: () => {
-          this.loading = false;
-        }
-      });
+  
+      // Wait for the login service to return the user data
+      const data = await this.loginService.loginUser(userObj);
+  
+      const { user, token } = data;
+      // Dispatch the user to the store
+      this.store.dispatch(setCurrentUser({ user }));
+      // Login user
+      this.authService.login(token);
+  
+      // Navigate to the home page
+      await this.router.navigate(['/home']);
+  
     } catch (error) {
       if (error instanceof ZodError) {
         this.updateErrorMessages(error.errors);
       } else {
-        this.snackBarService.openSnackBar('Login failed: ' + error, 'X');
+        this.snackBarService.openSnackBar('התחברות נכשלה', 'X');
+        console.log(error)
       }
-
+  
+      this.loading = false;
+    } finally {
       this.loading = false;
     }
   }
-
   // Update error messages for display
   private updateErrorMessages(errors: any[]) {
     errors.forEach(error => {
