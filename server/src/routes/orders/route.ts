@@ -58,9 +58,7 @@ server.post('/', async (request: FastifyRequest, reply: FastifyReply) => {
                 { $set: { balance: updatedBalance } }
             );
 
-            if (userUpdateResult?.modifiedCount === 0) {
-                return reply.status(500).send({ error: 'Failed to update balance' });
-            }
+            console.log(updatedBalance)
 
             // Fetch the updated user data
             user = await usersCollection?.findOne<UserType>({ _id: user._id });
@@ -74,7 +72,7 @@ server.post('/', async (request: FastifyRequest, reply: FastifyReply) => {
             ...user,
             orders: UserOrders
         };
-
+        console.log(userWithOrders)
         return reply.status(200).send(userWithOrders);
     } catch (error) {
         server.log.error('Error querying MongoDB:', error);

@@ -31,7 +31,7 @@
           <th>{{ left }}</th>
           <th>{{ desc }}</th>
           <th>{{ invoice }}</th>
-          <th *ngIf="userHasAccess">{{ actions }}</th>
+          <th *ngIf="userHasAccess" class="w-10">{{ actions }}</th>
         </tr>
       </thead>
       <tbody class="text-appText">
@@ -53,10 +53,10 @@
           <td>{{ order.name || "N/A" }}</td>
           <td>{{ order.orderInvoice || "N/A" }}</td>
           <td *ngIf="userHasAccess" class="flex gap-2 w-fit">
-            <app-confirm-dialog  [action]="getDeleteAction(order._id)" ></app-confirm-dialog>
             <button class="btn btn-outline cursor-pointer">
               <span class="material-symbols-outlined"> edit </span>
             </button>
+            <app-confirm-dialog  [action]="getDeleteAction(order._id)" ></app-confirm-dialog>
           </td>
         </tr>
       </tbody>

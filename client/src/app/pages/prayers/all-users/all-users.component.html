@@ -12,7 +12,7 @@
           </tr>
         </thead>
         <tbody class="text-appText">
-          <tr *ngFor="let user of users$ |async" class="cursor-pointer hover:bg-slate-200">
+          <tr *ngFor="let user of users$ |async" class="cursor-pointer hover:bg-slate-200" [routerLink]="['/prayers/overall-table', user._id]">
               <td>{{user.firstName  }} {{ user.lastName }}</td>
               <td>{{user.balance  | currency:'ILS' }} </td>
               <td>{{ user.lastSeen | date: 'dd/MM/yyyy, HH:mm' }}</td>

@@ -9,8 +9,7 @@ import { selectAllUsers, selectCurrentUserName } from '../../../store/slices/use
 import { AppStore } from '../../../store/store';
 import { OrdersService } from '../services/orders.service';
 import labels from './../data/addOrder.json';
-import orderNames from './data/orderNames.json';
-
+import orderNames from './data/orderOptions.json';
 type OrderNamesType = {
   value: string,
   label: string
@@ -21,6 +20,7 @@ type OrderNamesType = {
   templateUrl: './add-order.component.html',
   styleUrl: './add-order.component.scss'
 })
+
 
 
 export class AddOrderComponent {
@@ -56,6 +56,7 @@ export class AddOrderComponent {
     orderInvoice: new FormControl('', [])
   });
 
+  
   constructor(
     private store: Store<AppStore>,
     private orderService: OrdersService,
@@ -63,6 +64,11 @@ export class AddOrderComponent {
   ) {
     
   }
+
+  selectUser(userId: string) {
+    this.addOrder.get('userId')?.setValue(userId);
+  }
+
 
   async onSubmit() {
     this.loading = true;

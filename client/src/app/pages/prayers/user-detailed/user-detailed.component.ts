@@ -39,9 +39,13 @@ export class UserDetailedComponent implements OnInit {
   userDetailes$: Observable<UserTypeWithOrders | undefined> = this.store.select(selectUserById(this.userId));
   header: string = labels.header
   actions: string = labels.actions
+   isEditClicked: boolean = false
+   orderClickedId: string | null = null
 
-  
 
+   handleEdit(id: string){
+    this.orderClickedId = id
+   }
   ngOnInit(): void {
     this.getParams()
     this.currentUser$.subscribe(user => {

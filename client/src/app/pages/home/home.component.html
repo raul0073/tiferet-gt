@@ -30,9 +30,9 @@
         <button
           *ngFor="let label of quickActions"
           routerLink={{label.link}}
-          class="border border-gray-400 bg-appBlue rounded-lg w-full flex flex-col items-center p-4 hover:text-appBG hover:bg-appBlue transition-colors duration-75 md:w-1/3"
+          class="group border border-gray-400 bg-neutral-200 rounded-lg w-full flex flex-col items-center p-4 text-appDarkGrey hover:bg-appBlue hover:text-appBG transition-colors duration-75 md:w-1/3"
         >
-          <i class="material-icons text-appGold">{{ label.icon }}</i>
+          <i class="material-icons text-yellow-400 group-hover:text-appGold transition-colors duration-75">{{ label.icon }}</i>
           {{ label.txt }}
         </button>
       </div>
@@ -46,9 +46,9 @@
         <button
           *ngFor="let label of actions"
           routerLink={{label.link}}
-          class="border border-gray-400 bg-appBlue rounded-lg w-full flex flex-col items-center p-4 hover:text-appBG hover:bg-appBlue transition-colors duration-75 md:w-1/3"
+          class="group border border-gray-400 bg-white rounded-lg w-full flex flex-col items-center p-4 text-appBlue hover:bg-appBlue hover:text-appBG transition-colors duration-75 md:w-1/3"
         >
-          <i class="material-icons text-appGold">{{ label.icon }}</i>
+          <i class="material-icons text-yellow-400 group-hover:text-appGold transition-colors duration-75">{{ label.icon }}</i>
           {{ label.txt }}
         </button>
       </div>

@@ -8,6 +8,7 @@
           <td>תאריך</td>
           <td>פרשה</td>
           <td>פרטים</td>
+          <td>מתפלל</td>
           <td>
             בוצע על-ידי
           </td>
@@ -18,6 +19,7 @@
         <tr *ngFor="let item of latestActions">
           <td>{{item.createdAt | date:'shortDate'}}</td>
           <td>{{item.parasha}}</td>
+          <td>{{item.userName}}</td>
           <td class="p-4">{{getNames(item.name)}}</td>
           <td>{{item.doneBy}}</td>
         </tr>

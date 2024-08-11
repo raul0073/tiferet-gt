@@ -43,6 +43,7 @@ import { UserDetailedComponent } from './pages/prayers/user-detailed/user-detail
 import { ConfirmDialogComponent } from './components/buttons/delete-button-with-icon/confirm-dialog/confirm-dialog.component';
 import { PrintBalanceTableComponent } from './pages/prayers/custom-prints/pages/print-balance-table/print-balance-table.component';
 import { PrintAliyotComponent } from './pages/prayers/custom-prints/pages/print-aliyot/print-aliyot.component';
+import { ShortNumberPipe } from './pipes/short-number.pipe';
 
 
 
@@ -82,6 +83,7 @@ registerLocaleData(localeHe);
     ConfirmDialogComponent,
     PrintBalanceTableComponent,
     PrintAliyotComponent,
+    ShortNumberPipe,
   ],
   imports: [
     BrowserModule,

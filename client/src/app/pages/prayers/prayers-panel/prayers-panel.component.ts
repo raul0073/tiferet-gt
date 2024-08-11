@@ -14,7 +14,7 @@ export class PrayersPanelComponent {
   this.actions = [
     {txt: labels.addOrder, icon: 'add_circle', link: '/prayers/order/add'},
     {txt: labels.bigTable, icon: 'table_view', link: '/prayers/overall-table'},
-    {txt: labels.balaceTable, icon: 'account_balance', link: '/prayers/balance-table'},
+    // {txt: labels.balaceTable, icon: 'account_balance', link: '/prayers/balance-table'},
     {txt: labels.addUser, icon: 'person_add', link: '/prayers/add'},
     {txt: labels.forms, icon: 'photo', link: '/prayers/custom-prints'},
     {txt: labels.allUsers, icon: 'group', link: '/prayers/all'},
