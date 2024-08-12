@@ -1,22 +1,14 @@
-<!-- Open the modal using ID.showModal() method -->
-<button class="btn btn-outline btn-error cursor-pointer" onclick="confirmModal.showModal()">
-  <i class="material-symbols-outlined"> delete </i>
-  </button>
-<dialog #confirmModal id="confirmModal" class="modal bg-appGrey">
+<dialog #confirmModal class="modal bg-appGrey">
   <div class="modal-box bg-appBG">
-    <h3 class="text-lg font-bold">
-      האם אתה בטוח?!
-    </h3>
-    <p class="py-4">פעולה זאת לא ניתנת לשינוי
+    <h3 class="text-lg font-bold">האם אתה בטוח?!</h3>
+    <p class="py-4">
+      פעולה זאת לא ניתנת לשינוי
       <br>
       פעולה זו תמחק את ההזמנה לחלוטין
     </p>
-      <div class="w-full flex justify-between items-center">
-        <form method="dialog">
-          <!-- if there is a button in form, it will close the modal -->
-          <button class="btn">ביטול</button>
-        </form>
-        <button class="btn btn-error" (click)="onClick()" >מחק</button>
+    <div class="w-full flex justify-between items-center">
+      <button class="btn" (click)="closeModal()">ביטול</button>
+      <button class="btn btn-error" (click)="onClick()" [disabled]="loading">מחק</button>
     </div>
   </div>
 </dialog>

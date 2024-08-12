@@ -67,9 +67,11 @@
             >
               <span class="material-symbols-outlined"> save </span>
             </button>
-            <app-confirm-dialog
-              [action]="getDeleteAction(order._id)"
-            ></app-confirm-dialog>
+            <button class="btn btn-outline btn-error" (click)="openDeleteModal(order._id)">
+              <i class="material-symbols-outlined"> delete </i>
+            </button>
+            
+            <app-confirm-dialog #confirmDialog [action]="deleteAction" [loading]="loading"></app-confirm-dialog>
           </td>
         </tr>
       </tbody>

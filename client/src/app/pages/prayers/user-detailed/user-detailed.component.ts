@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
@@ -11,6 +11,7 @@ import { OrdersService } from '../services/orders.service';
 import { SnackBarService } from './../../../services/snack-bar.service';
 import { updateOrderInvoice, updateUserinStore } from '../../../store/slices/usersSlice/usersSlice.actions';
 import { selectCurrentUser } from './../../../store/slices/usersSlice/usersSlice.selector';
+import { ConfirmDialogComponent } from '../../../components/buttons/delete-button-with-icon/confirm-dialog/confirm-dialog.component';
 @Component({
   selector: 'app-user-detailed',
   templateUrl: './user-detailed.component.html',
@@ -24,10 +25,10 @@ export class UserDetailedComponent implements OnInit {
     private snackBar: SnackBarService
   ) {
     
-   }
-   currentUser$: Observable<UserType | null> = this.store.select(selectCurrentUser)
+  }
+  currentUser$: Observable<UserType | null> = this.store.select(selectCurrentUser)
   userHasAccess: boolean  = false;
-   loading: boolean = false;
+  loading: boolean = false;
   userId: string = ''
   dateLabel: string = labels.date
   parahsa: string = labels.parasha
@@ -40,9 +41,16 @@ export class UserDetailedComponent implements OnInit {
   header: string = labels.header
   actions: string = labels.actions
   showEditButton: string | null = null;
-   updatedInvoices: { [key: string]: string } = {};
+  updatedInvoices: { [key: string]: string } = {};
+  @ViewChild('confirmDialog') confirmDialog!: ConfirmDialogComponent;
 
-   
+   deleteAction: (() => Promise<void>) | undefined;
+ 
+    
+   openDeleteModal(orderId: string) {
+    this.deleteAction = this.getDeleteAction(orderId);
+    this.confirmDialog.openModal();
+  }
    // handle input change
   onInputChange(event: Event, orderId: string) {
     const inputElement = event.target as HTMLInputElement;

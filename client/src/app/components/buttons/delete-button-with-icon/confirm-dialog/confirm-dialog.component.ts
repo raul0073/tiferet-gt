@@ -7,16 +7,33 @@ import { Component, ElementRef, Input, ViewChild } from '@angular/core';
 })
 export class ConfirmDialogComponent {
   @Input() action?: () => Promise<void> | void;
-
+  @Input() loading: boolean = false;
   @ViewChild('confirmModal') confirmModal!: ElementRef<HTMLDialogElement>;
+
+  openModal() {
+    if (this.confirmModal) {
+      this.confirmModal.nativeElement.showModal();
+    } else {
+      console.error('confirmModal is undefined');
+    }
+  }
+
+  closeModal() {
+    if (this.confirmModal) {
+      this.confirmModal.nativeElement.close();
+    } else {
+      console.error('confirmModal is undefined');
+    }
+  }
 
   async onClick() {
     if (this.action) {
       try {
-        await this.action(); // Await if it's a Promise
-        this.confirmModal.nativeElement.close(); // Close the modal after action
+        await this.action();
       } catch (error) {
-        console.error(error);
+        console.error('Error during confirmation:', error);
+      } finally {
+        this.closeModal();
       }
     }
   }
