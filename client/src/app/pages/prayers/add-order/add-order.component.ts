@@ -85,7 +85,15 @@ export class AddOrderComponent {
 
       const orderRes = await this.orderService.addOrder(withAdminName);
       this.store.dispatch(updateUserinStore({user: orderRes}))
-      this.addOrder.reset()
+      this.addOrder.reset({
+        name: '',
+        userId: '',
+        parasha: '',
+        price: 0,
+        pricePaid: 0,
+        beenPaid: false,
+        orderInvoice: ''
+      });
       this.snackBar.openSnackBar("הושלם בהצלחה", 'x');
     } catch (error) {
       console.error(error);
