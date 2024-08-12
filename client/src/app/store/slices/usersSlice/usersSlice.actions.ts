@@ -14,3 +14,9 @@ export const updateUserinStore = createAction(
   '[Users] Update User',
   props<{ user: UserTypeWithOrders }>()
 );
+
+
+export const updateOrderInvoice = createAction(
+  '[Users] Update Order Invoice',
+  props<{ orderId: string; orderInvoice: string }>()
+);

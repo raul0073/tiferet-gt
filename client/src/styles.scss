@@ -45,6 +45,7 @@ $client-theme: mat.define-light-theme((
        url('./assets/StamSefaradCLM.ttf') format('truetype');
 }
 
+
 *,*::after,*::before{
     box-sizing: border-box;
     margin: 0;
@@ -55,15 +56,18 @@ $client-theme: mat.define-light-theme((
 
 html{
     max-width: 100dvw;
-    // overflow-x: hidden;
 }
-
+:root{
+  direction: rtl;
+}
 
 html, body { 
   min-height: 100dvh;
   background: #f5f4f4;
 }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+body {
+   margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
+  }
 
 .stamFont{
   font-family: 'StamSefaradCLM' !important;

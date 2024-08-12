@@ -9,7 +9,7 @@ import labels from './user-detailed.json'
 import { UsersService } from '../services/users.service';
 import { OrdersService } from '../services/orders.service';
 import { SnackBarService } from './../../../services/snack-bar.service';
-import { updateUserinStore } from '../../../store/slices/usersSlice/usersSlice.actions';
+import { updateOrderInvoice, updateUserinStore } from '../../../store/slices/usersSlice/usersSlice.actions';
 import { selectCurrentUser } from './../../../store/slices/usersSlice/usersSlice.selector';
 @Component({
   selector: 'app-user-detailed',
@@ -39,17 +39,39 @@ export class UserDetailedComponent implements OnInit {
   userDetailes$: Observable<UserTypeWithOrders | undefined> = this.store.select(selectUserById(this.userId));
   header: string = labels.header
   actions: string = labels.actions
-   isEditClicked: boolean = false
-   orderClickedId: string | null = null
+  showEditButton: string | null = null;
+   updatedInvoices: { [key: string]: string } = {};
 
+   
+   // handle input change
+  onInputChange(event: Event, orderId: string) {
+    const inputElement = event.target as HTMLInputElement;
+    this.updatedInvoices[orderId] = inputElement.value;
+    this.showEditButton = orderId;
+  }
+  // save order invoice
+  saveInvoice(orderId: string) {
+    const newInvoice = this.updatedInvoices[orderId];
+    this.onUpdate(orderId, newInvoice);
+    this.showEditButton = null;
+  }
 
-   handleEdit(id: string){
-    this.orderClickedId = id
-   }
+  // on update
+  async onUpdate(orderId: string, newInvoice: string) {
+    try {
+      this.store.dispatch(updateOrderInvoice({ orderId, orderInvoice: newInvoice }));
+      const res = await this.ordersService.updateOrderInvoice(orderId, newInvoice)
+      this.snackBar.openSnackBar(`נשמר בהצלחה`, "x")
+    } catch (error) {
+      this.snackBar.openSnackBarError(`לא ניתן לשמור מס קבלה`, "x")
+      console.error(error)
+    }
+  }
+
   ngOnInit(): void {
     this.getParams()
     this.currentUser$.subscribe(user => {
-    this.userHasAccess =  user?.hasAccess ?? false;
+      this.userHasAccess =  user?.hasAccess ?? false;
     });
   }
   getDeleteAction(orderId: string): () => Promise<void> {

@@ -20,7 +20,10 @@ export class OrdersService {
   addOrder(order: IOrder): Promise<any> {
     return lastValueFrom(this.http.post<IOrder>(`${this.API_URL}/orders`, order, httpOptions))
   }
-
+  updateOrderInvoice(orderId: string, newInvoice: string): Promise<any> {
+    const invoicePayload = { orderInvoice: newInvoice };
+    return lastValueFrom(this.http.put<string>(`${this.API_URL}/orders/${orderId}`, invoicePayload, httpOptions))
+  }
   deleteOrder(orderId: string): Promise<any> {
     return lastValueFrom(this.http.delete<string>(`${this.API_URL}/orders/${orderId}`, httpOptions))
   }

@@ -5,10 +5,11 @@
         <div
         class="btns flex flex-col md:flex-row gap-4 justify-evenly items-center w-full rounded-md"
         >
+
           <button
             *ngFor="let label of actions"
             routerLink={{label.link}}
-            class="border border-gray-400 bg-appBlue rounded-lg w-full flex flex-col items-center p-4 hover:text-appBG hover:bg-appBlue transition-colors duration-75"
+            class="border border-gray-400 bg-white rounded-lg w-full flex flex-col items-center p-4 hover:text-appBG hover:bg-appBlue transition-colors duration-75"
           >
             <span class="material-symbols-outlined text-appGold">{{ label.icon }}</span>
             {{ label.txt }}

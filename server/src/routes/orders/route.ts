@@ -79,7 +79,23 @@ server.post('/', async (request: FastifyRequest, reply: FastifyReply) => {
         return reply.status(500).send({ error: 'Internal Server Error', msg: error });
     }
 });
+    // PUT: update order with INVOICE only
+        server.put('/:id', async (request: FastifyRequest, reply: FastifyReply) => {
+            try {
+                const { id } = request.params as { id: string };
+                const { orderInvoice } = request.body as { orderInvoice: string };
+                
+                const orderUpdate = await ordersCollection?.updateOne(
+                    { _id: new ObjectId(id) },
+                    { $set: { orderInvoice: orderInvoice } }
+                );
 
+                return reply.status(200).send(orderUpdate);
+            } catch (error) {
+                server.log.error('Error querying MongoDB:', error);
+                return reply.status(500).send({ error: 'Internal Server Error', msg: error });
+            }
+        });
     // DEL: Delete order
     server.delete('/:id', async (request: FastifyRequest, reply: FastifyReply) => {
         try {

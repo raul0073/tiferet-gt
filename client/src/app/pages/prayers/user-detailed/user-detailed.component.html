@@ -51,12 +51,25 @@
             }}
           </td>
           <td>{{ order.name || "N/A" }}</td>
-          <td>{{ order.orderInvoice || "N/A" }}</td>
-          <td *ngIf="userHasAccess" class="flex gap-2 w-fit">
-            <button class="btn btn-outline cursor-pointer">
-              <span class="material-symbols-outlined"> edit </span>
+          <td>
+            <input
+              type="text"
+              [value]="order.orderInvoice || 'N/A'"
+              class="grow bg-white text-appText rounded-md p-2 border border-appGrey"
+              (input)="onInputChange($event, order._id)"
+            />
+          </td>
+          <td *ngIf="userHasAccess" class="flex gap-2 w-fit justify-end">
+            <button
+              class="btn btn-outline btn-success cursor-pointer"
+              (click)="saveInvoice(order._id)"
+              *ngIf="showEditButton === order._id"
+            >
+              <span class="material-symbols-outlined"> save </span>
             </button>
-            <app-confirm-dialog  [action]="getDeleteAction(order._id)" ></app-confirm-dialog>
+            <app-confirm-dialog
+              [action]="getDeleteAction(order._id)"
+            ></app-confirm-dialog>
           </td>
         </tr>
       </tbody>
