@@ -30,7 +30,7 @@
           <th>{{ paid }}</th>
           <th>{{ left }}</th>
           <th>{{ desc }}</th>
-          <th>{{ invoice }}</th>
+          <th *ngIf="userHasAccess"  >{{ invoice }}</th>
           <th *ngIf="userHasAccess" class="w-10">{{ actions }}</th>
         </tr>
       </thead>
@@ -53,6 +53,7 @@
           <td>{{ order.name || "N/A" }}</td>
           <td>
             <input
+            *ngIf="userHasAccess" 
               type="text"
               [value]="order.orderInvoice || 'N/A'"
               class="grow bg-white text-appText rounded-md p-2 border border-appGrey"
@@ -67,11 +68,18 @@
             >
               <span class="material-symbols-outlined"> save </span>
             </button>
-            <button class="btn btn-outline btn-error" (click)="openDeleteModal(order._id)">
+            <button
+              class="btn btn-outline btn-error"
+              (click)="openDeleteModal(order._id)"
+            >
               <i class="material-symbols-outlined"> delete </i>
             </button>
-            
-            <app-confirm-dialog #confirmDialog [action]="deleteAction" [loading]="loading"></app-confirm-dialog>
+
+            <app-confirm-dialog
+              #confirmDialog
+              [action]="deleteAction"
+              [loading]="loading"
+            ></app-confirm-dialog>
           </td>
         </tr>
       </tbody>

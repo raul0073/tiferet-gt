@@ -1,42 +1,44 @@
 <section class="prayers-panel w-full">
-    <app-header [text]="header"></app-header>
-    
- 
+  <app-header [text]="header"></app-header>
 
+  <table mat-table [dataSource]="doners" class="mat-elevation-z8">
+    <!-- Full Name Column -->
+    <ng-container matColumnDef="fullName" class="font-extrabold">
+      <th mat-header-cell *matHeaderCellDef>שם מלא</th>
+      <td mat-cell *matCellDef="let doner">{{ doner.fullName }}</td>
+    </ng-container>
 
-    <table mat-table [dataSource]="doners" class="mat-elevation-z8">
+    <!-- Amount Column -->
+    <ng-container matColumnDef="amountDonated">
+      <th mat-header-cell *matHeaderCellDef>סכום</th>
+      <td mat-cell *matCellDef="let doner">
+        {{ doner.amountDonated | currency : "ILS" }}
+      </td>
+    </ng-container>
 
-      <!-- Full Name Column -->
-      <ng-container matColumnDef="fullName" class="font-extrabold">
-        <th mat-header-cell *matHeaderCellDef> שם מלא </th>
-        <td mat-cell *matCellDef="let doner"> {{ doner.fullName }} </td>
-      </ng-container>
-    
-      <!-- Amount Column -->
-      <ng-container matColumnDef="amountDonated">
-        <th mat-header-cell *matHeaderCellDef> סכום </th>
-        <td mat-cell *matCellDef="let doner"> {{ doner.amountDonated | currency:'ILS' }} </td>
-      </ng-container>
-    
-      <!-- Phone Column -->
-      <ng-container matColumnDef="contact">
-        <th mat-header-cell *matHeaderCellDef> טלפון </th>
-        <td mat-cell *matCellDef="let doner"> {{ doner.contact }} </td>
-      </ng-container>
-    
-      <!-- Date Column -->
-      <ng-container matColumnDef="createdAt">
-        <th mat-header-cell *matHeaderCellDef> תאריך </th>
-        <td mat-cell *matCellDef="let doner"> {{ doner.createdAt | date:'shortDate' }} </td>
-      </ng-container>
-    
-      <!-- Header and Row Definitions -->
-      <tr mat-header-row *matHeaderRowDef="displayedColumns" class="text-white"></tr>
-      <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-    </table>
-    <div class="addDoner">
-      <app-add-doner></app-add-doner>
-     </div>
+    <!-- Phone Column -->
+    <ng-container matColumnDef="contact">
+      <th mat-header-cell *matHeaderCellDef>טלפון</th>
+      <td mat-cell *matCellDef="let doner">{{ doner.contact }}</td>
+    </ng-container>
 
-  </section>
-  
+    <!-- Date Column -->
+    <ng-container matColumnDef="createdAt">
+      <th mat-header-cell *matHeaderCellDef>תאריך</th>
+      <td mat-cell *matCellDef="let doner">
+        {{ doner.createdAt | date : "shortDate" }}
+      </td>
+    </ng-container>
+
+    <!-- Header and Row Definitions -->
+    <tr
+      mat-header-row
+      *matHeaderRowDef="displayedColumns"
+      class="text-white"
+    ></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <div class="addDoner">
+    <app-add-doner></app-add-doner>
+  </div>
+</section>

@@ -2,7 +2,7 @@
   <app-header [text]="header"></app-header>
 
   <div class="overflow-x-auto">
-    <table class="table table-xs bg-appBG">
+    <table class="table table-xs md:table-md md:text-lg bg-appBG">
       <!-- head -->
       <thead class="bg-appBlue text-appGold lg:text-xl font-extrabold">
         <tr>
@@ -18,7 +18,7 @@
           class="cursor-pointer hover:bg-gray-300"
           [routerLink]="user._id"
         >
-          <td>{{ user.firstName }} {{ user.lastName }}</td>
+          <td class="font-semibold">{{ user.firstName }} {{ user.lastName }}</td>
           <td>
             {{
               user.orders && user.orders[0] ? user.orders[0].parasha : "לא קיים"

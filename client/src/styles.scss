@@ -39,11 +39,6 @@ $client-theme: mat.define-light-theme((
 @tailwind components;
 @tailwind utilities;
 
-@font-face {
-  font-family: 'StamSefaradCLM';
-  src: local('StamSefaradCLM'),
-       url('./assets/StamSefaradCLM.ttf') format('truetype');
-}
 
 
 *,*::after,*::before{
@@ -53,21 +48,17 @@ $client-theme: mat.define-light-theme((
     min-width: none;
 }
 
-
-html{
-    max-width: 100dvw;
-}
 :root{
   direction: rtl;
 }
 
 html, body { 
+  max-width: 100dvw;
   min-height: 100dvh;
   background: #f5f4f4;
+  font-family: "IBM Plex Sans Hebrew", sans-serif;
+
 }
-body {
-   margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; 
-  }
 
 .stamFont{
   font-family: 'StamSefaradCLM' !important;

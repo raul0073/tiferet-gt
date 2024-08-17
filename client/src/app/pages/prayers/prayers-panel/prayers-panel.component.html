@@ -3,18 +3,20 @@
 
   <div class="action space-y-4 md:space-y-0 pb-8">
     <div
-    class="btns flex flex-col md:grid md:grid-cols-3 gap-4 justify-evenly items-center w-full p-4 border rounded-md"
+      class="btns flex flex-col md:grid md:grid-cols-3 gap-4 justify-evenly items-center w-full p-4 border rounded-md"
     >
-    <button
-    *ngFor="let label of actions"
-    routerLink='{{label.link}}'
-    class="group border border-gray-400 bg-white text-appBlue rounded-lg w-full flex flex-col items-center p-4 hover:bg-appBlue hover:text-appBG transition-colors duration-75 "
-    >
-    <i class="material-icons text-yellow-400 group-hover:text-appGold transition-colors duration-75">{{ label.icon }}</i>
-    {{ label.txt }}
-  </button>
-</div>
-<app-latest-actions></app-latest-actions>
-</div>
-
+      <button
+        *ngFor="let label of actions"
+        routerLink="{{ label.link }}"
+        class="group border border-gray-400 bg-white text-appBlue rounded-lg w-full flex flex-col items-center p-4 hover:bg-appBlue hover:text-appBG transition-colors duration-75"
+      >
+        <i
+          class="material-icons text-yellow-400 group-hover:text-appGold transition-colors duration-75"
+          >{{ label.icon }}</i
+        >
+        {{ label.txt }}
+      </button>
+    </div>
+    <app-latest-actions></app-latest-actions>
+  </div>
 </section>

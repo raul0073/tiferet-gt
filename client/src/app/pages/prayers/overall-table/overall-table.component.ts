@@ -33,7 +33,7 @@ export class OverallTableComponent implements OnInit {
     try {
       this.store.pipe(select(selectAllUsers)).subscribe(users => {
         if (users.length === 0) {
-          // Fetch users from the service and dispatch to store if not present
+          // get users
           this.userService.getUsers().subscribe(fetchedUsers => {
             fetchedUsers.forEach(user => {
               this.store.dispatch(addUserToStore({ user }));

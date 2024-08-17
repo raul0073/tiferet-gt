@@ -43,26 +43,24 @@ export class LoginComponent {
   async onSubmit() {
     this.errorMessages = {};
     this.loading = true;
-  
+
     const userObj: ILogin = { email: this.userEmail, password: this.userPassword };
-  
+
     try {
-      // Validate userObj with the schema
+      // validate userObj with the schema
       loginSchema.parse(userObj);
-  
-      // Wait for the login service to return the user data
+
+      
       const data = await this.loginService.loginUser(userObj);
-  
+
       const { user, token } = data;
       localStorage.setItem('UID', user._id);
-      // Dispatch the user to the store
       this.store.dispatch(setCurrentUser({ user }));
-      // Login user
       this.authService.login(token);
-  
-      // Navigate to the home page
+
+      // redirect
       await this.router.navigate(['/home']);
-  
+
     } catch (error) {
       if (error instanceof ZodError) {
         this.updateErrorMessages(error.errors);
@@ -70,13 +68,13 @@ export class LoginComponent {
         this.snackBarService.openSnackBar('התחברות נכשלה', 'X');
         console.error(error)
       }
-  
+
       this.loading = false;
     } finally {
       this.loading = false;
     }
   }
-  // Update error messages for display
+  // error msgs
   private updateErrorMessages(errors: any[]) {
     errors.forEach(error => {
       const { path, message } = error;
