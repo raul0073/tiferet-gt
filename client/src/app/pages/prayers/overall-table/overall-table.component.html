@@ -18,7 +18,9 @@
           class="cursor-pointer hover:bg-gray-300"
           [routerLink]="user._id"
         >
-          <td class="font-semibold">{{ user.firstName }} {{ user.lastName }}</td>
+          <td class="font-semibold">
+            {{ user.firstName }} {{ user.lastName }}
+          </td>
           <td>
             {{
               user.orders && user.orders[0] ? user.orders[0].parasha : "לא קיים"
@@ -29,11 +31,12 @@
               user.orders && user.orders[0]
                 ? user.orders[0].pricePaid > user.orders[0].price
                   ? "לא קיים"
-                  : user.orders[0].price - user.orders[0].pricePaid
+                  : (user.orders[0].price - user.orders[0].pricePaid
+                    | currency : "ILS")
                 : "לא קיים"
             }}
           </td>
-          <td>{{ user.balance }}</td>
+          <td>{{ user.balance | currency : "ILS" }}</td>
         </tr>
       </tbody>
     </table>
