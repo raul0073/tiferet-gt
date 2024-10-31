@@ -1,6 +1,6 @@
 import { createReducer, on } from '@ngrx/store';
 import { UserType, UserTypeWithOrders } from '../../../../../../shared/schemas/userSchema';
-import { addUserToStore, setCurrentUser, updateOrderInvoice, updateUserinStore } from './usersSlice.actions';
+import { addUserToStore, deleteUserStore, setCurrentUser, updateOrderInvoice, updateUserinStore } from './usersSlice.actions';
 export interface UsersState {
   allUsers: UserTypeWithOrders[];   
   currentUser: UserType | null; 
@@ -57,5 +57,9 @@ export const usersReducer = createReducer(
       ...state,
       allUsers: updatedUsers,
     };
-  })
+  }),
+  on(deleteUserStore, (state: UsersState, { userId }) => ({
+    ...state,
+    allUsers: state.allUsers.filter(user => user._id !== userId)
+  }))
 );

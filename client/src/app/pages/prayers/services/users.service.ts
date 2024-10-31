@@ -21,4 +21,7 @@ export class UsersService {
   async addUser(user: IUser): Promise<UserType> {
     return lastValueFrom(this.http.post<UserType>(`${this.API_URL}/users`, user, httpOptions))
   }
+  async deleteUser(id: string): Promise<Observable<string>> {
+    return this.http.delete<string>(`${this.API_URL}/users/${id}`, httpOptions)
+  }
 }

@@ -9,14 +9,21 @@
             <th>יתרה</th>
             <th>התחבר לאחרונה </th>
             <th>תאריך הרשמה  </th>
+            <th>פעולות</th>
           </tr>
         </thead>
         <tbody class="text-appText">
-          <tr *ngFor="let user of users$ |async" class="cursor-pointer hover:bg-slate-200" [routerLink]="['/prayers/overall-table', user._id]">
+          <tr *ngFor="let user of users$ |async" class="relative cursor-pointer hover:bg-slate-200" [routerLink]="['/prayers/overall-table', user._id]">
+           
               <td>{{user.firstName  }} {{ user.lastName }}</td>
               <td>{{user.balance  | currency:'ILS' }} </td>
               <td>{{ user.lastSeen | date: 'dd/MM/yyyy, HH:mm' }}</td>
               <td>{{user.createdAt | date:'shortDate' }}</td>
+              <td><i
+                class="material-icons text-red-400 hover:text-red-600 hover:scale-105 transition-colors duration-75"
+                (click)="onSubmit(user._id); $event.stopPropagation()"
+                >delete</i
+              ></td>
           </tr>
         </tbody>
       </table>

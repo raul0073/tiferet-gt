@@ -33,6 +33,10 @@
           כִּי תִדֹּר נֶדֶר לַיהוָה אֱלֹהֶיךָ לֹא תְאַחֵר לְשַׁלְּמוֹ
         </h2>
       </div>
+      <div *ngIf="shabbatData">
+          <p>{{ shabbatData.hebrew }}</p>
+          <p>{{ shabbatData.parasha }}</p>
+      </div>
       <div class="text-center">
         <p>בנק דיסקונט חשבון 9494, סניף 187</p>
         <p>בית כנסת תפארת ישראל</p>

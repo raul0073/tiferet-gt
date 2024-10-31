@@ -6,28 +6,45 @@ import { addUserToStore } from '../../../../../store/slices/usersSlice/usersSlic
 import { selectAllUsers } from '../../../../../store/slices/usersSlice/usersSlice.selector';
 import { AppStore } from '../../../../../store/store';
 import { UsersService } from '../../../services/users.service';
+import { HebcalService, ShabbatData } from './services/getHebrewDateService';
 
 @Component({
   selector: 'app-print-balance-table',
   templateUrl: './print-balance-table.component.html',
-  styleUrl: './print-balance-table.component.scss'
+  styleUrls: ['./print-balance-table.component.scss']
 })
-export class PrintBalanceTableComponent implements OnInit{
+export class PrintBalanceTableComponent implements OnInit {
   usersList$: Observable<UserTypeWithOrders[]> = this.store.pipe(select(selectAllUsers));  
-  usersPart1: UserTypeWithOrders[] = []
-  usersPart2: UserTypeWithOrders[] = []
+  usersPart1: UserTypeWithOrders[] = [];
+  usersPart2: UserTypeWithOrders[] = [];
+  shabbatData: ShabbatData | null = null;
+  
   constructor(
     private userService: UsersService,
+    private hebcalService: HebcalService,
     private store: Store<AppStore>
   ) {}
 
   ngOnInit(): void {
     this.getAllUsers();
+    this.getHebrewDate();
   }
 
-  onPrint(){
-    window.print()
+  getHebrewDate(): void {
+    this.hebcalService.getHebrewDate()
+      .then(data => {
+        this.shabbatData = data;
+        console.log('Shabbat data:', this.shabbatData);
+      })
+      .catch(error => {
+        console.error('Error fetching Shabbat data:', error);
+      });
   }
+
+  onPrint(): void {
+    window.print();
+  }
+
   getAllUsers(): void {
     try {
       this.store.pipe(select(selectAllUsers)).subscribe(users => {
@@ -41,13 +58,12 @@ export class PrintBalanceTableComponent implements OnInit{
         }
       });
       this.usersList$.subscribe(users => {
-        const mid = Math.ceil(users.length / 2)
-        this.usersPart1 = users.slice(0, mid)
-        this.usersPart2 = users.slice(mid)
-      })
+        const mid = Math.ceil(users.length / 2);
+        this.usersPart1 = users.slice(0, mid);
+        this.usersPart2 = users.slice(mid);
+      });
     } catch (error) {
-      console.error(error)
+      console.error(error);
     }
   }
 }
-

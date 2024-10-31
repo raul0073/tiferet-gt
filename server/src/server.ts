@@ -11,6 +11,7 @@ import balanceRoute from "./routes/balance/route";
 import transactionRoute from "./routes/transactions/route";
 import ordersRoute from "./routes/orders/route";
 import fastifyJwt from "@fastify/jwt";
+import hebcalRoute from "./routes/web-source/route";
 dotenv.config()
 
 const {MONGODB_URI, API_URL, PORT, SECRET} = process.env
@@ -52,7 +53,8 @@ const routes = [
     { route: donersRoute, prefix: 'api/doners' },
     { route: transactionRoute, prefix: 'api/synagogue/transactions' },
     { route: balanceRoute, prefix: 'api/synagogue/balance' },
-    { route: ordersRoute, prefix: 'api/orders' }
+    { route: ordersRoute, prefix: 'api/orders' },
+    { route: hebcalRoute, prefix: 'api/hebcal' },
 ];
 routes.forEach(({ route, prefix }) => {
     server.register(route, { prefix });
