@@ -89,7 +89,7 @@ server.post('/', async (request: FastifyRequest, reply: FastifyReply) => {
     try {
       // get id
       const { id } = request.params as { id: string };
-      
+      console.log("route id detected:", id);
       const result = await usersCollection?.deleteOne({ _id: new ObjectId(id) });
       // delete all orders with userId = id
       await ordersCollection?.deleteMany({userId: id.toString()})

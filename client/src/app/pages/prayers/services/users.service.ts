@@ -22,6 +22,8 @@ export class UsersService {
     return lastValueFrom(this.http.post<UserType>(`${this.API_URL}/users`, user, httpOptions))
   }
   async deleteUser(id: string): Promise<Observable<string>> {
-    return this.http.delete<string>(`${this.API_URL}/users/${id}`, httpOptions)
+    console.log("service id detected:", id);
+    console.log("service id detected:", this.API_URL);
+    return this.http.delete<string>(`${this.API_URL}/users/${id}`)
   }
 }
