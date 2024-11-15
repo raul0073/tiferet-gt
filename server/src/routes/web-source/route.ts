@@ -27,6 +27,7 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
       const hebrewDateRes = await fetch(
         `https://www.hebcal.com/converter?cfg=json&date=${currentDate.toISOString().split("T")[0]}&g2h=1&strict=1`
       );
+      console.log( `https://www.hebcal.com/converter?cfg=json&date=${currentDate.toISOString().split("T")[0]}&g2h=1&strict=1`);
       const hebrewDate = await hebrewDateRes.json();
 
       // Fetch orders from last week with "עליה" in the name
@@ -81,7 +82,7 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
         shabbatStart: data.items[0].date,
         shabbatEnd: data.items[2].date,
         hebrew: hebrewDate.hebrew,
-        parasha: data.items[3].hebrew,
+        parasha: data.items[1].hebrew,
         orders: rearrangedOrders,
       };
 
