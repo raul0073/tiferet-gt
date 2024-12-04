@@ -1,6 +1,6 @@
-<section class="login w-full my-8 p-1 md:p-8 md:my-0  ">
+<section class="login w-full my-8 p-1 md:p-8 md:my-0  mx-auto max-w-[600px]">
   <main class="w-full flex flex-col items-center">
-    <mat-card class="w-full border-0">
+    <mat-card class="w-full border-0 shadow-none border-none">
       <mat-card-header class="p-8 flex flex-col items-center">
         <h2 class="text-appBlue text-center text-3xl font-semibold w-full p-8">
           {{ headerText }}
@@ -59,30 +59,14 @@
                 ></app-loading-button>
               </div>
             </mat-card-actions>
-            <mat-divider></mat-divider>
+
           </div>
         </form>
       </mat-card-content>
       <mat-card-footer
         class="w-full p-2 flex justify-between items-center md:w-2/3 md:mx-auto"
       >
-        <button class="btn btn-link text-appGrey">{{ forgotTxt }}</button>
-        <button class="btn btn-link" onclick="my_modal_1.showModal()">
-          תנאי שימוש
-        </button>
-        <dialog id="my_modal_1" class="modal">
-          <div class="modal-box">
-            <form method="dialog">
-              <button
-                class="btn btn-sm btn-circle btn-ghost absolute right-2 top-2"
-              >
-                ✕
-              </button>
-            </form>
-            <h3 class="text-lg font-bold">תנאי שימוש</h3>
-            <p class="py-4">תנאי השימוש:</p>
-          </div>
-        </dialog>
+        
       </mat-card-footer>
     </mat-card>
   </main>
