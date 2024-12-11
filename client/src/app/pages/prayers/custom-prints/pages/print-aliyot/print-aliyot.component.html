@@ -6,6 +6,7 @@
       </span>
     </button>
   </div>
+  <app-logo [print]="true"></app-logo>
   <ng-container *ngIf="shabbatData; else loading">
     <div class="w-full grid grid-cols-3 place-items-center">
       <div class="flex flex-col items-center space-y-2">
@@ -68,7 +69,7 @@
     <div class="w-full aliyot-table grid grid-cols-2">
       <table class="table table-striped w-full mt-6">
         <thead>
-          <tr class="border-gray-400">
+          <tr class="border-gray-300">
             <th
               class="w-full text-center flex gap-2 justify-center items-center pb-0 text-xl"
               [width]="400"
@@ -81,11 +82,14 @@
         
           <tbody>
             <ng-container *ngFor="for; let item; of: shabbatData.orders">
-            <tr class="border-gray-200">
+            <tr class="">
               <td
                 class="text-center justify-center flex gap-2 items-center pb-0 font-bold text-lg"
               >
+              <span class="text-lg">
+
                 {{ item.name }} -
+              </span>
                 <span class="font-normal text-black">
                   {{ item.userName }}
                 </span>
@@ -112,10 +116,10 @@
                 <td
                   class="w-full text-left flex justify-between gap-2 text-nowrap items-center font-bold text-lg p-0"
                 >
-                  <span>
+                  <span class="text-lg">
                     {{ item.name }}
                   </span>
-                  <span class="font-normal text-black text-center">
+                  <span class="font-normal text-lg text-black text-center">
                     {{ item.time }}
                   </span>
                 </td>
@@ -125,7 +129,7 @@
         </table>
       </div>
     </div>
-    <div class="w-full grid grid-cols-3 mt-12">
+    <div class="w-full grid grid-cols-3 mt-6">
       <div class="w-full p-2 flex flex-col justify-center items-center text-center text-nowrap col-span-2">
         <small
           class="parashaText text-lg pr-[60%] font-semibold tracking-wider text-green-900"
