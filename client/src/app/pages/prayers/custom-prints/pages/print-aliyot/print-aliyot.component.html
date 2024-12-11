@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <div class="w-full aliyot-table p-8">
+    <div class="w-full aliyot-table p-4">
       <div
         class="w-full grid grid-cols-2 place-items-center align-middle gap-4 bg-gray-200 rounded-lg py-4 border-gray-300"
       >
@@ -64,7 +64,7 @@
       </div>
 
       <div class="w-full grid grid-cols-2">
-        <table class="table table-striped w-full mt-12">
+        <table class="table table-striped w-full mt-6">
           <thead>
             <tr class="px-4">
               <th class="text-right pr-4 text-xl" [width]="400">עליות</th>
@@ -73,9 +73,9 @@
           <ng-container *ngFor="for; let item; of: shabbatData.orders">
             <tbody>
               <tr>
-                <td class="text-right font-semibold text-lg">
+                <td class="text-right font-bold text-lg">
                   {{ item.name }} -
-                  <span class="font-normal">
+                  <span class="font-normal text-black">
                     {{ item.userName }}
                   </span>
                 </td>
@@ -83,17 +83,20 @@
             </tbody>
           </ng-container>
         </table>
-        <table class="table table-striped w-full mt-12">
+        <table class="table table-condensed w-full mt-6">
           <thead>
             <tr class="px-4">
               <th class="text-center pr-4 text-xl" [width]="400">תפילות</th>
             </tr>
           </thead>
-          <ng-container *ngFor="for; let item; of: shabbatData.orders">
+          <ng-container *ngFor="for; let item; of: shabbatData.prayerTimes">
             <tbody>
               <tr>
-                <td class="text-center font-semibold text-lg">
-                  {{ item.name }} - {{ item.userName }}
+                <td class="text-center font-bold text-lg">
+                  {{ item.name }}:
+                  <span class="font-normal text-black">
+                  {{item.time}}
+                  </span>
                 </td>
               </tr>
             </tbody>
@@ -101,8 +104,10 @@
         </table>
       </div>
     </div>
-    <div class="w-full p-2 flex justify-center items-center">
-        <small class="parashaText text-lg font-semibold tracking-wider">שבת שלום</small>
+    <div class="w-full p-2 flex flex-col justify-center items-center">
+        <small class="parashaText text-lg font-semibold tracking-wider">בברכת שבת שלום</small>
+        <br />
+        <small class="parashaText text-lg font-semibold tracking-wider">ועד בית הכנסת  </small>
     </div>
   </ng-container>
   <ng-template #loading>

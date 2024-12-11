@@ -1,9 +1,9 @@
 import { FastifyInstance, FastifyPluginAsync, FastifyRequest, FastifyReply } from "fastify";
-import { WeeklyBooks } from "./data";
+import { handleShabatPrayerTimes, WeeklyBooks } from "./data";
 import { ObjectId } from "@fastify/mongodb";
 
 export const Hazanim = [
-  "Avi Cohen", "Moshe Levi"
+  "כהן", "לוי"
 ]
 const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise<void> => {
   const db = server.mongo.db;
@@ -121,6 +121,7 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
         parasha: data.items[1].hebrew,
         orders: rearrangedOrders,
         hazan: Hazanim,
+        prayerTimes: handleShabatPrayerTimes(new Date(data.items[0].date)),
         book: WeeklyBooks[bookIndex]?.name
       };
 

@@ -2,7 +2,10 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { lastValueFrom } from 'rxjs';
 import { environment } from './../../../../../../../environments/environments';
-
+export type prayerTime = {
+  time: string;
+  name: string;
+}
 export interface ShabbatData {
   shabbatStart: string;
   shabbatEnd: string;
@@ -10,6 +13,7 @@ export interface ShabbatData {
   parasha: string;
   book: string;
   hazan: string[];
+  prayerTimes: prayerTime[];
   orders: Array<{
     _id: string;
     userId: string;
