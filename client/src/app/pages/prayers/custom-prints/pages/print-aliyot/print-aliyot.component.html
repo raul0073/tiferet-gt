@@ -33,7 +33,7 @@
       </div>
     </div>
 
-    <div class="w-full aliyot-table p-4">
+    <div class="w-full book-and-hazan mt-4">
       <div
         class="w-full grid grid-cols-2 place-items-center align-middle gap-4 bg-gray-200 rounded-lg py-4 border-gray-300"
       >
@@ -63,17 +63,23 @@
         </div>
       </div>
 
-      <div class="w-full grid grid-cols-2">
+      <div class="w-full aliyot-table grid grid-cols-2">
         <table class="table table-striped w-full mt-6">
           <thead>
-            <tr class="px-4">
-              <th class="text-right pr-4 text-xl" [width]="400">עליות</th>
+            <tr class="">
+                <th class="w-full text-center flex gap-2 justify-center items-center pr-4 text-xl" [width]="400">
+                  
+                  עליות
+                  <img [src]="talitIcon" alt="talit Icon" class="w-4 h-4"/> 
+               
+              
+              </th>
             </tr>
           </thead>
           <ng-container *ngFor="for; let item; of: shabbatData.orders">
             <tbody>
               <tr>
-                <td class="text-right font-bold text-lg">
+                <td class="text-center justify-center flex gap-2 items-center font-bold text-lg">
                   {{ item.name }} -
                   <span class="font-normal text-black">
                     {{ item.userName }}
@@ -83,18 +89,23 @@
             </tbody>
           </ng-container>
         </table>
-        <table class="table table-condensed w-full mt-6">
+        <table class="table table-striped w-full mt-6">
           <thead>
-            <tr class="px-4">
-              <th class="text-center pr-4 text-xl" [width]="400">תפילות</th>
+            <tr class="mx-auto">
+              <th class="w-full text-center flex gap-2 justify-center items-center pr-4 text-xl" [width]="400"
+              >
+            
+              זמני תפילות
+              <img [src]="davidIcon" alt="Start David Icon" class="w-4 h-4"/>
+            </th>
             </tr>
           </thead>
           <ng-container *ngFor="for; let item; of: shabbatData.prayerTimes">
             <tbody>
               <tr>
-                <td class="text-center font-bold text-lg">
+                <td class="text-left flex justify-center gap-2 items-center font-bold text-lg">
                   {{ item.name }}:
-                  <span class="font-normal text-black">
+                  <span class="font-normal text-black text-center">
                   {{item.time}}
                   </span>
                 </td>
@@ -110,7 +121,9 @@
         <small class="parashaText text-lg font-semibold tracking-wider">ועד בית הכנסת  </small>
     </div>
   </ng-container>
-  <ng-template #loading class="w-full flex justify-center items-center text-center">
-    <p>מכין טופס עליות לשבת</p>
+  <ng-template #loading >
+    <div class="w-full flex justify-center items-center text-center">
+      <p class="text-2xl font-bold text-red-800">מכין טופס עליות לשבת</p>
+    </div>
   </ng-template>
 </section>

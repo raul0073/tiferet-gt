@@ -11,6 +11,8 @@ export class PrintAliyotComponent implements OnInit{
   hazanIcon = 'assets/jewish.png';
   candelsIcon = 'assets/sabbath.png';
   bookIcon = 'assets/torah.png';
+  talitIcon = 'assets/tallit.png';
+  davidIcon = 'assets/star-of-david.png';
 
   constructor(
     private hebcalService: HebcalService,

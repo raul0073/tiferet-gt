@@ -17,13 +17,13 @@ th {
   @media print {
     .logo,
     .nav,
-    .noPrint {
+    .noPrintת,.mat-divider {
       display: none;
     }
     @page {
       margin-top: 0;
       margin-bottom: 0;
-      padding-top: 1rem;
+      padding-top: .5rem;
     }
   
     body {
