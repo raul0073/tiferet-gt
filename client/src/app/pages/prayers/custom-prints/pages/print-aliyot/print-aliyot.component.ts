@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { HebcalService, ShabbatData } from '../print-balance-table/services/getHebrewDateService';
-
 @Component({
   selector: 'app-print-aliyot',
   templateUrl: './print-aliyot.component.html',
