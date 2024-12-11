@@ -76,9 +76,9 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
         };
       });
 
-      // Define the desired order of 'עליה' names
+      // Define the desired order of 'עליה' names        "עליה-שלישי",
       const splitOrders = orders.flatMap((order) => 
-        order.name.map((aliya: string) => ({
+        order.name.filter((aliya:string) => aliya !== "עליה-ראשון" && aliya !== "עליה-שני").map((aliya: string) => ({
           ...order,
           name: aliya, // Each aliya becomes a separate order
         }))
@@ -94,7 +94,8 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
         "עליה-חמישי",
         "עליה-שישי",
         "עליה-שביעי",
-        "מפטיר"
+        "מפטיר",
+        "תרגום"
       ];
       
       // Rearrange orders according to the aliyaOrder
