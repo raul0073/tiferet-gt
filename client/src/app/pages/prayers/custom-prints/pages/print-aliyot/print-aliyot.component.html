@@ -1,1 +1,111 @@
-<p>print-aliyot works!</p>
+<section class="aliyot-page w-full p-4">
+    <div class="noPrint w-full p-5 flex justify-center items-center">
+  <button (click)="onPrint()">
+    <span class="material-symbols-outlined text-7xl text-appBlue"> print </span>
+  </button>
+</div>
+  <ng-container *ngIf="shabbatData; else loading">
+    <div class="w-full grid grid-cols-3 place-items-center">
+      <div class="flex flex-col items-center space-y-2">
+        <label>כניסת שבת</label>
+        <p class="text-center font-semibold text-2xl text-black">
+          {{ shabbatData.shabbatStart | date : "HH:mm:ss" }}
+        </p>
+      </div>
+      <img [src]="candelsIcon" alt="Candles Icon" class="w-12 h-12" />
+
+      <div class="flex flex-col items-center space-y-2">
+        <label>צאת שבת</label>
+        <p class="text-center font-semibold text-2xl text-black">
+          {{ shabbatData.shabbatEnd | date : "HH:mm:ss" }}
+        </p>
+      </div>
+    </div>
+
+    <div
+      class="w-full flex justify-center items-center py-4 gap-4 border-dashed border-b border-black"
+    >
+      <div class="parashaText h-fit flex flex-col items-center">
+        <p>{{ shabbatData.parasha }}</p>
+        <small class="w-full text-center text-xl">
+          {{ shabbatData.hebrew }}
+        </small>
+      </div>
+    </div>
+
+    <div class="w-full aliyot-table p-8">
+      <div
+        class="w-full grid grid-cols-2 place-items-center align-middle gap-4 bg-gray-200 rounded-lg py-4 border-gray-300"
+      >
+        <div class="flex flex-col items-around justify-end space-y-2">
+          <label>
+            <img [src]="bookIcon" alt="Book Icon" class="w-12 h-12"
+          /></label>
+          <p class="text-center font-semibold text-xl">
+            {{ shabbatData.book }}
+          </p>
+        </div>
+
+        <div class="flex flex-col items-center justify-end space-y-2">
+          <label>
+            <img [src]="hazanIcon" alt="Hazan Icon" class="w-12 h-12"
+          /></label>
+          <div class="w-full flex">
+            <ng-container
+              *ngFor="for; let hazan; of: shabbatData.hazan"
+              class="flex flex-row"
+            >
+              <p class="text-center font-semibold text-xl inline first:ml-2">
+                {{ hazan }}
+              </p>
+            </ng-container>
+          </div>
+        </div>
+      </div>
+
+      <div class="w-full grid grid-cols-2">
+        <table class="table table-striped w-full mt-12">
+          <thead>
+            <tr class="px-4">
+              <th class="text-right pr-4 text-xl" [width]="400">עליות</th>
+            </tr>
+          </thead>
+          <ng-container *ngFor="for; let item; of: shabbatData.orders">
+            <tbody>
+              <tr>
+                <td class="text-right font-semibold text-lg">
+                  {{ item.name }} -
+                  <span class="font-normal">
+                    {{ item.userName }}
+                  </span>
+                </td>
+              </tr>
+            </tbody>
+          </ng-container>
+        </table>
+        <table class="table table-striped w-full mt-12">
+          <thead>
+            <tr class="px-4">
+              <th class="text-center pr-4 text-xl" [width]="400">תפילות</th>
+            </tr>
+          </thead>
+          <ng-container *ngFor="for; let item; of: shabbatData.orders">
+            <tbody>
+              <tr>
+                <td class="text-center font-semibold text-lg">
+                  {{ item.name }} - {{ item.userName }}
+                </td>
+              </tr>
+            </tbody>
+          </ng-container>
+        </table>
+      </div>
+    </div>
+    <div class="w-full p-2 flex justify-center items-center">
+        <small class="parashaText text-lg font-semibold tracking-wider">שבת שלום</small>
+    </div>
+  </ng-container>
+  <ng-template #loading>
+    <p>Loading Shabbat data...</p>
+  </ng-template>
+</section>

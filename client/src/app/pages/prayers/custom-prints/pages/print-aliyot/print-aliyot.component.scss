@@ -1,0 +1,38 @@
+.parashaText {
+  p {
+    font-family: "StamSefaradCLM";
+    color: goldenrod;
+    font-size: 3.4rem;
+  }
+}
+th {
+    font-weight: 700;
+    font-size: 1.2rem;
+    color: gray;
+  }
+  td {
+    font-size: 1rem;
+  }
+  
+  @media print {
+    .logo,
+    .nav,
+    .noPrint {
+      display: none;
+    }
+    @page {
+      margin-top: 0;
+      margin-bottom: 0;
+      padding-top: 1rem;
+    }
+  
+    body {
+      padding: 0;
+      margin: 0;
+    }
+  
+    td {
+      font-size: 1.1rem;
+    }
+  }
+  

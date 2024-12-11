@@ -8,6 +8,8 @@ export interface ShabbatData {
   shabbatEnd: string;
   hebrew: string;
   parasha: string;
+  book: string;
+  hazan: string[];
   orders: Array<{
     _id: string;
     userId: string;

@@ -12,7 +12,7 @@ export class CustomPrintsComponent {
   constructor(  ){
     this.actions = [
       { txt: labels.smallTable, icon: 'table', link: 'print-balance' },
-      { txt: labels.alyot, icon: 'toc', link: 'print-balance' },
+      { txt: labels.alyot, icon: 'toc', link: 'print-aliyot' },
     ]
   }
 }
