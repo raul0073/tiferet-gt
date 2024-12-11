@@ -26,7 +26,7 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
       const data = await res.json();
       const currentDate = new Date();
       const oneWeekAgo = new Date();
-      oneWeekAgo.setDate(currentDate.getDate() - 6);
+      oneWeekAgo.setDate(currentDate.getDate() - 5);
       
       // Calculate the current week of the year
       const startOfYear = new Date(currentDate.getFullYear(), 0, 1);
