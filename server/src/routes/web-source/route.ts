@@ -24,6 +24,7 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
       }
 
       const data = await res.json();
+      console.log(data);
       const currentDate = new Date();
       const oneWeekAgo = new Date();
       oneWeekAgo.setDate(currentDate.getDate() - 5);
@@ -40,7 +41,6 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
       const hebrewDateRes = await fetch(
         `https://www.hebcal.com/converter?cfg=json&date=${currentDate.toISOString().split("T")[0]}&g2h=1&strict=1`
       );
-      console.log( `https://www.hebcal.com/converter?cfg=json&date=${currentDate.toISOString().split("T")[0]}&g2h=1&strict=1`);
       const hebrewDate = await hebrewDateRes.json();
 
       // Fetch orders from last week with "עליה" in the name

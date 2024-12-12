@@ -38,7 +38,7 @@
 
     <div class="w-full book-and-hazan mt-4">
       <div
-        class="w-full grid grid-cols-2 place-items-center align-middle gap-4 bg-gray-200 rounded-lg py-4 border-gray-300"
+        class="w-full grid grid-cols-1 place-items-center align-middle gap-4 bg-gray-200 rounded-lg py-4 border-gray-300"
       >
         <div class="flex flex-col items-center justify-center space-y-2">
           <label>
@@ -47,22 +47,6 @@
           <p class="text-center font-semibold text-xl">
             {{ shabbatData.book }}
           </p>
-        </div>
-
-        <div class="flex flex-col items-center justify-end space-y-2">
-          <label>
-            <img [src]="hazanIcon" alt="Hazan Icon" class="w-12 h-12"
-          /></label>
-          <div class="w-full flex">
-            <ng-container
-              *ngFor="for; let hazan; of: shabbatData.hazan"
-              class="flex flex-row"
-            >
-              <p class="text-center font-semibold text-xl inline first:ml-2">
-                {{ hazan }}
-              </p>
-            </ng-container>
-          </div>
         </div>
       </div>
     </div>
@@ -98,7 +82,7 @@
           </ng-container>
           </tbody>
       </table>
-      <div class="p-8 w-full flex flex-col items-end">
+      <div class="p-8 w-full flex flex-col items-end pl-8">
         <table class="table table-striped w-fit mt-6 p-8">
           <thead>
             <tr class="mx-auto border-b border-gray-200">
@@ -129,22 +113,25 @@
         </table>
       </div>
     </div>
-    <div class="w-full grid grid-cols-3 mt-6">
+
+    
       <div class="w-full p-2 flex flex-col justify-center items-center text-center text-nowrap col-span-2">
         <small
-          class="parashaText text-lg pr-[60%] font-semibold tracking-wider text-green-900"
+          class="text-lg font-semibold tracking-wider text-green-900"
           >בברכת שבת שלום</small
         >
       
         <small
-          class="parashaText text-lg pr-[60%] font-semibold tracking-wider text-green-900"
+          class="text-lg  font-semibold tracking-wider text-green-900"
           >ועד בית הכנסת
         </small>
+        <div class="w-full flex justify-center p-2 mt-8">
+          <p class="text-xl">כולם מוזמנים לסעודה שלישית</p>
+        </div>
       </div>
-      <div class="w-full flex justify-center p-2 -mt-12">
-        <p>מוזמנים לסעודה שלישית</p>
-      </div>
-    </div>
+     
+      
+
   </ng-container>
   <ng-template #loading>
     <div class="w-full flex justify-center items-center text-center">

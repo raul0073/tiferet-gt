@@ -36,23 +36,15 @@ export function handleShabatPrayerTimes(shabatStartTime: Date): { name: string; 
         },
         {
             name: "שחרית של שבת",
-            time: "08:30" // Fixed time (can be made dynamic if required)
-        },
-        {
-            name: "קריאת התורה",
-            time: "09:30" // Fixed time (can be made dynamic if required)
-        },
-        {
-            name: "מוסף של שבת",
-            time: "10:30" // Fixed time (can be made dynamic if required)
+            time: "07:00" // Fixed time (can be made dynamic if required)
         },
         {
             name: "מנחה של שבת",
-            time: calculateTime(shabatStartTime, 24 * 60 - 90) // 90 minutes before sunset
+            time: calculateTime(shabatStartTime, 24 * 60 - 45) // 180 minutes before sunset
         },
         {
             name: "סעודה שלישית",
-            time: calculateTime(shabatStartTime, 24 * 60 - 70) // 70 minutes before sunset
+            time: calculateTime(shabatStartTime, 24 * 60 -20) // 60 minutes before sunset
         },
         {
             name: "ערבית מוצאי שבת",

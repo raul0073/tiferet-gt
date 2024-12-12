@@ -20,9 +20,10 @@ th {
   }
   
   @media print {
-
+    
     .nav,
-    .noPrintת,.mat-divider {
+    .noPrint,
+    mat-divider.mat-divider {
       display: none;
     }
     @page {
