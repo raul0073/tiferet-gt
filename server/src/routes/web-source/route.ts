@@ -78,7 +78,7 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
 
       // Define the desired order of 'עליה' names        "עליה-שלישי",
       const splitOrders = orders.flatMap((order) => 
-        order.name.filter((aliya:string) => aliya !== "עליה-ראשון" && aliya !== "עליה-שני").map((aliya: string) => ({
+        order.name.map((aliya: string) => ({
           ...order,
           name: aliya, // Each aliya becomes a separate order
         }))

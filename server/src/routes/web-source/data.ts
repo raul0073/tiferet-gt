@@ -27,12 +27,12 @@ export function handleShabatPrayerTimes(shabatStartTime: Date): { name: string; 
     };
     return [
         {
-            name: "קבלת שבת",
-            time: calculateTime(shabatStartTime, 0) // Start time of Shabbat
+            name: "שיר השירים",
+            time: calculateTime(shabatStartTime, -40) // Start time of Shabbat
         },
         {
-            name: "ערבית של שבת",
-            time: calculateTime(shabatStartTime, 20) // 20 minutes after Shabbat start
+            name: "מנחה ערב שבת",
+            time: calculateTime(shabatStartTime, -10) // 20 minutes after Shabbat start
         },
         {
             name: "שחרית של שבת",
@@ -40,19 +40,18 @@ export function handleShabatPrayerTimes(shabatStartTime: Date): { name: string; 
         },
         {
             name: "מנחה של שבת",
-            time: calculateTime(shabatStartTime, 24 * 60 - 45) // 180 minutes before sunset
+            time: "15:30" // 20 minutes after Shabbat start
         },
         {
             name: "סעודה שלישית",
-            time: calculateTime(shabatStartTime, 24 * 60 -20) // 60 minutes before sunset
+            time: "16:00" // 60 minutes before sunset
         },
         {
             name: "ערבית מוצאי שבת",
-            time: calculateTime(shabatStartTime, 25 * 60) // 1 hour after Shabbat ends
+            // 25 hour after Shabbat start
+            time: calculateTime(shabatStartTime, 25 * 60)
+
+
         },
-        {
-            name: "הבדלה",
-            time: calculateTime(shabatStartTime, 25 * 60 + 15) // 15 minutes after Maariv
-        }
     ];
 }

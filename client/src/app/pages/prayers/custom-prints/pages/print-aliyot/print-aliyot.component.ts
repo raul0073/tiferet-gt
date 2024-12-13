@@ -22,6 +22,7 @@ export class PrintAliyotComponent implements OnInit{
         this.shabbatData = data;
         console.log('Shabbat data:', this.shabbatData);
       })
+      
       .catch(error => {
         console.error('Error fetching Shabbat data:', error);
       });
