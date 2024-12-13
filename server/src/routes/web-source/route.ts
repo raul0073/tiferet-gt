@@ -24,11 +24,17 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
       }
 
       const data = await res.json();
-      console.log(data);
       const currentDate = new Date();
       const oneWeekAgo = new Date();
       oneWeekAgo.setDate(currentDate.getDate() - 5);
       
+      // Format the dates to Israel time
+      const options: any = { timeZone: 'Asia/Jerusalem', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
+      
+      const formatter = new Intl.DateTimeFormat('en-IL', options);
+      
+      const currentDateIsrael = formatter.format(currentDate);
+      const oneWeekAgoIsrael = formatter.format(oneWeekAgo);
       // Calculate the current week of the year
       const startOfYear = new Date(currentDate.getFullYear(), 0, 1);
       const weekNumber = Math.floor(
