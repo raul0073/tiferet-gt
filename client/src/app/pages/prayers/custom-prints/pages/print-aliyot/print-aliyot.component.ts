@@ -14,19 +14,32 @@ export class PrintAliyotComponent implements OnInit{
   davidIcon = 'assets/star-of-david.png';
   shofarIcon = 'assets/shofar.png';
   haftaraIcon = 'assets/haftara.png';
+  ptihatHihal: string = "";
 
   constructor(
     private hebcalService: HebcalService,
   ) {}
+  
   getHebrewDate(): void {
     this.hebcalService.getHebrewDate()
       .then(data => {
         this.shabbatData = data;
         console.log('Shabbat data:', this.shabbatData);
+  
+        // Process ptihatHihal after shabbatData is fetched
+        if (this.shabbatData?.orders && this.shabbatData.orders.length > 0) {
+          const matchingOrder = this.shabbatData.orders.find(order => 
+            order.name.includes("פתיחת היכל")
+          );
+  
+          this.ptihatHihal = matchingOrder ? matchingOrder.userName : "לא נמצא פיתחת היכל";
+        } else {
+          this.ptihatHihal = "לא נמצא פיתחת היכל";
+        }
       })
-      
       .catch(error => {
         console.error('Error fetching Shabbat data:', error);
+        this.ptihatHihal = "שגיאה בטעינת הנתונים";
       });
   }
 

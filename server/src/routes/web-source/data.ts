@@ -14,7 +14,7 @@ export const WeeklyBooks = [
     {name: 'ספר של מזל בדני ז"ל',  week: 13},
     {name: 'ספר של בנימין שירי ושושנה בן מנשה ז"ל',  week: 14},
 ]
-export function handleShabatPrayerTimes(shabatStartTime: Date): { name: string; time: string }[] {
+export function handleShabatPrayerTimes(shabatStartTime: Date, shabatEnd: Date): { name: string; time: string }[] {
     // Ensure the input is a valid Date object
     if (!(shabatStartTime instanceof Date) || isNaN(shabatStartTime.getTime())) {
         throw new Error("Invalid shabatStartTime: Please provide a valid Date object.");
@@ -28,11 +28,11 @@ export function handleShabatPrayerTimes(shabatStartTime: Date): { name: string; 
     return [
         {
             name: "שיר השירים",
-            time: calculateTime(shabatStartTime, -40) // Start time of Shabbat
+            time: calculateTime(shabatStartTime, -30) // Start time of Shabbat
         },
         {
             name: "מנחה ערב שבת",
-            time: calculateTime(shabatStartTime, -10) // 20 minutes after Shabbat start
+            time: calculateTime(shabatStartTime, -15) // 20 minutes after Shabbat start
         },
         {
             name: "שחרית של שבת",
@@ -40,16 +40,16 @@ export function handleShabatPrayerTimes(shabatStartTime: Date): { name: string; 
         },
         {
             name: "מנחה של שבת",
-            time: "15:30" // 20 minutes after Shabbat start
+            time:  calculateTime(shabatEnd, +120)
         },
         {
             name: "סעודה שלישית",
-            time: "16:00" // 60 minutes before sunset
+            time:  calculateTime(shabatEnd, +150)
         },
         {
             name: "ערבית מוצאי שבת",
             // 25 hour after Shabbat start
-            time: calculateTime(shabatStartTime, 25 * 60)
+            time: calculateTime(shabatEnd, -10)
 
 
         },

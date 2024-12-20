@@ -1,4 +1,4 @@
-<section class="aliyot-page w-full p-4">
+<section class="aliyot-page w-full p-2">
   <div class="noPrint w-full p-5 flex justify-center items-center">
     <button (click)="onPrint()">
       <span class="material-symbols-outlined text-7xl text-appBlue">
@@ -6,13 +6,13 @@
       </span>
     </button>
   </div>
-  <app-logo [print]="true" className="w-[100px]"></app-logo>
+  <app-logo [width]="'200'" [height]="'200'" [className]="'w-64 h-auto'" [print]="true"></app-logo>
   <ng-container *ngIf="shabbatData; else loading">
     <div class="w-full grid grid-cols-3 place-items-center">
       <div class="flex flex-col items-center space-y-2">
         <label>כניסת שבת</label>
         <p class="text-center font-semibold text-2xl text-green-700">
-          {{ shabbatData.shabbatStart | date : "HH:mm:ss" }}
+          {{ shabbatData.shabbatStart | date : "HH:mm" }}
         </p>
       </div>
       <img [src]="candelsIcon" alt="Candles Icon" class="w-12 h-12" />
@@ -20,69 +20,72 @@
       <div class="flex flex-col items-center space-y-2">
         <label>צאת שבת</label>
         <p class="text-center font-semibold text-2xl text-red-700">
-          {{ shabbatData.shabbatEnd | date : "HH:mm:ss" }}
+          {{ shabbatData.shabbatEnd | date : "HH:mm" }}
         </p>
       </div>
     </div>
 
     <div
-      class="w-full grid grid-cols-3 py-4 gap-4 border-dashed border-b border-black"
+      class="w-full grid grid-cols-1 py-2 gap-2 border-dashed border-b border-black"
     >
-      <div
-        class="w-fit flex flex-col items-center justify-end text-center"
-      >
-        <label
-          >חזנים
-          <img
-            [src]="shofarIcon"
-            alt="Shofar Icon"
-            class="w-6 h-6 inline-flex mr-1"
-        /></label>
-        <p class="text-center font-semibold text-xl flex items-center">
-         כהן לוי 
-        </p>
-      </div>
-
       <div class="parashaText h-fit flex flex-col items-center">
-        <p class="text-nowrap">{{ shabbatData.parasha }}</p>
-        <small class="w-full text-center text-xl">
+           <small class="w-full text-center text-xl">
           {{ shabbatData.hebrew }}
         </small>
-      </div>
-      <div
-        class="w-fit  flex flex-col items-center gap-2 justify-end place-self-end"
-      >
-        <label
-          >הפטרה
-          <img
-            [src]="haftaraIcon"
-            alt="Reading book Icon"
-            class="w-6 h-6 inline-flex mr-1"
-        /></label>
-        <p class="text-center font-semibold text-xl flex items-center">
-          <span>
-            {{ shabbatData.parasha.split(" ")[1] || shabbatData.parasha }}
-          </span>
-        </p>
+        <p class="text-nowrap">{{ shabbatData.parasha }}</p>
+     
       </div>
     </div>
+    <!-- END OF TOP SECTION  -->
 
-    <div class="w-full book-and-hazan mt-4">
+    <div class="w-full grid grid-cols-3 place-items-center py-2">
+      <div class="flex gap-2 items-center flex-col justify-start h-full">
+        <label class="stamFont text-xl">חזנים:</label>
+       <div class="flex gap-1 flex-col items-center">
+        <ng-container *ngFor="let name of shabbatData?.hazan" class="flex">
+          <span class="text-sm hazanName">
+          {{name}}
+          </span>
+        </ng-container>
+       </div>
+      </div>
+     
+      <div class="flex gap-2 items-center flex-col justify-start h-full">
+        <label class="stamFont text-xl">פתיחת היכל</label>
+      
+        <p class=" mx-1 text-lg">
+          {{ ptihatHihal }}
+          </p>
+      
+      </div>
+      <div class="flex gap-2 items-center flex-col justify-start h-full">
+        <label class="stamFont text-xl">הפטרה</label>
+       
+        <p class=" mx-1 text-lg">
+            {{ shabbatData.parasha.split(" ")[1] }}
+          </p>
+       
+      </div>
+    </div>
+ 
+   
+
+    <div class="w-full book-and-hazan mt-1">
       <div
-        class="w-full grid grid-cols-1 place-items-center align-middle gap-4 bg-gray-200 rounded-lg py-4 border-gray-300"
+        class="w-full grid grid-cols-1 place-items-center align-middle gap-4 bg-gray-200 rounded-lg py-1 border-gray-300"
       >
         <div class="flex flex-col items-center justify-center space-y-2">
           <label>
             <img [src]="bookIcon" alt="Book Icon" class="w-12 h-12"
           /></label>
-          <p class="text-center text-2xl tracking-widest font-bold ">
+          <p class="text-center text-2xl tracking-widest font-bold">
             {{ shabbatData.book }}
           </p>
         </div>
       </div>
     </div>
     <div class="w-full aliyot-table grid grid-cols-2">
-      <table class="table table-striped w-fit mt-6 place-self-center">
+      <table class="table table-striped w-fit mt-2 place-self-center">
         <thead>
           <tr class="mx-auto border-b border-gray-200">
             <th
@@ -110,7 +113,7 @@
           </ng-container>
         </tbody>
       </table>
-      <div class="p-8 w-full flex flex-col items-end pl-8">
+      <div class="py-4 pb-1 w-full flex flex-col items-end pl-8">
         <table class="table table-striped w-fit mt-6 p-8">
           <thead>
             <tr class="mx-auto border-b border-gray-200">
@@ -139,9 +142,18 @@
             </tbody>
           </ng-container>
         </table>
-        <div class="mt-8 text-red-600 font-semobold">
-          <p>שחרית חול 05:30</p>
-          <p>מנחה וערבית 15 דקות לפני שקיעה</p>
+      
+        <div class="mt-2 mr-12">
+        
+            <p class="font-semibold">
+              אשכבות
+            </p>
+            <p class="mb-2">
+            {{ shabbatData.book.split(" ")[2]}} {{ shabbatData.book.split(" ")[3]}} {{ shabbatData.book.split(" ")[4]}} 
+            </p>
+        
+          <p class="text-red-600">שחרית חול 05:30</p>
+          <p class="text-red-600">מנחה וערבית 15 דקות לפני שקיעה</p>
         </div>
       </div>
     </div>

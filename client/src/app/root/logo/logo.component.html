@@ -1,15 +1,13 @@
 <div
-  ngClass="{{
-    print
-      ? 'w-full flex justify-center items-center'
-      : 'logo w-full flex justify-center items-center'
-  }}"
+  [ngClass]="print
+    ? 'w-full flex justify-center items-center'
+    : 'logo w-full flex justify-center items-center'"
 >
   <img
-    src="/assets/logo.jpg"
+    src="/assets/logo_noBG.png"
     alt="synagogue_logo"
-    width="400"
-    height="400"
-    ngClass="pt-4 mix-blend-multiply className"
+    [attr.width]="width || '400'"
+    [attr.height]="height || '400'"
+    [ngClass]="'pt-4 mix-blend-multiply ' + (className || '')"
   />
 </div>
