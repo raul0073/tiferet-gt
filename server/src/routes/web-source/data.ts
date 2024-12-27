@@ -14,6 +14,9 @@ export const WeeklyBooks = [
     {name: 'ספר של מזל בדני ז"ל',  week: 13},
     {name: 'ספר של בנימין שירי ושושנה בן מנשה ז"ל',  week: 14},
 ]
+export const Hazanim = [
+    "יניב בדני", "ישראל גרמה", "שאול פנחס"
+  ]
 export function handleShabatPrayerTimes(shabatStartTime: Date, shabatEnd: Date): { name: string; time: string }[] {
     // Validate input is a valid Date object
     if (!(shabatStartTime instanceof Date) || isNaN(shabatStartTime.getTime())) {
@@ -48,11 +51,11 @@ export function handleShabatPrayerTimes(shabatStartTime: Date, shabatEnd: Date):
         },
         {
             name: "סעודה שלישית",
-            time: calculateTime(shabatEnd, -90), // 2.5 hours before Shabbat end
+            time: calculateTime(shabatEnd, -90), // 1.5 hours before Shabbat end
         },
         {
             name: "ערבית מוצאי שבת",
-            time: calculateTime(shabatEnd, 10), // 10 minutes after Shabbat end
+            time: calculateTime(shabatEnd, -10), // 10 before after Shabbat end
         },
     ];
 }
