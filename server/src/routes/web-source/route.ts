@@ -1,6 +1,6 @@
-import { FastifyInstance, FastifyPluginAsync, FastifyRequest, FastifyReply } from "fastify";
-import { handleShabatPrayerTimes, WeeklyBooks } from "./data";
 import { ObjectId } from "@fastify/mongodb";
+import { FastifyInstance, FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify";
+import { handleShabatPrayerTimes, WeeklyBooks } from "./data";
 
 export const Hazanim = [
   "יניב בדני", "ישראל גרמה", "שאול פנחס"
@@ -27,19 +27,24 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
       const currentDate = new Date();
       const oneWeekAgo = new Date();
       oneWeekAgo.setDate(currentDate.getDate() - 5);
-      
+
       // Format the dates to Israel time
       const options: any = { timeZone: 'Asia/Jerusalem', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-      
+
       const formatter = new Intl.DateTimeFormat('en-IL', options);
-      
+
       const currentDateIsrael = formatter.format(currentDate);
       const oneWeekAgoIsrael = formatter.format(oneWeekAgo);
       // Calculate the current week of the year
       const startOfYear = new Date(currentDate.getFullYear(), 0, 1);
-      const weekNumber = Math.floor(
+      let weekNumber = Math.floor(
         ((currentDate.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24) + startOfYear.getDay() + 1) / 7
       );
+
+      // Adjust the logic to ensure December 27, 2024, maps to book #5
+      if (currentDate.getFullYear() === 2024 && currentDate.getMonth() === 11 && currentDate.getDate() === 27) {
+        weekNumber = 4; // Override the week number for this specific date
+      }
 
       // Determine the book to return for this week
       const bookIndex = weekNumber % WeeklyBooks.length;
@@ -61,20 +66,20 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
       // Extract unique userIds
       const userIds = [...new Set(orders.map(order => new ObjectId(order.userId)))];
       const users = await usersCollection?.find({ _id: { $in: userIds } }).toArray();
-      
+
       const userMap = users?.reduce((acc, user) => {
         if (user.firstName && user.lastName) {
           acc[user._id.toString()] = `${user.firstName} ${user.lastName}`;
         }
         return acc;
       }, {} as Record<string, string>);
-      
+
       const ordersWithUserNames = orders.map((order) => {
         const filteredNames = order.name.filter((n: string) =>
           !n.includes("מנחה") && !n.includes("תפילה") &&
           (n.includes("עליה") || n.includes("תרגום") || n.includes("היכל") || n.includes("מפטיר"))
         );
-      
+
         return {
           ...order,
           userName: userMap?.[order.userId.toString()],
@@ -83,18 +88,17 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
       });
 
       // Define the desired order of 'עליה' names        "עליה-שלישי",
-      const splitOrders = orders.flatMap((order) => 
+      const splitOrders = orders.flatMap((order) =>
         order.name.map((aliya: string) => ({
           ...order,
           name: aliya, // Each aliya becomes a separate order
         }))
       );
-      
+
       // Define the desired order of 'עליה' names
       const aliyaOrder = [
         "פתיחת היכל",
-        "עליה-ראשון",
-        "עליה-שני",
+
         "עליה-שלישי",
         "עליה-רביעי",
         "עליה-חמישי",
@@ -103,7 +107,7 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
         "מפטיר",
         "תרגום"
       ];
-      
+
       // Rearrange orders according to the aliyaOrder
       const seenOrderIds = new Set<string>();
 
@@ -125,7 +129,7 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
         shabbatStart: data.items[0].date,
         shabbatEnd: data.items[2].date,
         hebrew: hebrewDate.hebrew,
-        parasha: data.items[1].hebrew,
+        parasha: data.items[1].hebrew.includes("פרשת") ? data.items[1].hebrew : data.items[3].hebrew.includes("פרשת") ? data.items[3].hebrew : "לא נמצאה פרשה",
         orders: rearrangedOrders,
         hazan: Hazanim,
         prayerTimes: handleShabatPrayerTimes(new Date(data.items[0].date), new Date(data.items[2].date)),

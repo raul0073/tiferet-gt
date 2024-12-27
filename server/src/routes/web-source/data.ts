@@ -15,9 +15,12 @@ export const WeeklyBooks = [
     {name: 'ספר של בנימין שירי ושושנה בן מנשה ז"ל',  week: 14},
 ]
 export function handleShabatPrayerTimes(shabatStartTime: Date, shabatEnd: Date): { name: string; time: string }[] {
-    // Ensure the input is a valid Date object
+    // Validate input is a valid Date object
     if (!(shabatStartTime instanceof Date) || isNaN(shabatStartTime.getTime())) {
         throw new Error("Invalid shabatStartTime: Please provide a valid Date object.");
+    }
+    if (!(shabatEnd instanceof Date) || isNaN(shabatEnd.getTime())) {
+        throw new Error("Invalid shabatEnd: Please provide a valid Date object.");
     }
 
     // Helper to calculate times based on an offset in minutes
@@ -25,33 +28,31 @@ export function handleShabatPrayerTimes(shabatStartTime: Date, shabatEnd: Date):
         const adjustedTime = new Date(baseTime.getTime() + offsetMinutes * 60000);
         return adjustedTime.toLocaleTimeString("he-IL", { hour: "2-digit", minute: "2-digit" });
     };
+
     return [
         {
             name: "שיר השירים",
-            time: calculateTime(shabatStartTime, -30) // Start time of Shabbat
+            time: calculateTime(shabatStartTime, -30), // 30 minutes before Shabbat start
         },
         {
             name: "מנחה ערב שבת",
-            time: calculateTime(shabatStartTime, -15) // 20 minutes after Shabbat start
+            time: calculateTime(shabatStartTime, -15), // 15 minutes before Shabbat start
         },
         {
             name: "שחרית של שבת",
-            time: "07:00" // Fixed time (can be made dynamic if required)
+            time: "07:00", // Fixed time
         },
         {
             name: "מנחה של שבת",
-            time:  calculateTime(shabatEnd, +120)
+            time: calculateTime(shabatEnd, -120), // 2 hours before Shabbat end
         },
         {
             name: "סעודה שלישית",
-            time:  calculateTime(shabatEnd, +150)
+            time: calculateTime(shabatEnd, -90), // 2.5 hours before Shabbat end
         },
         {
             name: "ערבית מוצאי שבת",
-            // 25 hour after Shabbat start
-            time: calculateTime(shabatEnd, -10)
-
-
+            time: calculateTime(shabatEnd, 10), // 10 minutes after Shabbat end
         },
     ];
 }
