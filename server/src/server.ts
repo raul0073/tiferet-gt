@@ -12,6 +12,7 @@ import transactionRoute from "./routes/transactions/route";
 import ordersRoute from "./routes/orders/route";
 import fastifyJwt from "@fastify/jwt";
 import hebcalRoute from "./routes/web-source/route";
+import { initializeOrdersIndexes } from "./routes/web-source/functions";
 dotenv.config()
 
 const {MONGODB_URI, API_URL, PORT, SECRET} = process.env
@@ -81,6 +82,8 @@ const start = async () => {
         } else {
             console.error('Failed to connect to MongoDB Atlas');
         }
+
+        await initializeOrdersIndexes(server.mongo.db);
     } catch (err) {
         console.error('Error starting server:', err);
         process.exit(1);

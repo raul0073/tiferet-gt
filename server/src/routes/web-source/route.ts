@@ -1,6 +1,7 @@
 import { ObjectId } from "@fastify/mongodb";
 import { FastifyInstance, FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify";
 import { handleShabatPrayerTimes, WeeklyBooks } from "./data";
+import { getShabatEndTimes, getShabatParasha, getShabatStartTimes } from "./functions";
 
 export const Hazanim = [
   "יניב בדני", "ישראל גרמה", "שאול פנחס"
@@ -28,32 +29,20 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
       const oneWeekAgo = new Date();
       oneWeekAgo.setDate(currentDate.getDate() - 5);
 
-      // Format the dates to Israel time
-      const options: any = { timeZone: 'Asia/Jerusalem', year: 'numeric', month: '2-digit', day: '2-digit', hour: '2-digit', minute: '2-digit', second: '2-digit' };
-
-      const formatter = new Intl.DateTimeFormat('en-IL', options);
-
-      const currentDateIsrael = formatter.format(currentDate);
-      const oneWeekAgoIsrael = formatter.format(oneWeekAgo);
       // Calculate the current week of the year
       const startOfYear = new Date(currentDate.getFullYear(), 0, 1);
       let weekNumber = Math.floor(
         ((currentDate.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24) + startOfYear.getDay() + 1) / 7
       );
+   
 
-      // Adjust the logic to ensure December 27, 2024, maps to book #5
-      if (currentDate.getFullYear() === 2024 && currentDate.getMonth() === 11 && currentDate.getDate() === 27) {
-        weekNumber = 4; // Override the week number for this specific date
-      }
-
-      // Determine the book to return for this week
-      const bookIndex = weekNumber % WeeklyBooks.length;
+      
       // Fetch Hebrew date
       const hebrewDateRes = await fetch(
         `https://www.hebcal.com/converter?cfg=json&date=${currentDate.toISOString().split("T")[0]}&g2h=1&strict=1`
       );
       const hebrewDate = await hebrewDateRes.json();
-
+    
       // Fetch orders from last week with "עליה" in the name
       const orders = await ordersCollection?.find({
         createdAt: { $gte: oneWeekAgo }
@@ -91,7 +80,7 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
       const splitOrders = orders.flatMap((order) =>
         order.name.map((aliya: string) => ({
           ...order,
-          name: aliya, // Each aliya becomes a separate order
+          name: aliya, 
         }))
       );
 
@@ -125,15 +114,18 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
       });
 
       // Create the final Shabbat object to send back
+      const shabatStart = getShabatStartTimes(data.items)
+      const shabatEnd = getShabatEndTimes(data.items);
       const shabbatObj = {
-        shabbatStart: data.items[0].date,
-        shabbatEnd: data.items[2].date,
+        shabbatStart: shabatStart,
+        shabbatEnd: shabatEnd,
         hebrew: hebrewDate.hebrew,
-        parasha: data.items[1].hebrew.includes("פרשת") ? data.items[1].hebrew : data.items[3].hebrew.includes("פרשת") ? data.items[3].hebrew : "לא נמצאה פרשה",
+        parasha: getShabatParasha(data.items),
         orders: rearrangedOrders,
         hazan: Hazanim,
-        prayerTimes: handleShabatPrayerTimes(new Date(data.items[0].date), new Date(data.items[2].date)),
-        book: WeeklyBooks[bookIndex]?.name
+        prayerTimes: handleShabatPrayerTimes(shabatStart, shabatEnd),
+        book: WeeklyBooks.find((b)=> b.week === weekNumber)?.name
+
       };
 
       reply.status(200).send(shabbatObj);

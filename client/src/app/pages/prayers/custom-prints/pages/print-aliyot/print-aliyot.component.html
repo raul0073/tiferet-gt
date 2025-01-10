@@ -40,7 +40,7 @@
 
     <div class="w-full grid grid-cols-3 place-items-center py-2">
       <div class="flex gap-2 items-center flex-col justify-start h-full">
-        <label class="stamFont text-xl">חזנים:</label>
+        <label class="stamFont text-xl">חזנים</label>
        <div class="flex gap-1 flex-col items-center">
         <ng-container *ngFor="let name of shabbatData?.hazan" class="flex">
           <span class="text-sm hazanName">
@@ -143,13 +143,13 @@
           </ng-container>
         </table>
       
-        <div class="mt-2 mr-12">
+        <div class="mt-4 mr-12">
         
             <p class="font-semibold">
               אשכבות
             </p>
-            <p class="mb-2">
-            {{ shabbatData.book.split(" ")[2]}} {{ shabbatData.book.split(" ")[3]}} {{ shabbatData.book.split(" ")[4]}} 
+            <p class="mb-6">
+            {{ shabbatData.book.split(" ")[2] }} {{ shabbatData.book.split(" ")[3] }} {{ shabbatData.book.split(" ")[4] }} {{ shabbatData.book.split(" ")[5] }} 
             </p>
         
           <p class="text-red-600">שחרית חול 05:30</p>

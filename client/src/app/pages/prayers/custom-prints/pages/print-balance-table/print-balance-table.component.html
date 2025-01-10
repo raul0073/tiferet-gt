@@ -57,8 +57,8 @@
         </thead>
         <tbody>
           <tr *ngFor="let user of usersPart2">
-            <td>{{ user.firstName }} {{ user.lastName }}</td>
-            <td class="lastCol">{{ user.balance | currency : "ILS" }}</td>
+            <td class="text-nowrap">{{ user.firstName }} {{ user.lastName }}</td>
+            <td class="lastCol text-left">{{ user.balance | currency : "ILS" }}</td>
           </tr>
         </tbody>
       </table>
