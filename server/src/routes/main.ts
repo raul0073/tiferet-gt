@@ -7,7 +7,7 @@ const mainRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise<v
                 main:  {
                     path: 'api/main',
                     methods: 'GET',
-                    DATE: new Date().toDateString()
+                    DATE: new Date().toLocaleTimeString()
                 },
                 prayers: {
                     users: {
