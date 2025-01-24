@@ -34,10 +34,11 @@ export const Hazanim = [
     // Helper to calculate times based on an offset in minutes
     const calculateTime = (baseTime: Date, offsetMinutes: number): string => {
       const adjustedTime = new Date(baseTime.getTime() + offsetMinutes * 60000);
-      return adjustedTime.toLocaleTimeString("he-IL", {
+      return new Intl.DateTimeFormat("he-IL", {
         hour: "2-digit",
         minute: "2-digit",
-      });
+        timeZone: "Asia/Jerusalem",
+      }).format(adjustedTime);
     };
   
     // Define prayer times relative to the start and end times
