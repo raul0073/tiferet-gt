@@ -57,11 +57,11 @@ export const Hazanim = [
       },
       {
         name: "מנחה של שבת",
-        time: calculateTime(endTime, -120), // 2 hours before Shabbat end
+        time: "16:00", // 2 hours before Shabbat end
       },
       {
         name: "סעודה שלישית",
-        time: calculateTime(endTime, -90), // 1.5 hours before Shabbat end
+        time: "16:30", // 1.5 hours before Shabbat end
       },
       {
         name: "ערבית מוצאי שבת",
