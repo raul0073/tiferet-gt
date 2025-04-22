@@ -31,10 +31,15 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
 
       // Calculate the current week of the year
       const startOfYear = new Date(currentDate.getFullYear(), 0, 1);
-      let weekNumber = Math.floor(
+      const weekNumber = Math.floor(
         ((currentDate.getTime() - startOfYear.getTime()) / (1000 * 60 * 60 * 24) + startOfYear.getDay() + 1) / 7
       );
-   
+      
+      const sortedBooks = WeeklyBooks.sort((a, b) => a.week - b.week);
+
+      // Use modular index to pick based on position in list, regardless of week value
+      const rotatedIndex = (weekNumber - 1) % sortedBooks.length;
+      const book = sortedBooks[rotatedIndex]?.name || "No Book";
 
       
       // Fetch Hebrew date
@@ -87,7 +92,6 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
       // Define the desired order of 'עליה' names
       const aliyaOrder = [
         "פתיחת היכל",
-
         "עליה-שלישי",
         "עליה-רביעי",
         "עליה-חמישי",
@@ -124,7 +128,7 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
         orders: rearrangedOrders,
         hazan: Hazanim,
         prayerTimes: handleShabatPrayerTimes(shabatStart, shabatEnd),
-        book: WeeklyBooks.find((b)=> b.week === weekNumber)?.name
+        book: book
 
       };
 
