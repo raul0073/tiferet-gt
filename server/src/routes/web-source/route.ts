@@ -26,9 +26,10 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
 
       const data = await res.json();
       const currentDate = new Date();
-      const oneWeekAgo = new Date();
-      oneWeekAgo.setDate(currentDate.getDate() - 5);
-
+      const fiveDaysAgoStartOfDay = new Date(currentDate);
+      fiveDaysAgoStartOfDay.setDate(currentDate.getDate() - 5);
+      fiveDaysAgoStartOfDay.setHours(0, 0, 0, 0);
+      // console.log(fiveDaysAgoStartOfDay); 
       // Calculate the current week of the year
       const startOfYear = new Date(currentDate.getFullYear(), 0, 1);
       const weekNumber = Math.floor(
@@ -50,7 +51,7 @@ const hebcalRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise
     
       // Fetch orders from last week with "עליה" in the name
       const orders = await ordersCollection?.find({
-        createdAt: { $gte: oneWeekAgo }
+        createdAt: { $gte: fiveDaysAgoStartOfDay }
       }).toArray();
 
       if (!orders) {
