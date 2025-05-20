@@ -1,4 +1,25 @@
 import { FastifyInstance, FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify";
+import cron from "node-cron";
+
+
+const TARGET_URL = "https://experimental-scraping-server-1.onrender.com/ping";
+let isPinging = true;
+console.log("Auto-pinger is ON");
+
+
+// ping every 14 minutes
+cron.schedule("*/14 * * * *", async () => {
+    if (isPinging && TARGET_URL) {
+        try {
+            const res = await fetch(TARGET_URL, {
+                method: "GET"
+            });
+            console.log(`[PING] ${new Date().toISOString()} => ${res.status}`);
+        } catch (err: any) {
+            console.error(`[PING FAILED] ${new Date().toISOString()} => ${err.message}`);
+        }
+    }
+});
 
 const mainRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise<void> => {
     server.get('/', async (request: FastifyRequest, reply: FastifyReply) => {
@@ -40,9 +61,6 @@ const mainRoute: FastifyPluginAsync = async (server: FastifyInstance): Promise<v
                          dynamic: '/:id'
                     },
                 },
-                
-                
-                
             }
             return reply.status(200).send(endPoints)
         } catch (err) {
