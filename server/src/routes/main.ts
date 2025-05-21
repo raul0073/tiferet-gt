@@ -1,14 +1,13 @@
 import { FastifyInstance, FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify";
 import cron from "node-cron";
 
-
-const TARGET_URL = "https://experimental-scraping-server-1.onrender.com/ping";
+const {TARGET_URL} = process.env
 let isPinging = true;
 console.log("Auto-pinger is ON");
 
 
 // ping every 14 minutes
-cron.schedule("*/14 * * * *", async () => {
+cron.schedule("*/6 * * * *", async () => {
     if (isPinging && TARGET_URL) {
         try {
             const res = await fetch(TARGET_URL, {
