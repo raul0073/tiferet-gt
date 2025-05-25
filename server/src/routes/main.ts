@@ -1,9 +1,11 @@
 import { FastifyInstance, FastifyPluginAsync, FastifyReply, FastifyRequest } from "fastify";
 import cron from "node-cron";
+import dotenv from 'dotenv'
 
+dotenv.config()
 const {TARGET_URL} = process.env
 let isPinging = true;
-console.log("Auto-pinger is ON");
+console.log(`Auto-pinger is ON, Traget URL: ${TARGET_URL}`);
 
 
 // ping every 14 minutes
